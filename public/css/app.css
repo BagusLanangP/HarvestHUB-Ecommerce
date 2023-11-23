@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+*{
+    margin: 0px;
+   
+}
+
+
+
+
+:root {
+
+    /* --defaultFont:  */
+    --body-font: 'Poppins', sans-serif;
+    --big-font-size: 3.7rem;
+    --h1-font-size: 2rem;
+    --h2-font-size: 1.25rem;
+    --normal-font-size: .938rem;
+    --smaller-font-size: .75rem;
+
+    /* Default Color */
+    --firstColorWhite : hsl(0, 0%, 100%);
+    --SecColorGrey: hsl(220, 23%, 97%);
+    --ThirdColorGreen: hsl(147, 37%, 52%);
+    --ForthColorBlack: hsl(147, 0%, 15%);
+    --FiveColorSecGreen: hsl(147, 36%, 95%);
+    --SixthColorGreenOld: hsl(166, 80%, 17%);
+
+    /* Padding  */
+    --paddingContentRL: 8rem;
+    --paddingContentTB: 6rem
+
+
+}
+
+/* 
+.dark-theme{
+
+} */
+
+
+/* Global start */
+body{
+
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: var(--body-font);
+}
+
+
+/* Global end */
+
+
+/* Navbar start */
+header{
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    margin-bottom: 40px;
+   
+}
+
+.navbar{
+    /* background-color: var(--firstColorWhite); */
+    min-height: 5rem;
+    max-height: 15rem;
+    color: var(--firstColorWhite);
+    padding-right: var(--paddingContentRL);
+    padding-left: var(--paddingContentRL);
+
+}
+.navbar-brand{
+    color: var(--SixthColorGreenOld);
+    font-weight: 600;
+}
+
+.nav-link{
+    font-weight: 600;
+}
+
+.logo{
+    width: 3rem;
+}
+
+/* Navbar End */
+
+
+/* Login start */
+.login{
+    padding-top: 80px;
+}
+
+.login-content{
+    padding-left: var(--paddingContentRL);
+    padding-right: var(--paddingContentRL);
+    padding-top: var(--paddingContentTB);
+    padding-bottom: var(--paddingContentTB);
+}
+.submit-login{
+    width: 100%;
+    background-color: var(--ThirdColorGreen);
+    color: var(--firstColorWhite);
+}
+
+.login-tittle h2{
+    font-size: var(--h1-font-size);
+    font-weight: 600;
+}
+.login-tittle h4{
+    font-size: var(--h2-font-size);
+    font-weight: 400;
+}
+
+.form-label{
+    font-weight: 400;
+}
+/* Login End */
+
+
+img{
+    width: 100%; 
+    height: auto; 
+}
