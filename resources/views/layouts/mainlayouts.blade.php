@@ -7,8 +7,13 @@
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
+    {{-- Bootstrap Icon --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="https://unpkg.com/feather-icons"></script>
+
+    
   </head>
   <body>
 
@@ -43,27 +48,163 @@
           </ul>
         </div>
 
-        <div class="navbar-">
-          <ul class="navbar-nav d-flex d-flex justify-content-end">
-            <li class="nav-item ">
-              <i data-feather="user"></i>
-              <i data-feather="circle"></i>
+        <div class="d-flex justify-content-end">
+          <ul class="navbar-nav">
+            <li class="nav-item search">
+              <i class="bi bi-search nav-link nav-item" style="font-size: 30px;"></i>
+            </li>
+            @auth
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-person" style="font-size: 30px;"></i>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#"><i class="bi bi-cart"></i>Keranjang</a></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-bag"></i>Transaksi</a></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-person-circle"></i>Profil</a></li>
+                <li class="dropdown-divider"></li>
+                <li>
+                  <form action="/logout" method="post">
+                    @csrf
+                    <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Log Out</button>
+                  </form>
+                </li>
+              </ul>
+            </li>
+            @else
+            <li class="nav-item">
+              <a href="/login" class="nav-link">
+                <i class="bi bi-person" style="font-size: 30px;"></i>
+              </a>
+            </li>
+            @endauth
+            <!-- Garis vertikal -->
+            <li class="divider-vertical"></li>
+            <li class="nav-item">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="bi bi-sun" style="font-size: 30px;"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-moon-stars"></i>Keranjang</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-bag"></i>Transaksi</a></li>
+                  <li class="dropdown-divider"></li>
+                  <li>
+                    <form action="/logout" method="post">
+                      @csrf
+                      <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Log Out</button>
+                    </form>
+                  </li>
+                </ul>
+              </li>
+            {{-- <div class="form-check form-switch nav-item"> --}}
+                {{-- <input type="checkbox" class="form-check-input " id="checkbox">
+                <label class="form-check-label nav-link" for="checkbox">Dark Mode</label>
+              </div> --}}
+          </li>
+
+
+            
+            {{-- <li class="nav-item">
+              <div class="form-check form-switch nav-item">
+                  <input type="checkbox" class="form-check-input " id="checkbox">
+                  <label class="form-check-label nav-link" for="checkbox">Dark Mode</label>
+                </div>
+            </li> --}}
+          </ul>
+        </div>
+
+
+        {{-- @auth
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item me-5">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="#">Categori</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link" href="#">Product</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Service
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Tenaga Kerja</a></li>
+                <li><a class="dropdown-item" href="#">Ahli Pakar</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        @else
+        <div class="navbar d-flex justify-content-end">
+          <ul class="navbar-nav">
+            <li class="nav-item me-5 ">
+              <i class="bi bi-search nav-link"></i>
             </li>
             <li class="nav-item">
               <div class="form-check form-switch nav-link">
                   <input type="checkbox" class="form-check-input" id="checkbox">
-                  <label class="form-check-label" for="checkbox">Dark Mode</label>
+                  <label class="form-check-label nav-link" for="checkbox">Dark Mode</label>
                 </div>
             </li>
           </ul>
         </div>
       </div>
+        
+      @endauth --}}
+
+       
     </nav>
 
   </header> 
 
 
-@yield('content');
+  @yield('content')
+
+
+  <section id="FOOTER "> 
+    <div class="ft-2  bg-black text-white p-5">
+      <hr class="color-white">
+      <div class="row justify-content-center p-5">
+        <div class="col-md-6 p-5">
+          <h3 class="fw-bold ">HARVEST HUB</h3>
+          <p> E-Commerce dan  layanan konsultasi <br>di bidang Pertanian dan Peternakan.</p>
+            
+        </div>
+        <div class="col-md-6 row justify-content-between text-start p-5 ">
+          <div class="col-md-4">
+            <h6>Contact</h6><br> 
+              <ul>
+                <li><h6>Email</h6></li>
+                <li>Facebook</li>
+                <li>Instagram</li>
+              </ul>
+          </div>
+          <div class="col-md-4">
+            <h6>About</h6><br>
+            <ul>
+              <li>Team</li>
+              <li>Shipping</li>
+              <li>Affiliate</li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6>Info</h6><br>
+            <ul>
+              <li>Privacy Policies</li>
+              <li>Terms & Conditions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
 
 
     

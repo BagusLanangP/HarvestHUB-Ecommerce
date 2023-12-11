@@ -5,9 +5,6 @@
    
 }
 
-
-
-
 :root {
 
     /* --defaultFont:  */
@@ -28,7 +25,11 @@
 
     /* Padding  */
     --paddingContentRL: 8rem;
-    --paddingContentTB: 6rem
+    --paddingContentTB: 6rem;
+    --paddingContentRL2: 10rem;
+    --paddingInElemenMini: 4rem;
+    --paddingInElemenMini1: 3rem;
+    --paddingInElemenMini2: 1.5rem;
 
 
 }
@@ -49,6 +50,24 @@ body{
     font-family: var(--body-font);
 }
 
+img{
+  max-height: 100vh;
+  width: 100%; /* Lebar 100% agar sesuai dengan lebar container */
+  object-fit: cover;
+}
+
+
+
+ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+/* Optionally, you can add some styling back if needed */
+ul, li {
+  margin-bottom: 5px; /* Add some spacing between list items if needed */
+}
 
 /* Global end */
 
@@ -58,19 +77,22 @@ header{
     position: fixed;
     width: 100%;
     z-index: 9999;
-    margin-bottom: 40px;
-   
+    margin-bottom: 40px;   
 }
 
 .navbar{
-    /* background-color: var(--firstColorWhite); */
     min-height: 5rem;
     max-height: 15rem;
     color: var(--firstColorWhite);
     padding-right: var(--paddingContentRL);
     padding-left: var(--paddingContentRL);
-
 }
+
+/* mengatur logo pada navbar */
+.logo{
+  max-width: 3rem;
+}
+
 .navbar-brand{
     color: var(--SixthColorGreenOld);
     font-weight: 600;
@@ -80,17 +102,46 @@ header{
     font-weight: 600;
 }
 
-.logo{
-    width: 3rem;
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Sesuaikan jarak sesuai kebutuhan Anda */
 }
+
+.dropdown-item i {
+    margin-right: 5px; /* Sesuaikan jarak sesuai kebutuhan Anda */
+    font-size: 24px; /* Sesuaikan ukuran ikon sesuai kebutuhan Anda */
+    color: #a9a9a9; /* Sesuaikan warna ikon sesuai kebutuhan Anda */
+    font-weight: bold; /* Menjadikan ikon lebih tebal */
+}
+
+.dropdown-divider {
+    margin: 5px 0; /* Sesuaikan jarak sesuai kebutuhan Anda */
+    border-top: 1px solid #e5e5e5; /* Warna dan ketebalan garis pembagi */
+}
+
+.dropdown-menu {
+    min-width: 200px; /* Sesuaikan lebar dropdown sesuai kebutuhan Anda */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.divider-vertical {
+    border-right: 1px solid #ccc;
+    height: 30px; /* Sesuaikan dengan tinggi yang diinginkan */
+    margin: auto 15px; /* Sesuaikan margin sesuai kebutuhan */
+}
+
+.search{
+  margin-right: 30px;
+}
+
 
 /* Navbar End */
 
 
 /* Login start */
-.login{
-    padding-top: 80px;
-}
+
 
 .login-content{
     padding-left: var(--paddingContentRL);
@@ -120,6 +171,73 @@ header{
 
 
 img{
-    width: 100%; 
-    height: auto; 
+    max-height: 100vh;
+    width: 100%; /* Lebar 100% agar sesuai dengan lebar container */
+    object-fit: cover;
 }
+
+
+/* Home Start */
+
+.caraousel{
+    max-height: 100vh;
+}
+
+
+.carousel-caption-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.logo-home{
+  width: 6rem;
+}
+  
+.overlay-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%; /* Sesuaikan dengan lebar yang diinginkan */
+    background-color: rgba(255, 255, 255, 35%); /* Warna latar belakang putih transparan */
+    padding-left: var(--paddingContentRL1);
+    padding-right: var(--paddingContentRL1);
+    padding-top: var(--paddingInElemenMini1);
+    padding-bottom: var(--paddingInElemenMini1);
+    text-align: center;
+    border-radius: 15px; /* Sudut melengkung (rounded) */
+    backdrop-filter: blur(20px);
+  }
+  
+.overlay-content {
+    color: black; /* Warna teks */
+    
+  }
+
+#carouselTitle{
+    font-size: var(--h1-font-size);
+    font-weight: 600;
+}
+
+.button-home{
+    width: 50%;
+}
+
+.app-tittle{
+    padding-top: var(--paddingInElemenMini2);
+}
+
+.app-desc{
+    padding-bottom: var(--paddingInElemenMini);
+}
+
+  /* Home End */
+
+
+

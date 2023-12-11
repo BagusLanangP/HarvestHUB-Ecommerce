@@ -15,8 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone', 12);
+            $table->text('alamat')->nullable();
+            $table->string('role_id')->default(2); // Set default role to 'user'
+            $table->string('foto')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('status')->default('aktif');
             $table->rememberToken();
             $table->timestamps();
         });
