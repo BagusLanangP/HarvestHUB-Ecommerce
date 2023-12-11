@@ -18,8 +18,6 @@ class RegisterController extends Controller
             'phone' => 'required|unique:users|min:12|max:12',
             'password' => 'required|min:8|max:255'
         ]);
-
-        return $validateData;
         
         User::create($validateData);
 

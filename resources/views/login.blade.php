@@ -42,6 +42,7 @@
                                 </div>
                                 <button type="submit" class="btn submit-login">Login</button>
                             </form>
+                            <h6 class="mt-2">Jika Belum memiliki Akun bisa <a href="/register">register</a></h6>
                         </div>   
                     </div>
             </div>
