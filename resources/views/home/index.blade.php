@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <section class="home">
+    <section class="home" id="home">
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
             <div class="carousel-inner" >
               <div class="carousel-item active">
@@ -48,8 +48,18 @@
         </div>
     </section>
 
-    <section class="kategori"></section>
+    <section class="kategori vh-100" id="category">
+       <p>I Love You so</p>
+    </section>
 
-    <section class=""></section>
+    <section class="produk vh-100" id="produkhome">
+      <div class="homeProduk">
+        <div class="homeProdukTittle text-center" >
+          <h1>Produk</h1>
+          <h4>Pesanlah untuk anda atau orang tercinta anda!</h4>
+          <hr>
+        </div>
+      </div>
+    </section>
 
 @endsection

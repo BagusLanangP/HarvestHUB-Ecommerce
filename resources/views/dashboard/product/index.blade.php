@@ -25,12 +25,31 @@
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Role</th>
+          <th scope="col">Kategori</th>
+          <th scope="col">Harga</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
+        @foreach( $Products as $product)
+        <tr>
+          <td>{{ $loop->iteration }}</td>
+          <td>{{ $product->name }}</td>
+          <td>{{ $product->category_id }}</td>
+          <td>{{ $product->user_id}}</td>
+          <td>
+            {{-- <a href="/dashboard/user/{{ $user->slug }}" class=" badge bg-info">
+                <i class="bi bi-eye"></i>
+            </a>
+            <a href="/dashboard/user/{{ $user->id }}" class=" badge bg-warning">
+                <i class="bi bi-pencil-square"></i>
+            </a>
+            <a href="/dashboard/user/{{ $user->id }}" class=" badge bg-danger">
+                <i class="bi bi-x-circle"></i>
+            </a> --}}
+          </td>
+        </tr>
+        @endforeach
         
       </tbody>
     </table>

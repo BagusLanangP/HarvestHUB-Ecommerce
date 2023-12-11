@@ -136,6 +136,9 @@ header{
   margin-right: 30px;
 }
 
+.nav-link.active { 
+    color: blue;
+  }
 
 /* Navbar End */
 
@@ -237,7 +240,26 @@ img{
     padding-bottom: var(--paddingInElemenMini);
 }
 
-  /* Home End */
+
+/* for produk home style */
+#produkhome{
+    padding-left: var(--paddingContentRL);
+    padding-right: var(--paddingContentRL);
+}
+
+.homeProdukTittle h1{
+    font-size: var(--h1-font-size);
+    font-weight: 600;
+    color: var(--ForthColorBlack);
+}
+.homeProdukTittle h4{
+    font-size: var(--normal-font-size);
+    font-weight: 400;
+    color: var(--ForthColorBlack);
+}
+
+
+/* Home End */
 
 
 

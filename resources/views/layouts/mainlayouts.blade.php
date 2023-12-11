@@ -28,13 +28,13 @@
         <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item me-5">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link {{ Request::is('.home') ? 'active' : '' }}" aria-current="page" href=".home">Home</a>
             </li>
             <li class="nav-item me-5">
-              <a class="nav-link" href="#">Categori</a>
+              <a class="nav-link {{ Request::is('#category') ? 'active' : '' }}" href="#category">Categori</a>
             </li>
             <li class="nav-item me-5">
-              <a class="nav-link" href="#">Product</a>
+              <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" href="#">Product</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -19,7 +19,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/user') ? 'active' : '' }}" href="/dashboard/user">
+          <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/user*') ? 'active' : '' }}" href="/dashboard/user">
             <svg class="bi"><use xlink:href="#people"/></svg>
             Customers
           </a>

@@ -49,25 +49,9 @@ class DashboardProductController extends Controller
             // ... tambahkan aturan validasi lainnya sesuai kebutuhan
         ]);
     
-        // Mengambil data yang relevan dari instance Request
-        // $productData = [
-        //     'name' => $validatedData['name'],
-        //     'category_id' => $validatedData['category_id'],
-        //     'harga' => $validatedData['harga'],
-        //     'descripton' => $validatedData['description'],
-        //     'jumlah_produk' => $validatedDa['jumlah_produk'],
-        //     'foto' => $validatedData['foto'],
-        //     'slug' => $validatedData['slug'],
-        //     'user_id' => $validatedData['user_id'],
-        // ];
-
-        // return $productData;
-    
+        
         // Membuat produk baru
         Product::create($validatedData);
-    
-        // // Redirect atau lakukan tindakan lainnya setelah produk berhasil disimpan
-        // return redirect('/dashboard/product');
     
     
     }
@@ -77,7 +61,7 @@ class DashboardProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        
     }
 
     /**

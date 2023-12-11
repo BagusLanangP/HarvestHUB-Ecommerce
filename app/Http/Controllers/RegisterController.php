@@ -19,8 +19,6 @@ class RegisterController extends Controller
             'password' => 'required|min:8|max:255'
         ]);
 
-        return $validateData;
-        
         User::create($validateData);
 
         return redirect('/login')->with('success',  'Registration succesfuly!, Please Login');
