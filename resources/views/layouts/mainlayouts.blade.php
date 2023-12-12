@@ -59,7 +59,7 @@
                 <i class="bi bi-person" style="font-size: 30px;"></i>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#"><i class="bi bi-cart"></i>Keranjang</a></li>
+                <li><a class="dropdown-item" href="/cart"><i class="bi bi-cart"></i>Keranjang</a></li>
                 <li><a class="dropdown-item" href="#"><i class="bi bi-bag"></i>Transaksi</a></li>
                 <li><a class="dropdown-item" href="#"><i class="bi bi-person-circle"></i>Profil</a></li>
                 <li class="dropdown-divider"></li>

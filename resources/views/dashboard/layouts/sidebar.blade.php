@@ -38,8 +38,7 @@
         </li>
       </ul>
 
-      <!-- The rest of your code remains unchanged -->
-
+      
     </div>
   </div>
 </div>
