@@ -1,22 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
-*{
+* {
     margin: 0px;
-   
 }
 
 :root {
-
     /* --defaultFont:  */
-    --body-font: 'Poppins', sans-serif;
+    --body-font: "Poppins", sans-serif;
     --big-font-size: 3.7rem;
     --h1-font-size: 2rem;
     --h2-font-size: 1.25rem;
-    --normal-font-size: .938rem;
-    --smaller-font-size: .75rem;
+    --normal-font-size: 0.938rem;
+    --smaller-font-size: 0.75rem;
 
     /* Default Color */
-    --firstColorWhite : hsl(0, 0%, 100%);
+    --firstColorWhite: hsl(0, 0%, 100%);
     --SecColorGrey: hsl(220, 23%, 97%);
     --ThirdColorGreen: hsl(147, 37%, 52%);
     --ForthColorBlack: hsl(147, 0%, 15%);
@@ -31,8 +29,6 @@
     --paddingInElemenMini: 4rem;
     --paddingInElemenMini1: 3rem;
     --paddingInElemenMini2: 1.5rem;
-
-
 }
 
 /* 
@@ -40,10 +36,8 @@
 
 } */
 
-
 /* Global start */
-body{
-
+body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -51,37 +45,35 @@ body{
     font-family: var(--body-font);
 }
 
-img{
-  max-height: 100vh;
-  width: 100%; /* Lebar 100% agar sesuai dengan lebar container */
-  object-fit: cover;
+img {
+    max-height: 100vh;
+    width: 100%; /* Lebar 100% agar sesuai dengan lebar container */
+    object-fit: cover;
 }
 
-
-
 ul {
-  list-style-type: none; /* Remove bullet points */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
 }
 
 /* Optionally, you can add some styling back if needed */
-ul, li {
-  margin-bottom: 5px; /* Add some spacing between list items if needed */
+ul,
+li {
+    margin-bottom: 5px; /* Add some spacing between list items if needed */
 }
 
 /* Global end */
 
-
 /* Navbar start */
-header{
+header {
     position: fixed;
     width: 100%;
     z-index: 9999;
-    margin-bottom: 40px;   
+    margin-bottom: 40px;
 }
 
-.navbar{
+.navbar {
     min-height: 5rem;
     max-height: 15rem;
     color: var(--firstColorWhite);
@@ -90,19 +82,18 @@ header{
 }
 
 /* mengatur logo pada navbar */
-.logo{
-  max-width: 3rem;
+.logo {
+    max-width: 3rem;
 }
 
-.navbar-brand{
+.navbar-brand {
     color: var(--SixthColorGreenOld);
     font-weight: 600;
 }
 
-.nav-link{
+.nav-link {
     font-weight: 600;
 }
-
 
 .dropdown-item {
     display: flex;
@@ -133,60 +124,55 @@ header{
     margin: auto 15px; /* Sesuaikan margin sesuai kebutuhan */
 }
 
-.search{
-  margin-right: 30px;
+.search {
+    margin-right: 30px;
 }
 
-.nav-link.active { 
+.nav-link.active {
     color: blue;
-  }
+}
 
 /* Navbar End */
 
-
 /* Login start */
 
-
-.login-content{
+.login-content {
     padding-left: var(--paddingContentRL);
     padding-right: var(--paddingContentRL);
     padding-top: var(--paddingContentTB);
     padding-bottom: var(--paddingContentTB);
 }
-.submit-login{
+.submit-login {
     width: 100%;
     background-color: var(--ThirdColorGreen);
     color: var(--firstColorWhite);
 }
 
-.login-tittle h2{
+.login-tittle h2 {
     font-size: var(--h1-font-size);
     font-weight: 600;
 }
-.login-tittle h4{
+.login-tittle h4 {
     font-size: var(--h2-font-size);
     font-weight: 400;
 }
 
-.form-label{
+.form-label {
     font-weight: 400;
 }
 /* Login End */
 
-
-img{
+img {
     max-height: 100vh;
     width: 100%; /* Lebar 100% agar sesuai dengan lebar container */
     object-fit: cover;
 }
 
-
 /* Home Start */
 
-.caraousel{
+.caraousel {
     max-height: 100vh;
 }
-
 
 .carousel-caption-container {
     position: absolute;
@@ -197,19 +183,24 @@ img{
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-.logo-home{
-  width: 6rem;
 }
-  
+
+.logo-home {
+    width: 6rem;
+}
+
 .overlay-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 40%; /* Sesuaikan dengan lebar yang diinginkan */
-    background-color: rgba(255, 255, 255, 35%); /* Warna latar belakang putih transparan */
+    background-color: rgba(
+        255,
+        255,
+        255,
+        35%
+    ); /* Warna latar belakang putih transparan */
     padding-left: var(--paddingContentRL1);
     padding-right: var(--paddingContentRL1);
     padding-top: var(--paddingInElemenMini1);
@@ -217,47 +208,46 @@ img{
     text-align: center;
     border-radius: 15px; /* Sudut melengkung (rounded) */
     backdrop-filter: blur(20px);
-  }
-  
+}
+
 .overlay-content {
     color: black; /* Warna teks */
-    
-  }
+}
 
-#carouselTitle{
+#carouselTitle {
     font-size: var(--h1-font-size);
     font-weight: 600;
 }
 
-.button-home{
+.button-home {
     width: 50%;
 }
 
-.app-tittle{
+.app-tittle {
     padding-top: var(--paddingInElemenMini2);
 }
 
-.app-desc{
+.app-desc {
     padding-bottom: var(--paddingInElemenMini);
 }
 
-
 /* for produk home style */
-#produkhome{
+#produkhome {
     padding-left: var(--paddingContentRL);
     padding-right: var(--paddingContentRL);
 }
 
-.homeProdukTittle h1{
+.homeProdukTittle h1 {
     font-size: var(--h1-font-size);
     font-weight: 600;
     color: var(--ForthColorBlack);
 }
-.homeProdukTittle h4{
+.homeProdukTittle h4 {
     font-size: var(--normal-font-size);
     font-weight: 400;
     color: var(--ForthColorBlack);
 }
+
 
 .card-body{
     height: auto;
@@ -312,3 +302,4 @@ img{
 
 
 
+/* Home End */

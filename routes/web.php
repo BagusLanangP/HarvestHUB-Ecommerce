@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\TenagaKerjaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,11 @@ Route::resource('/dashboard/user', DashboardUserController::class)->middleware('
 
 Route::get('/dashboard/product/checkSlug', [DashboardProductController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/product', DashboardProductController::class)->middleware('auth');
+<<<<<<< HEAD
 
 Route::get('/cart', function () {
     return view('cart.index');
 });
+=======
+Route::resource('/dashboard/TenagaKerja', TenagaKerjaController::class);
+>>>>>>> 752bf30e454116363fbea3cbae9cbe32006c9e19

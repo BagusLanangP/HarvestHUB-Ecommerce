@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TenagaKerja;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TenagaKerjaController extends Controller
@@ -12,7 +13,13 @@ class TenagaKerjaController extends Controller
      */
     public function index()
     {
-        //
+        //$data = TenagaKerja::where('user_id', 2)->first();
+       
+        $data = TenagaKerja::whereHas('user', function ($query) {
+            $query->where('role_id', 1);
+            })->get();
+
+        return  view('TenagaKerja.index', $data);
     }
 
     /**
