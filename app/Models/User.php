@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cviebrock\EloquentSluggable\Sluggable;
+use App\Models\TenagaKerja;
 
 class User extends Authenticatable
 {
@@ -65,6 +66,11 @@ class User extends Authenticatable
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function tenaga_kerja()
+    {
+        return $this->hasOne(TenagaKerja::class);
     }
 
 

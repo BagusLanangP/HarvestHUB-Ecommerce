@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
 
         $data = [
             ['name' => 'Lanang Purbhawa', 'email' => 'baguslanangpurbhawa@gmail.com', 'password' => '200603', 'phone' => '082145149616', 'alamat' => 'Gianyar', 'role_id' => 1, ],
-            ['name' => 'Mardana', 'email' => 'Mardana@gmail.com', 'password' => '12345678', 'phone' => '085858158622', 'alamat' => 'Tabanan', 'role_id' => 1, ]           
+            ['name' => 'Mardana', 'email' => 'Mardana@gmail.com', 'password' => '$2y$12$IuYi/gGl/pWkWLXc9iXmueP8Zm8bs6Q8NwfUxFZLKuYJDtZk61052', 'phone' => '085858158622', 'alamat' => 'Tabanan', 'role_id' => 1, ]           
         ];
 
         foreach ( $data as $value){
