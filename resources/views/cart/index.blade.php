@@ -99,18 +99,28 @@
             </table>
         </div>
     </div>
-    <div class="cart-checkout vh-20 mt-4 shadow">
+    <div class="cart-checkout vh-20 mt-4 shadow rounded mb-3">
         <div class="container">
-            <div class="row">
+            <div class="row pt-3 pb-3">
                 <div class="col checkout-border">
                     <h1>Checkout Now!</h1>
                 </div>
-                <hr>
-                <div class="col">
-
+            </div>
+            <hr class="mb-0 mt-0">
+            <div class="row pt-5 pb-5">
+                <div class="col-3">
+                    <span>Total Produk : 12 Produk</span>
+                </div>
+                <div class="col-2">
+                    <span><a href="">Hapus</a></span>
+                </div>
+                <div class="col-3">
+                    <span>Rp. 20.000</span>
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn submit-login d-flex justify-content-center">Checkout</button>
                 </div>
             </div>
-            <div class="row"></div>
         </div>
     </div>
 </section>
