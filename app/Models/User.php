@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\Models\TenagaKerja;
 use App\Models\Konsultan;
+use App\Models\Toko;
 
 class User extends Authenticatable
 {
@@ -76,7 +77,12 @@ class User extends Authenticatable
 
     public function konsultan()
     {
-        return $this->hasOne(konsultan::class);
+        return $this->hasOne(Konsultan::class);
+    }
+
+    public function toko()
+    {
+        return $this->hasOne(Toko::class);
     }
 
 

@@ -73,6 +73,10 @@
                   <li><a class="dropdown-item" href="/Konsultan/create"><i class="bi bi-person-circle"></i>Profil</a></li>
                 @elsecan('konsultan1')
                   <li><a class="dropdown-item" href="/Konsultan/"><i class="bi bi-person-circle"></i>Profil</a></li>
+                @elsecan('toko0')
+                  <li><a class="dropdown-item" href="/Toko/create"><i class="bi bi-person-circle"></i>Profil</a></li>
+                @elsecan('toko1')
+                  <li><a class="dropdown-item" href="/Toko/"><i class="bi bi-person-circle"></i>Profil</a></li>
                 @endcan
 
                

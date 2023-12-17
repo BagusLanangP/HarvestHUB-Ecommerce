@@ -1,6 +1,6 @@
 @extends('layouts.mainlayouts')
 
-@section('tittle', 'Edit Tenaga Kerja')
+@section('tittle', 'Edit Profil Toko')
 
 
 @section('content')
@@ -8,20 +8,20 @@
       <div class="container">
         <div class="row text-center">
             <div class="login-tittle">
-                  <h2>Edit Biodata</h2>
+                  <h2>Edit Profil Toko</h2>
                   <h4>ini klo ga dibutuhin hapus aja</h4>
         </div>
         </div>
         <div class="row justify-content-center">
           <div class="col col-8">
           <div class="tenagakerja-form">
-            <form action="{{ route('TenagaKerja.update', $data->id) }}" method="post">
+            <form action="{{ route('Toko.update', $data->id) }}" method="post">
               @method('PATCH')
               @csrf
                 <div class="mb-4">
-                    <label for="nama" class="form-label">Nama</label>
-                    <input type="text" class="form-control" id="nama" placeholder="Masukkan nama" name="nama"
-                      @error('nama') is-invalid @enderror value="{{ old('nama') }}" value="{{ $data->nama }}" required>
+                    <label for="nama" class="form-label">Nama Toko</label>
+                    <input type="nama" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" 
+                      @error('nama') is-invalid @enderror value="{{ $data->nama }}" required>
 
                       @error('nama')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -50,15 +50,6 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                       @enderror
                 </div>
-                <div class="mb-4">
-                    <label for="pengalaman" class="form-label">pengalaman</label>
-                    <input id="pengalaman" type="hidden" name="pengalaman" @error('pengalaman') is-invalid @enderror value="{{ $data->pengalaman }}" required>
-
-                    @error('pengalaman')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                    <trix-editor input="pengalaman"></trix-editor>
-                 </div>
                 <div class="mb-4">
                     <label for="deskripsi" class="form-label">deskripsi</label>
                     <input id="deskripsi" type="hidden" name="deskripsi" @error('deskripsi') is-invalid @enderror value="{{ $data->deskripsi }}" required>

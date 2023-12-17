@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\TenagaKerjaController;
 use App\Http\Controllers\KonsultanController;
+use App\Http\Controllers\TokoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::resource('/dashboard/product', DashboardProductController::class)->middle
 
 Route::resource('/TenagaKerja', TenagaKerjaController::class)->middleware('tenagaKerja');
 Route::resource('/Konsultan', KonsultanController::class)->middleware('konsultan');
+Route::resource('/Toko', TokoController::class)->middleware('toko');
 
 Route::get('/cart', function () {
     return view('cart.index');

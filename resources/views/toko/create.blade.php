@@ -1,6 +1,6 @@
 @extends('layouts.mainlayouts')
 
-@section('tittle', 'Home')
+@section('tittle', 'Buat Profil Toko')
 
 
 @section('content')
@@ -8,17 +8,17 @@
       <div class="container">
         <div class="row text-center">
             <div class="login-tittle">
-                  <h2>Biodata Tenaga Kerja</h2>
+                  <h2>Buat Profil Toko</h2>
                   <h4>ini klo ga dibutuhin hapus aja</h4>
         </div>
         </div>
         <div class="row justify-content-center">
           <div class="col col-8">
           <div class="tenagakerja-form">
-            <form action="{{ route('TenagaKerja.store') }}" method="post">
+            <form action="{{ route('Toko.store') }}" method="post">
               @csrf
                 <div class="mb-4">
-                    <label for="nama" class="form-label">Nama</label>
+                    <label for="nama" class="form-label">Nama Toko</label>
                     <input type="text" class="form-control" id="nama" placeholder="Masukkan nama" name="nama"
                       @error('nama') is-invalid @enderror value="{{ old('nama') }}" required>
 
@@ -54,17 +54,8 @@
                       @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="pengalaman" class="form-label">pengalaman</label>
-                    <input id="pengalaman" type="hidden" name="pengalaman" @error('pengalaman') is-invalid @enderror required>
-
-                    @error('pengalaman')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                    <trix-editor input="pengalaman"></trix-editor>
-                 </div>
-                <div class="mb-4">
                     <label for="deskripsi" class="form-label">deskripsi</label>
-                    <input id="deskripsi" type="hidden" name="deskripsi" @error('deskripsi') is-invalid @enderror required>
+                    <input id="deskripsi" type="hidden" name="deskripsi" @error('deskripsi') is-invalid @enderror required value="{{ old('deskripsi') }}">
 
                     @error('deskripsi')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -72,7 +63,7 @@
                     <trix-editor input="deskripsi"></trix-editor>
                 </div>
                 
-                    <button type="submit" class="btn submit-login mb-5 mx-auto d-block">Login</button>
+                    <button type="submit" class="btn submit-login mb-5 mx-auto d-block">Simpan</button>
                                 
             </form>
           </div>
