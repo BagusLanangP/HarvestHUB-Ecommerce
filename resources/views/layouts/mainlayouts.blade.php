@@ -65,7 +65,14 @@
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/cart"><i class="bi bi-cart"></i>Keranjang</a></li>
                 <li><a class="dropdown-item" href="#"><i class="bi bi-bag"></i>Transaksi</a></li>
-                <li><a class="dropdown-item" href="/TenagaKerja/create"><i class="bi bi-person-circle"></i>Profil</a></li>
+                @can('tenagaKerja0')
+                  <li><a class="dropdown-item" href="/TenagaKerja/create"><i class="bi bi-person-circle"></i>Profil</a></li>
+                @elsecan('tenagaKerja1')
+                  <li><a class="dropdown-item" href="/TenagaKerja"><i class="bi bi-person-circle"></i>Profil</a></li>
+                @endcan
+
+               
+                
                 <li class="dropdown-divider"></li>
                 <li>
                   <form action="/logout" method="post">

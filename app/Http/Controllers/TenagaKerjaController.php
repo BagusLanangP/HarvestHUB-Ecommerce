@@ -30,7 +30,7 @@ class TenagaKerjaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(User $user)
     {
         return view('TenagaKerja.create');
     }
@@ -54,6 +54,7 @@ class TenagaKerjaController extends Controller
         $itemuser = $request->user();//ambil data user yang login
         $inputan = $request->all();
         $inputan['user_id'] = $itemuser->id;
+        $inputan['isi'] = 1;
         
         TenagaKerja::create($inputan);
 
