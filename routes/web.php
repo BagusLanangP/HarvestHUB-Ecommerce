@@ -41,4 +41,9 @@ Route::resource('/dashboard/user', DashboardUserController::class)->middleware('
 
 Route::get('/dashboard/product/checkSlug', [DashboardProductController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/product', DashboardProductController::class)->middleware('auth');
+
 Route::resource('/TenagaKerja', TenagaKerjaController::class)->middleware('tenagaKerja');
+
+Route::get('/cart', function () {
+    return view('cart.index');
+});

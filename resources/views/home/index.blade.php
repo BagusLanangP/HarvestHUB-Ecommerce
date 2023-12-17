@@ -52,14 +52,136 @@
        <p>I Love You so</p>
     </section>
 
-    <section class="produk vh-100" id="produkhome">
+    <section class="produk vh-100 mb-5" id="produkhome">
       <div class="homeProduk">
-        <div class="homeProdukTittle text-center" >
+        <div class="homeProdukTittle text-center mb-5" >
           <h1>Produk</h1>
           <h4>Pesanlah untuk anda atau orang tercinta anda!</h4>
-          <hr>
+          
         </div>
+        <hr>
+        <div class="homeProdukContent ">
+          <div class="row-1 d-flex justify-content-between mb-3">
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+                <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text fw-medium">Daging Sapi</p>
+                  <p class="productPrice">Rp.15000/kg</p>
+                </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text fw-medium">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text fw-medium">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text fw-medium">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text fw-medium">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            </div>
+          </div>
+          <div class="row-1 d-flex justify-content-between mb-3">
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+                <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text fw-medium">Daging Sapi</p>
+                  <p class="productPrice">Rp.15000/kg</p>
+                </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text fw-medium">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text fw-medium">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text fw-medium">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text fw-medium">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            </div>
+          </div>
+          {{-- <div class="row-2 d-flex justify-content-between">
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>     
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Daging Sapi</p>
+                <p class="productPrice">Rp.15000/kg</p>
+              </div>             
+            </div>
+          </div> --}}
+          <div class="seemore d-flex justify-content-center mt-5">
+            <div class="produkhomeseemore">
+              <button type="submit" class="btn submit-login d-flex justify-content-center">Lihat Produk Lainnya</button>
+            </div>     
+          </div>
+              
+        </div> 
       </div>
     </section>
 
+    
 @endsection

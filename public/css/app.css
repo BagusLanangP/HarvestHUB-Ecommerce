@@ -22,6 +22,7 @@
     --SixthColorGreenOld: hsl(166, 80%, 17%);
     --warning: hsl(50, 100%, 53%);
     --create: hsl(240, 100%, 50%);
+    --SevenColorGreyOld: hsl(0, 0%, 47%);
 
     /* Padding  */
     --paddingContentRL: 8rem;
@@ -261,9 +262,61 @@ img {
     color: var(--ForthColorBlack);
 }
 
+.card-body {
+    height: auto;
+}
+
+.produkhomeseemore {
+    width: 30%;
+}
+
+#promo {
+    background-color: var(--SecColorGrey);
+}
+
+.productPrice {
+    color: var(--SixthColorGreenOld);
+    font-weight: 600;
+}
+
+/* Home End */
+
+/* cart start */
+#cart {
+    padding-top: var(--paddingContentRL);
+    padding-left: var(--paddingContentRL);
+    padding-right: var(--paddingContentRL);
+}
+
+#cart th {
+    color: var(--SevenColorGreyOld);
+}
+
+.cart-tittle h1 {
+    font-size: var(--h1-font-size);
+    font-weight: 600;
+    color: var(--ForthColorBlack);
+}
+.cart-tittle h4 {
+    font-size: var(--normal-font-size);
+    font-weight: 400;
+    color: var(--ForthColorBlack);
+}
+
+.checkout-border h1 {
+    font-size: var(--h2-font-size);
+    font-weight: 600;
+    color: var(--ForthColorBlack);
+}
+
+/* cart end */
+
+/* Worker */
+.worker {
+    padding-top: var(--paddingContentRL);
+}
+
 /* Home End */
 #tenagakerja .login-tittle {
     margin-top: 6rem;
 }
-
-
