@@ -20,6 +20,8 @@
     --ForthColorBlack: hsl(147, 0%, 15%);
     --FiveColorSecGreen: hsl(147, 36%, 95%);
     --SixthColorGreenOld: hsl(166, 80%, 17%);
+    --warning: hsl(50, 100%, 53%);
+    --create: hsl(240, 100%, 50%);
 
     /* Padding  */
     --paddingContentRL: 8rem;
@@ -147,6 +149,18 @@ header {
     color: var(--firstColorWhite);
 }
 
+.submit-edit {
+    width: 100%;
+    background-color: var(--warning);
+    color: var(--firstColorWhite);
+}
+
+.submit-upload {
+    width: 100%;
+    background-color: var(--create);
+    color: var(--firstColorWhite);
+}
+
 .login-tittle h2 {
     font-size: var(--h1-font-size);
     font-weight: 600;
@@ -248,3 +262,8 @@ img {
 }
 
 /* Home End */
+#tenagakerja .login-tittle {
+    margin-top: 6rem;
+}
+
+

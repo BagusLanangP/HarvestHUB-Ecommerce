@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('tenaga_kerjas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('nama');
+            $table->string('email')->unique();
+            $table->string('phone');
+            $table->text('alamat');
             $table->text('pengalaman');
             $table->text('deskripsi');
+            $table->integer('isi')->default(0);
             $table->string('cv')->nullable();
             $table->unsignedBigInteger('user_id');
             

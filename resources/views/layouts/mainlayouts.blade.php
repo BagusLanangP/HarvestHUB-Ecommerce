@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="https://unpkg.com/feather-icons"></script>
 
+    {{-- Trix editor --}}
+    <link rel="stylesheet" type="text/css" href="/css/trix.css">
+    <script type="text/javascript" src="/js/trix.js"></script>
+
     
   </head>
   <body>
@@ -61,7 +65,7 @@
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#"><i class="bi bi-cart"></i>Keranjang</a></li>
                 <li><a class="dropdown-item" href="#"><i class="bi bi-bag"></i>Transaksi</a></li>
-                <li><a class="dropdown-item" href="/dashboard/TenagaKerja"><i class="bi bi-person-circle"></i>Profil</a></li>
+                <li><a class="dropdown-item" href="/TenagaKerja/create"><i class="bi bi-person-circle"></i>Profil</a></li>
                 <li class="dropdown-divider"></li>
                 <li>
                   <form action="/logout" method="post">
