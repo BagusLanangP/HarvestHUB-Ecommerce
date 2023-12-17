@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\Models\TenagaKerja;
+use App\Models\Konsultan;
 
 class User extends Authenticatable
 {
@@ -71,6 +72,11 @@ class User extends Authenticatable
     public function tenaga_kerja()
     {
         return $this->hasOne(TenagaKerja::class);
+    }
+
+    public function konsultan()
+    {
+        return $this->hasOne(konsultan::class);
     }
 
 

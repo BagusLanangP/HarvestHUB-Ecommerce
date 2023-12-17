@@ -69,6 +69,10 @@
                   <li><a class="dropdown-item" href="/TenagaKerja/create"><i class="bi bi-person-circle"></i>Profil</a></li>
                 @elsecan('tenagaKerja1')
                   <li><a class="dropdown-item" href="/TenagaKerja"><i class="bi bi-person-circle"></i>Profil</a></li>
+                @elsecan('konsultan0')
+                  <li><a class="dropdown-item" href="/Konsultan/create"><i class="bi bi-person-circle"></i>Profil</a></li>
+                @elsecan('konsultan1')
+                  <li><a class="dropdown-item" href="/Konsultan/"><i class="bi bi-person-circle"></i>Profil</a></li>
                 @endcan
 
                

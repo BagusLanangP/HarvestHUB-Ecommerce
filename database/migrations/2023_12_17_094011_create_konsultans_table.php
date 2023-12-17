@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tenaga_kerjas', function (Blueprint $table) {
+        Schema::create('konsultans', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('nama');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('alamat');
             $table->text('pengalaman');
             $table->text('deskripsi');
-            $table->string('foto')->nullable();
+            $table->string('cv')->nullable();
             $table->unsignedBigInteger('user_id');
             
             $table->foreign('user_id')->references('id')->on('users');
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tenaga_kerjas');
+        Schema::dropIfExists('konsultans');
     }
 };

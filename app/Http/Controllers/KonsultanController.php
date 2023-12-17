@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TenagaKerja;
-use App\Models\User;
+use App\Models\Konsultan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
-class TenagaKerjaController extends Controller
+class KonsultanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-         $itemuser = Auth::user();
+        $itemuser = Auth::user();
 
-        if ($itemuser->role_id == 3) {
-            $item = TenagaKerja::where('user_id', $itemuser->id)->first();
+        if ($itemuser->role_id == 4) {
+            $item = Konsultan::where('user_id', $itemuser->id)->first();
             $data = array('data' => $item);
-            return view('TenagaKerja.index', $data);
+            return view('Konsultan.index', $data);
         } else {
             // Handle a situation where the logged-in user does not have role_id 2
             // You can redirect or show an error message, for example.
@@ -30,9 +30,9 @@ class TenagaKerjaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(User $user)
+    public function create()
     {
-        return view('TenagaKerja.create');
+        return view('Konsultan.create');
     }
 
     /**
@@ -40,10 +40,9 @@ class TenagaKerjaController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'nama' => 'required|max:50',
-            'email' => 'required|email:dns|unique:tenaga_kerjas',
+            'email' => 'required|email:dns|unique:konsultans',
             'phone' => 'required|min:10',
             'alamat' => 'required',
             'pengalaman' =>'required',
@@ -55,17 +54,17 @@ class TenagaKerjaController extends Controller
         $inputan = $request->all();
         $inputan['user_id'] = $itemuser->id;
         
-        TenagaKerja::create($inputan);
+        Konsultan::create($inputan);
 
         
 
-        return redirect('/TenagaKerja')->with('success',  'Data Anda Tersimpan');
+        return redirect('/Konsultan')->with('success',  'Data Anda Tersimpan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(TenagaKerja $tenagaKerja)
+    public function show(Konsultan $konsultan)
     {
         //
     }
@@ -73,42 +72,41 @@ class TenagaKerjaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Konsultan $id)
     {
-        $item = TenagaKerja::findOrFail($id);
+        $item = Konsulatan::findOrFail($id);
             $data = array('data' => $item);
-        return view('TenagaKerja.edit', $data);
+        return view('Konsulatan.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Konsultan $konsultan)
     {
-
         $this->validate($request, [
             'nama' => 'required|max:50',
-            'email' => 'required|email|unique:tenaga_kerjas,email,' . $id,
+            'email' => 'required|email|unique:konsultans,email,' . $id,
             'phone' => 'required|min:10',
             'alamat' => 'required',
             'pengalaman' =>'required',
             'deskripsi' =>'required',
         ]);
 
-        $item = TenagaKerja::findOrFail($id);
+        $item = Konsultan::findOrFail($id);
         // kalo ga ada error page not found 404
         
         $inputan = $request->all();
         $itemuser = $request->user();//ambil data user yang login
         $inputan['user_id'] = $itemuser->id;
         $item->update($inputan);   
-            return redirect('/TenagaKerja')->with('success',  'Data Anda Tersimpan');
-        
+            return redirect('/Konsultan')->with('success',  'Data Anda Tersimpan');
     }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TenagaKerja $tenagaKerja)
+    public function destroy(Konsultan $konsultan)
     {
         //
     }

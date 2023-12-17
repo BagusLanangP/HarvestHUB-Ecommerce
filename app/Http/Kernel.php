@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'tenagaKerja' => \App\Http\Middleware\tenagaKerja::class,
+        'konsultan' => \App\Http\Middleware\konsultan::class,
 
     ];
 }

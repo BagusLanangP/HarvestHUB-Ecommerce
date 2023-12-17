@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardProductController;
 use App\Http\Controllers\TenagaKerjaController;
+use App\Http\Controllers\KonsultanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::get('/dashboard/product/checkSlug', [DashboardProductController::class, '
 Route::resource('/dashboard/product', DashboardProductController::class)->middleware('auth');
 
 Route::resource('/TenagaKerja', TenagaKerjaController::class)->middleware('tenagaKerja');
+Route::resource('/Konsultan', KonsultanController::class)->middleware('konsultan');
 
 Route::get('/cart', function () {
     return view('cart.index');
