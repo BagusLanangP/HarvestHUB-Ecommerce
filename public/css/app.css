@@ -141,7 +141,7 @@ header {
     right: -110%;
     width: 25rem;
     height: 3rem;
-    background: var(--firstColorWhite);
+    background: #ffffff;
     overflow: hidden;
     display: flex;
     align-items: center;

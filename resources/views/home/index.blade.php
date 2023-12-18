@@ -59,32 +59,18 @@
         </div>
         <hr>
         <div class="row ">
+          @foreach($kategoris as $k)
           <div class="col-4 md-3 mb-3">
             <div class="card shadow">
               <img src="{{ asset('img/home/produk.jpg') }}" class="card-img-top" alt="GAMBAR2">
               <div class="card-body">
-                <h4 class="card-text text-center">Buah</h4>
+                <h4 class="card-text text-center">{{ $k->productName }}</h4>
               </div>
             </div>
           </div>
+          @endforeach
 
-          <div class="col-4 md-3 mb-3">
-            <div class="card">
-              <img src="{{ asset('img/home/produk.jpg') }}" class="card-img-top" alt="GAMBAR3">
-              <div class="card-body">
-                <h4 class="card-text text-center">Obat</h4>
-              </div>
-            </div>
-          </div>
           
-          <div class="col-4 md-3 mb-3">
-            <div class="card">
-              <img src="{{ asset('img/home/produk.jpg') }}" class="card-img-top" alt="GAMBAR3">
-              <div class="card-body">
-                <h4 class="card-text text-center">Sayur</h4>
-              </div>
-            </div>
-          </div>
          
         </div>
         <div class="row">

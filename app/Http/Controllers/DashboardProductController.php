@@ -64,21 +64,21 @@ class DashboardProductController extends Controller
             'harga' => 'required',
             'description' => 'required',
             'jumlah_produk' => 'required',
-            'foto' => 'image|file|max:1024',   
+            // 'foto' => 'image|file|max:1024',   
             'slug' => 'required',
             'user_id' => 'required',
             // ... tambahkan aturan validasi lainnya sesuai kebutuhan
         ]);
         $validatedData['toko_id'] = $toko->id;
 
-        if($request->file('foto')){
-            $validatedData['foto'] = $request->file('foto')->store('product-images');
-        }
+        // if($request->file('foto')){
+        //     $validatedData['foto'] = $request->file('foto')->store('product-images');
+        // }
         // Membuat produk baru
         Product::create($validatedData);
         return redirect('/dashboard/product')->with('success',  'Data Anda Tersimpan');
     
-    
+     
     }
 
     /**
@@ -110,7 +110,13 @@ class DashboardProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $itemproduk = Product::findOrFail($id);//cari berdasarkan id = $id, 
+        // kalo ga ada error page not found 404
+        if ($itemproduk->delete()) {
+            return back()->with('success', 'Data berhasil dihapus');
+        } else {
+            return back()->with('error', 'Data gagal dihapus');
+        }
     }
 
     public function checkSlug(Request $request){

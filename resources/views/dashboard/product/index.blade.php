@@ -16,7 +16,9 @@
     </div>
   </div>
   <div class="table-responsive small">
+    @can('toko1')
     <a href="/dashboard/product/create" class="btn btn-primary mb-3 mt-4">New Product</a>
+    @endcan
     <table class="table table-striped table-sm">
       <thead>
         <tr>
@@ -38,6 +40,7 @@
             <a href="/dashboard/product/{{ $product->id}}" class=" badge bg-info">
                 <i class="bi bi-eye"></i>
             </a>
+             @can('toko1') 
             <a href="/dashboard/{{ $product->id }}/edit" class=" badge bg-warning">
                 <i class="bi bi-pencil-square"></i>
             </a>
@@ -47,6 +50,7 @@
                 <button type="submit" class="badge bg-danger"><i class="bi bi-x-circle"></i>
                 </button>                    
             </form>
+            @endcan
           </td>
           
         </tr>
