@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'tenagaKerja' => \App\Http\Middleware\tenagaKerja::class,
         'konsultan' => \App\Http\Middleware\konsultan::class,
         'toko' => \App\Http\Middleware\toko::class,
+        'dashboard' => \App\Http\Middleware\dashboard::class,
 
     ];
 }

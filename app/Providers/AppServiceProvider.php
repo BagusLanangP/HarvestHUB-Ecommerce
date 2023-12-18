@@ -121,5 +121,19 @@ class AppServiceProvider extends ServiceProvider
             
         });
 
+        Gate::define('dashboard', function (User $user) {
+           
+
+            return $user->role_id == 5 || $user->role_id == 1;
+            
+        });
+
+        Gate::define('admin', function (User $user) {
+           
+
+            return $user->role_id == 1;
+            
+        });
+
     }
 }

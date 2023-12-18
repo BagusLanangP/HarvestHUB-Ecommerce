@@ -78,8 +78,10 @@
                 @elsecan('toko1')
                   <li><a class="dropdown-item" href="/Toko/"><i class="bi bi-person-circle"></i>Profil</a></li>
                 @endcan
-
-               
+                  
+               @can('dashboard')
+               <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-database"></i></i>Dashboard</a></li>
+               @endcan
                 
                 <li class="dropdown-divider"></li>
                 <li>

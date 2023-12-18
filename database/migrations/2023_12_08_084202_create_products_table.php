@@ -21,11 +21,13 @@ return new class extends Migration
             $table->string('foto')->nullable();
             $table->string('slug', 255);
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('toko_id');
             $table->timestamps();
 
             // Tambahkan foreign key pada category_id
             $table->foreign('category_id')->references('id')->on('product_categories');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('toko_id')->references('id')->on('tokos');
         });
     }
 

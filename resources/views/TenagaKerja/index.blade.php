@@ -1,6 +1,6 @@
 @extends('layouts.mainlayouts')
 
-@section('tittle', 'Home')
+@section('tittle', 'Profile Tenaga Kerja')
 
 
 @section('content')
@@ -8,7 +8,7 @@
       <div class="container">
         <div class="row text-center">
             <div class="login-tittle">
-                  <h2>Biodata Konsultan</h2>
+                  <h2>Biodata Tenaga Kerja/h2>
                   <h4>ini klo ga dibutuhin hapus aja</h4>
         </div>
         </div>
@@ -43,7 +43,7 @@
      <td  style="width: 35%;"> {!! $data->deskripsi !!}</td>
     </tr>
     <tr>
-     <td colspan="2" class="text-center"><a href="/Konsultan/{{ $data->id }}/edit"><button type="submit" class="btn submit-login">Edit</button></a></td>
+     <td colspan="2" class="text-center"><a href="/TenagaKerja/{{ $data->id }}/edit"><button type="submit" class="btn submit-login">Edit</button></a></td>
      <td class="text-center"> <button type="submit" class="btn submit-login ">Upload</button></td>
     </tr>
   </tbody>

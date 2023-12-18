@@ -35,7 +35,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 
 
-Route::get('/dashboard', function () {
+Route::middleware(['dashboard'])->get('/dashboard', function () {
     return view('dashboard.index');
 });
 

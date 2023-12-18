@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Product| Welcome Back </h1>
+    <h1 class="h2">{{ $title }} </h1>
     <div class="btn-toolbar mb-2 mb-md-0">
       <div class="btn-group me-2">
         <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -23,7 +23,7 @@
     <table class="table table-striped table-sm">
       <thead>
         <tr>
-          <th scope="col">Id</th>
+          <th scope="col">Id Produk</th>
           <th scope="col">Name</th>
           <th scope="col">Kategori</th>
           <th scope="col">Harga</th>
@@ -35,18 +35,21 @@
         <tr>
           <td>{{ $loop->iteration }}</td>
           <td>{{ $product->name }}</td>
-          <td>{{ $product->category_id }}</td>
-          <td>{{ $product->user_id}}</td>
+          <td>{{ $product->kategori->productName}}</td>
+          <td>{{ $product->harga}}</td>
           <td>
-            {{-- <a href="/dashboard/user/{{ $user->slug }}" class=" badge bg-info">
+            <a href="/dashboard/product/{{ $product->id}}" class=" badge bg-info">
                 <i class="bi bi-eye"></i>
             </a>
-            <a href="/dashboard/user/{{ $user->id }}" class=" badge bg-warning">
+            <a href="/dashboard/{{ $product->id }}/edit" class=" badge bg-warning">
                 <i class="bi bi-pencil-square"></i>
             </a>
-            <a href="/dashboard/user/{{ $user->id }}" class=" badge bg-danger">
-                <i class="bi bi-x-circle"></i>
-            </a> --}}
+            <form action="{{ route('product.destroy', $product->id) }}" method="post" style="display:inline;">
+              @csrf
+             @method('delete')
+                <button type="submit" class="badge bg-danger"><i class="bi bi-x-circle"></i>
+                </button>                    
+            </form>
           </td>
         </tr>
         @endforeach

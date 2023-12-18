@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\Models\User;
+use App\Models\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,4 +17,10 @@ class Toko extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function produk()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }

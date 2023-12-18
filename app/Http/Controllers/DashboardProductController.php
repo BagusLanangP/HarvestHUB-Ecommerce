@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\User;
+use App\Models\Toko;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -13,14 +16,29 @@ class DashboardProductController extends Controller
 {
     public function index()
     {
-        if (Gate::allows('is-admin')) {
-            // If user is admin, retrieve all products
-            $products = Product::all();
+        $itemuser = Auth::user();  
+        $toko = Toko::where('user_id', $itemuser->id)->get();
+        
+
+        if ($toko->isNotEmpty() || Gate::allows('is-admin')) {
+                
+            if (Gate::allows('is-admin')) {
+                // If user is admin, retrieve all products
+                $products = Product::all();
+                $namatoko = "Selamat Datang : ". $itemuser->nama ;
+            } else { 
+                $toko = Toko::where('user_id', $itemuser->id)->first();
+                $namatoko = "Toko : " . $toko->nama;
+                $products = Product::where('user_id', $itemuser->id)->get();
+            }
+            
+            $data = array('title' => $namatoko,
+                       'Products' => $products,);
+            return view('dashboard.product.index', $data);
+            
         } else {
-            $user = auth()->user();
-            $products = Product::where('user_id', $user->id)->get();
+            return redirect('/Toko/create');
         }
-        return view('dashboard.product.index', ['Products' => $products]);
     }
 
     /**
@@ -37,6 +55,9 @@ class DashboardProductController extends Controller
     public function store(Request $request)
     {
         // return $request;
+        $itemuser = Auth::user();  
+        $toko = Toko::where('user_id', $itemuser->id)->first();
+
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'category_id' => 'required|unique:products',
@@ -48,10 +69,11 @@ class DashboardProductController extends Controller
             'user_id' => 'required',
             // ... tambahkan aturan validasi lainnya sesuai kebutuhan
         ]);
-    
+        $validatedData['toko_id'] = $toko->id;
         
         // Membuat produk baru
         Product::create($validatedData);
+        return redirect('/dashboard/product')->with('success',  'Data Anda Tersimpan');
     
     
     }
