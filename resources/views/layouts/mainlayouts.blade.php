@@ -7,6 +7,12 @@
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
+    {{-- Swipper --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+
+    <!--=============== SWIPER CSS ===============-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
     {{-- Bootstrap Icon --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
@@ -21,7 +27,7 @@
   </head>
   <body>
 
-  <header>
+  <header class="header">
     <nav class="navbar navbar-expand-lg bg-body shadow-sm">
       <div class="container-fluid">
       ` <img src="{{ asset('img/Logo-harvesthub.png') }}" class="logo me-2" alt="">
@@ -54,8 +60,9 @@
 
         <div class="d-flex justify-content-end">
           <ul class="navbar-nav">
+            
             <li class="nav-item search">
-              <i class="bi bi-search nav-link nav-item" style="font-size: 30px;"></i>
+              <i class="bi bi-search nav-link nav-item" style="font-size: 30px;" id="search-btn"></i>
             </li>
             @auth
             <li class="nav-item dropdown">
@@ -180,6 +187,11 @@
 
        
     </nav>
+    <form action="/cari" class="search-form rounded shadow">
+      <input type="search" id="search-box" placeholder="search here..." name="cari"
+      value="{{ request('cari') }}" class="shadow rounded">
+      <label for="search-box" class="fas fa-search"></label>
+    </form>
 
   </header> 
 
@@ -235,7 +247,10 @@
     <script>
       feather.replace();
     </script>
+     <!--=============== SWIPER JS ===============-->
+    <script src="assets/js/swiper-bundle.min.js"></script>
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
   </body>
 </html>
