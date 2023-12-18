@@ -19,7 +19,7 @@
             <label for="foto" class="form-label">Upload Gambar</label>
             <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto" name="foto">
             @error('foto')
-           <div class="invalid-feedback">
+           <div class="alert alert-danger">
             {{ $message }}
            </div>
             @enderror
