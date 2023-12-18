@@ -15,11 +15,6 @@
       </button>
     </div>
   </div>
-
-  <p>Testingg aja brok</p>
-
-
-
   <div class="table-responsive small">
     <a href="/dashboard/product/create" class="btn btn-primary mb-3 mt-4">New Product</a>
     <table class="table table-striped table-sm">
