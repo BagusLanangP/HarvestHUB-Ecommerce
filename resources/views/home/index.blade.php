@@ -48,10 +48,52 @@
         </div>
     </section>
 
-    <section class="kategori vh-100" id="category">
-       <p>I Love You so</p>
+    <section id="kategori" class="mt-5 mb-5" >
+      <div class="container">
+        <div class="row text-center mb-3 ">
+          <div class="col category-tittle">
+            <h1>Kategori</h1>
+            <h4>Temukan produk yang anda inginkan</h3>
+          </div>
+          
+        </div>
+        <hr>
+        <div class="row ">
+          <div class="col-4 md-3 mb-3">
+            <div class="card shadow">
+              <img src="{{ asset('img/home/produk.jpg') }}" class="card-img-top" alt="GAMBAR2">
+              <div class="card-body">
+                <h4 class="card-text text-center">Buah</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4 md-3 mb-3">
+            <div class="card">
+              <img src="{{ asset('img/home/produk.jpg') }}" class="card-img-top" alt="GAMBAR3">
+              <div class="card-body">
+                <h4 class="card-text text-center">Obat</h4>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-4 md-3 mb-3">
+            <div class="card">
+              <img src="{{ asset('img/home/produk.jpg') }}" class="card-img-top" alt="GAMBAR3">
+              <div class="card-body">
+                <h4 class="card-text text-center">Sayur</h4>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+        <div class="row">
+
+        </div>
+      </div>
     </section>
 
+    <div class="mt-5"></div>
     <section class="produk vh-100 mb-5" id="produkhome">
       <div class="homeProduk">
         <div class="homeProdukTittle text-center mb-5" >
@@ -183,5 +225,62 @@
       </div>
     </section>
 
-    
+    <section class="review vh-100">
+
+      <div class="review-tittle text-center mb-5">
+        <h1>Service</h1>
+        <h4>Pesanlah untuk anda atau orang tercinta anda!</h4>
+      </div>
+      <hr>
+      <div class="review-content swiper">
+        <div class="d-flex justify-content-between swiper-wrapper">
+          <div class="card shadow swiper-slide" style="width: 14rem;">
+            <div class="card-img pt-3 pb-3 d-flex justify-content-center">
+              <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title review-name">Lanang Purbhawa</h5>
+              <h4 class="card-text review-desc">Some quick example text to build on the card title and make up the bulk of the card's content.</h4>
+            </div>
+          </div>   
+          <div class="card shadow swiper-slide" style="width: 14rem;">
+            <div class="card-img pt-3 pb-3 d-flex justify-content-center">
+              <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title review-name">Lanang Purbhawa</h5>
+              <h4 class="card-text review-desc">Some quick example text to build on the card title and make up the bulk of the card's content.</h4>
+            </div>
+          </div>
+          <div class="card shadow swiper-slide" style="width: 14rem;">
+            <div class="card-img pt-3 pb-3 d-flex justify-content-center">
+              <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title review-name">Lanang Purbhawa</h5>
+              <h4 class="card-text review-desc">Some quick example text to build on the card title and make up the bulk of the card's content.</h4>
+            </div>
+          </div>
+          <div class="card shadow swiper-slide" style="width: 14rem;">
+            <div class="card-img pt-3 pb-3 d-flex justify-content-center">
+              <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title review-name">Lanang Purbhawa</h5>
+              <h4 class="card-text review-desc">Some quick example text to build on the card title and make up the bulk of the card's content.</h4>
+            </div>
+          </div>
+          <div class="card shadow swiper-slide" style="width: 14rem;">
+            <div class="card-img pt-3 pb-3 d-flex justify-content-center">
+              <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title review-name">Lanang Purbhawa</h5>
+              <h4 class="card-text review-desc">Some quick example text to build on the card title and make up the bulk of the card's content.</h4>
+            </div>
+          </div>   
+        </div> 
+      </div>
+           
+    </section>
 @endsection

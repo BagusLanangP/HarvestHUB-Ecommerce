@@ -10,11 +10,11 @@
             <h4>Ayok Checkout barangmu sebelum kehabisan!</h4>
         </div>
         <hr>
-        <div class="table-responsive small">
+        <div class="">
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
-                    <th scope="col"  style="width: 10%;">
+                    <th scope="col"  style="width: 10%;" class="text-center">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                 </label>
@@ -28,7 +28,7 @@
               </thead>
               <tbody>
                 <tr>
-                    <td class="d-flex justify-content-center align-items-center">
+                    <td class="cart-check pt-3 pb-3 text-center">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
                         </label>
@@ -45,7 +45,7 @@
                         </div>
                         
                     </td>
-                    <td class="d-flex justify-content-center" style="height: 100%">
+                    <td class="cart-jml text-center pb-3 ps-2">
                         <div class="div">
                             <label for="jumlah_produk" class="form-label" ></label>
                             <input type="number" class="form-control" id="jumlah_produk" name="jumlah_produk"  style="width: 60px;" value="1"  required>
@@ -62,7 +62,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="d-flex justify-content-center align-items-center">
+                    <td class="pt-3 pb-3 text-center">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
                         </label>

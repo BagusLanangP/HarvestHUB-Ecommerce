@@ -6,7 +6,7 @@
 </div>
 
 <div class="col-lg-8">
-    <form method="post" action="/dashboard/product" class="mt-4">
+    <form method="post" action="/dashboard/product" class="mt-4" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
           <label for="name" class="form-label">Nama</label>
@@ -16,6 +16,15 @@
             {{ $message }}
            </div>
           @enderror
+        </div>
+        <div class="mb-3">
+            <label for="foto" class="form-label">Upload Gambar</label>
+            <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto" name="foto">
+            @error('foto')
+           <div class="invalid-feedback">
+            {{ $message }}
+           </div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="slug" class="form-label">Slug</label>

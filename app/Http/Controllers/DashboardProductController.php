@@ -32,22 +32,27 @@ class DashboardProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage
      */
     public function store(Request $request)
     {
         // return $request;
+       
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'category_id' => 'required|unique:products',
             'harga' => 'required',
             'description' => 'required',
             'jumlah_produk' => 'required',
-            'foto' => 'max:255',   
+            'foto' => 'image|file|max:1024',   
             'slug' => 'required',
             'user_id' => 'required',
             // ... tambahkan aturan validasi lainnya sesuai kebutuhan
         ]);
+
+        if($request->file('foto')){
+            $validatedData['foto'] = $request->file('foto')->store('product-images');
+        }
     
         
         // Membuat produk baru

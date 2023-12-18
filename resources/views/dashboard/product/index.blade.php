@@ -34,21 +34,27 @@
         @foreach( $Products as $product)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ $product->name }}</td>
+          <td class="d-flex align-items-start">
+            <img src="{{ asset('storage/' . $product->foto) }}" alt="Ini hujan" width="100rem" class="me-2">
+            <span>{{ $product->name }}</span>
+          </td>
           <td>{{ $product->category_id }}</td>
           <td>{{ $product->user_id}}</td>
           <td>
-            {{-- <a href="/dashboard/user/{{ $user->slug }}" class=" badge bg-info">
+                        
+            <a href="" class=" badge bg-info">
                 <i class="bi bi-eye"></i>
             </a>
-            <a href="/dashboard/user/{{ $user->id }}" class=" badge bg-warning">
+            <a href="" class=" badge bg-warning">
                 <i class="bi bi-pencil-square"></i>
             </a>
-            <a href="/dashboard/user/{{ $user->id }}" class=" badge bg-danger">
+            <a href="" class=" badge bg-danger">
                 <i class="bi bi-x-circle"></i>
-            </a> --}}
+            </a>
           </td>
+          
         </tr>
+        
         @endforeach
         
       </tbody>
