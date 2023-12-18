@@ -30,11 +30,18 @@
       <tbody>
         @foreach( $Products as $product)
         <tr>
-          <td>{{ $loop->iteration }}</td>
-          <td>{{ $product->name }}</td>
-          <td>{{ $product->kategori->productName}}</td>
-          <td>{{ $product->harga}}</td>
-          <td>
+          <td class="pt-2 pb-2">{{ $loop->iteration }}</td>
+          <td class="pt-2 pb-2">
+            <div class="">
+              <img src="{{ asset('storage/' . $product->foto) }}" alt="Png/jpg"  style="width:5rem; height:5rem;  display: block; margin-right: 10px; float: left;" >
+              <span class="product-name">{{ $product->name }}</span>
+            </div>
+            
+            
+          </td>
+          <td class="pt-2 pb-2 product-name" >{{ $product->kategori->productName}}</td>
+          <td class="pt-2 pb-2 product-name ">{{ $product->harga}}</td>
+          <td class="pt-2 pb-2 product-name">
             <a href="/dashboard/product/{{ $product->id}}" class=" badge bg-info">
                 <i class="bi bi-eye"></i>
             </a>

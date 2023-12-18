@@ -54,7 +54,8 @@ class DashboardProductController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+        // ddd($request);
+        // return $request->file('foto')->store('product-images');
 
         $itemuser = Auth::user();  
         $toko = Toko::where('user_id', $itemuser->id)->first();
@@ -64,16 +65,20 @@ class DashboardProductController extends Controller
             'harga' => 'required',
             'description' => 'required',
             'jumlah_produk' => 'required',
-            'foto' => 'image|file|max:1024',   
+            'foto' => 'required|image',  
             'slug' => 'required',
-            'user_id' => 'required',
             // ... tambahkan aturan validasi lainnya sesuai kebutuhan
         ]);
+        $validatedData['user_id'] = $itemuser->id;
         $validatedData['toko_id'] = $toko->id;
 
-        if($request->file('foto')){
-            $validatedData['foto'] = $request->file('foto')->store('product-images');
-        }
+       
+        // if($request->file('foto')){
+        $validatedData['foto'] = $request->file('foto')->store('product-images');
+        // }
+        
+
+        
         // Membuat produk baru
         Product::create($validatedData);
         return redirect('/dashboard/product')->with('success',  'Data Anda Tersimpan');
