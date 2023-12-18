@@ -21,7 +21,9 @@
     --ForthColorBlack: hsl(147, 0%, 15%);
     --FiveColorSecGreen: hsl(147, 36%, 95%);
     --SixthColorGreenOld: hsl(166, 80%, 17%);
-    --SevenColorGreyOld: hsl(0,0%,47%);
+    --warning: hsl(50, 100%, 53%);
+    --create: hsl(240, 100%, 50%);
+    --SevenColorGreyOld: hsl(0, 0%, 47%);
 
     /* Padding  */
     --paddingContentRL: 8rem;
@@ -189,6 +191,18 @@ header {
     color: var(--firstColorWhite);
 }
 
+.submit-edit {
+    width: 100%;
+    background-color: var(--warning);
+    color: var(--firstColorWhite);
+}
+
+.submit-upload {
+    width: 100%;
+    background-color: var(--create);
+    color: var(--firstColorWhite);
+}
+
 .login-tittle h2 {
     font-size: var(--h1-font-size);
     font-weight: 600;
@@ -312,65 +326,65 @@ img {
     color: var(--ForthColorBlack);
 }
 
-
-.card-body{
+.card-body {
     height: auto;
 }
 
 .produkhomeseemore {
-    width: 30%
+    width: 30%;
 }
 
-#promo{
+#promo {
     background-color: var(--SecColorGrey);
 }
 
-.productPrice{
+.productPrice {
     color: var(--SixthColorGreenOld);
     font-weight: 600;
 }
 
 /* Home End */
 
-
 /* cart start */
-#cart{
+#cart {
     padding-top: var(--paddingContentRL);
     padding-left: var(--paddingContentRL);
     padding-right: var(--paddingContentRL);
 }
 
-#cart th{
+#cart th {
     color: var(--SevenColorGreyOld);
 }
+
 
 .cart-check {
     padding-left: 10rem;
     padding-right: 10rem;
 }
 
-.cart-tittle h1{
+
+.cart-tittle h1 {
+
     font-size: var(--h1-font-size);
     font-weight: 600;
     color: var(--ForthColorBlack);
 }
-.cart-tittle h4{
+.cart-tittle h4 {
     font-size: var(--normal-font-size);
     font-weight: 400;
     color: var(--ForthColorBlack);
 }
 
-.checkout-border h1{
+.checkout-border h1 {
     font-size: var(--h2-font-size);
     font-weight: 600;
     color: var(--ForthColorBlack);
 }
 
-
 /* cart end */
 
 /* Worker */
-.worker{
+.worker {
     padding-top: var(--paddingContentRL);
 }
 
@@ -408,3 +422,6 @@ img {
 }
 
 /* Home End */
+#tenagakerja .login-tittle {
+    margin-top: 6rem;
+}

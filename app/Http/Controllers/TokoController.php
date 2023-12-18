@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TenagaKerja;
+use App\Models\Toko;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TenagaKerjaController extends Controller
+class TokoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-         $itemuser = Auth::user();
+       $itemuser = Auth::user();
 
-        if ($itemuser->role_id == 3) {
-            $item = TenagaKerja::where('user_id', $itemuser->id)->first();
+        if ($itemuser->role_id == 5) {
+            $item = Toko::where('user_id', $itemuser->id)->first();
             $data = array('data' => $item);
-            return view('TenagaKerja.index', $data);
+            return view('Toko.index', $data);
         } else {
             // Handle a situation where the logged-in user does not have role_id 2
             // You can redirect or show an error message, for example.
@@ -30,9 +30,9 @@ class TenagaKerjaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(User $user)
+    public function create()
     {
-        return view('TenagaKerja.create');
+        return view('Toko.create');
     }
 
     /**
@@ -42,11 +42,10 @@ class TenagaKerjaController extends Controller
     {
 
         $this->validate($request, [
-            'nama' => 'required|max:50',
-            'email' => 'required|email:dns|unique:tenaga_kerjas',
-            'phone' => 'required|min:10',
+            'nama' => 'required|max:50|unique:tokos',
+            'email' => 'required|email:dns|unique:tokos',
+            'phone' => 'required|min:10|unique:tokos',
             'alamat' => 'required',
-            'pengalaman' =>'required',
             'deskripsi' =>'required',
             
         ]);
@@ -55,17 +54,17 @@ class TenagaKerjaController extends Controller
         $inputan = $request->all();
         $inputan['user_id'] = $itemuser->id;
         
-        TenagaKerja::create($inputan);
+        Toko::create($inputan);
 
         
 
-        return redirect('/TenagaKerja')->with('success',  'Data Anda Tersimpan');
+        return redirect('/Toko')->with('success',  'Data Anda Tersimpan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(TenagaKerja $tenagaKerja)
+    public function show(Toko $toko)
     {
         //
     }
@@ -75,9 +74,9 @@ class TenagaKerjaController extends Controller
      */
     public function edit($id)
     {
-        $item = TenagaKerja::findOrFail($id);
+        $item = Toko::findOrFail($id);
             $data = array('data' => $item);
-        return view('TenagaKerja.edit', $data);
+        return view('Toko.edit', $data);
     }
 
     /**
@@ -85,30 +84,28 @@ class TenagaKerjaController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $this->validate($request, [
-            'nama' => 'required|max:50',
-            'email' => 'required|email|unique:tenaga_kerjas,email,' . $id,
-            'phone' => 'required|min:10',
+            'nama' => 'required|max:50|unique:tokos,nama,' . $id,
+            'email' => 'required|email|unique:tokos,email,' . $id,
+            'phone' => 'required|min:10|unique:tokos,phone,' . $id,
             'alamat' => 'required',
-            'pengalaman' =>'required',
             'deskripsi' =>'required',
         ]);
 
-        $item = TenagaKerja::findOrFail($id);
+        $item = Toko::findOrFail($id);
         // kalo ga ada error page not found 404
         
         $inputan = $request->all();
         $itemuser = $request->user();//ambil data user yang login
         $inputan['user_id'] = $itemuser->id;
         $item->update($inputan);   
-            return redirect('/TenagaKerja')->with('success',  'Data Anda Tersimpan');
-        
+        return redirect('/Toko')->with('success',  'Data Anda Tersimpan');
     }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TenagaKerja $tenagaKerja)
+    public function destroy(Toko $toko)
     {
         //
     }

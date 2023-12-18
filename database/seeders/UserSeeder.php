@@ -20,9 +20,11 @@ class UserSeeder extends Seeder
 
         $data = [
             ['name' => 'Lanang Purbhawa', 'email' => 'baguslanangpurbhawa@gmail.com', 'password' => '200603', 'phone' => '082145149616', 'alamat' => 'Gianyar', 'role_id' => 1, ],
-            ['name' => 'Mardana', 'email' => 'Mardana@gmail.com', 'password' => '$2y$12$IuYi/gGl/pWkWLXc9iXmueP8Zm8bs6Q8NwfUxFZLKuYJDtZk61052', 'phone' => '085858158622', 'alamat' => 'Tabanan', 'role_id' => 1, ]           
+            ['name' => 'Mardana', 'email' => 'Mardana@gmail.com', 'password' => '$2y$12$IuYi/gGl/pWkWLXc9iXmueP8Zm8bs6Q8NwfUxFZLKuYJDtZk61052', 'phone' => '085858158622', 'alamat' => 'Tabanan', 'role_id' => 3],
+            ['name' => 'alex', 'email' => 'alexsancez101@gmail.com', 'password' => '$2y$12$79zH32tfk54WNB3Uq9fGtOL.r1.6Y.JayplNd4imShD0xJwDHUxSG', 'phone' => '+62858581056', 'alamat' => 'Tabanan', 'role_id' => 3]                    
         ];
 
+            
         foreach ( $data as $value){
             User::insert([
                 'name' => $value['name'],

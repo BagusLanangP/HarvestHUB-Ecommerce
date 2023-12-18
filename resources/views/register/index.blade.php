@@ -18,19 +18,39 @@
                                 @csrf
                                 <div class="mb-4">
                                     <label for="InputNama" class="form-label">Your name</label>
-                                    <input type="name" class="form-control" id="InputNama" aria-describedby="NamaHelp" name="name" @error('name') is-invalid @enderror required value="{{ old('name') }}">
+                                    <input type="name" class="form-control" id="InputNama" name="name" @error('name') is-invalid 
+                                    @enderror value="{{ old('name') }}" required>
+ 
+                                    @error('name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-4">
                                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" 
+                                    @error('email') is-invalid @enderror  value="{{ old('email') }}" required>
+
+                                    @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-4">
                                     <label for="exampleInputPhone" class="form-label">Phone Number</label>
-                                    <input type="phone" class="form-control" id="exampleInputPhone" aria-describedby="PhoneHelp" name="phone">
+                                    <input type="phone" class="form-control" id="exampleInputPhone" aria-describedby="PhoneHelp" name="phone" 
+                                    @error('phone') is-invalid @enderror  value="{{ old('phone') }}" required>
+
+                                    @error('phone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-4">
                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" 
+                                    @error('password') is-invalid @enderror  value="{{ old('password') }}" required>
+                                    
+                                    @error('password')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-4 form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
