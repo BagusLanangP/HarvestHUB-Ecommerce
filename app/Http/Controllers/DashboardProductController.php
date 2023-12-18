@@ -65,7 +65,7 @@ class DashboardProductController extends Controller
             'harga' => 'required',
             'description' => 'required',
             'jumlah_produk' => 'required',
-            'foto' => 'required|image',  
+            'foto' => 'image|file',  
             'slug' => 'required',
             
         ]);
@@ -111,7 +111,7 @@ class DashboardProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         $itemproduk = Product::findOrFail($id);//cari berdasarkan id = $id, 
         // kalo ga ada error page not found 404
