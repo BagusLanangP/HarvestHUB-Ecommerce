@@ -48,7 +48,7 @@
                 <i class="bi bi-eye"></i>
             </a>
              @can('toko1') 
-            <a href="/dashboard/{{ $product->id }}/edit" class=" badge bg-warning">
+            <a href="/dashboard/product/{{ $product->id }}/edit" class=" badge bg-warning">
                 <i class="bi bi-pencil-square"></i>
             </a>
             <form action="{{ route('product.destroy', $product->id) }}" method="post" style="display:inline;">
