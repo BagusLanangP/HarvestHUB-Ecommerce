@@ -61,7 +61,7 @@
         <div class="row ">
           <div class="col-4 md-3 mb-3">
             <div class="card shadow">
-              <img src="{{ asset('img/home/produk.jpg') }}" class="card-img-top" alt="GAMBAR2">
+              <img src="{{ asset('img/home/kategori/buah-kategori.jpg') }}" class="card-img-top" alt="GAMBAR2">
               <div class="card-body">
                 <h4 class="card-text text-center">Buah</h4>
               </div>
@@ -69,8 +69,8 @@
           </div>
 
           <div class="col-4 md-3 mb-3">
-            <div class="card">
-              <img src="{{ asset('img/home/produk.jpg') }}" class="card-img-top" alt="GAMBAR3">
+            <div class="card shadow">
+              <img src="{{ asset('img/home/kategori/obat.jpg') }}" class="card-img-top" alt="GAMBAR3">
               <div class="card-body">
                 <h4 class="card-text text-center">Obat</h4>
               </div>
@@ -78,8 +78,8 @@
           </div>
           
           <div class="col-4 md-3 mb-3">
-            <div class="card">
-              <img src="{{ asset('img/home/produk.jpg') }}" class="card-img-top" alt="GAMBAR3">
+            <div class="card shadow">
+              <img src="{{ asset('img/home/kategori/sayur-kategori.jpg') }}" class="card-img-top" alt="GAMBAR3">
               <div class="card-body">
                 <h4 class="card-text text-center">Sayur</h4>
               </div>
@@ -240,7 +240,7 @@
             </div>
             <div class="card-body text-center">
               <h5 class="card-title review-name">Lanang Purbhawa</h5>
-              <h4 class="card-text review-desc">Some quick example text to build on the card title and make up the bulk of the card's content.</h4>
+              <h4 class="card-text review-desc">Ahli Durian</h4>
             </div>
           </div>   
           <div class="card shadow swiper-slide" style="width: 14rem;">
@@ -249,7 +249,7 @@
             </div>
             <div class="card-body text-center">
               <h5 class="card-title review-name">Lanang Purbhawa</h5>
-              <h4 class="card-text review-desc">Some quick example text to build on the card title and make up the bulk of the card's content.</h4>
+              <h4 class="card-text review-desc">Ahli Durian</h4>
             </div>
           </div>
           <div class="card shadow swiper-slide" style="width: 14rem;">
@@ -258,7 +258,7 @@
             </div>
             <div class="card-body text-center">
               <h5 class="card-title review-name">Lanang Purbhawa</h5>
-              <h4 class="card-text review-desc">Some quick example text to build on the card title and make up the bulk of the card's content.</h4>
+              <h4 class="card-text review-desc">Ahli Durian</h4>
             </div>
           </div>
           <div class="card shadow swiper-slide" style="width: 14rem;">
@@ -267,7 +267,7 @@
             </div>
             <div class="card-body text-center">
               <h5 class="card-title review-name">Lanang Purbhawa</h5>
-              <h4 class="card-text review-desc">Some quick example text to build on the card title and make up the bulk of the card's content.</h4>
+              <h4 class="card-text review-desc">Ahli Durian</h4>
             </div>
           </div>
           <div class="card shadow swiper-slide" style="width: 14rem;">
@@ -276,10 +276,22 @@
             </div>
             <div class="card-body text-center">
               <h5 class="card-title review-name">Lanang Purbhawa</h5>
-              <h4 class="card-text review-desc">Some quick example text to build on the card title and make up the bulk of the card's content.</h4>
+              <h4 class="card-text review-desc">Ahli Durian</h4>
             </div>
-          </div>   
+          </div>  
+           
         </div> 
+         <!-- Navigation buttons -->
+         <div class="swiper-button-next ">
+          <i class="ri-arrow-right-s-line"></i>
+          </div>
+          
+          <div class="swiper-button-prev">
+              <i class="ri-arrow-left-s-line"></i>
+          </div>
+
+          <!-- Pagination -->
+          <div class="swiper-pagination mt-3"></div>
       </div>
            
     </section>

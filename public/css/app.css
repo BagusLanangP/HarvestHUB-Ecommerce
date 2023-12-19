@@ -12,7 +12,7 @@
     --h2-font-size: 1.25rem;
     --normal-font-size: 0.938rem;
     --smaller-font-size: 0.75rem;
-    --smallers-font-size: 0.5rem
+    --smallers-font-size: 0.5rem;
 
     /* Default Color */
     --firstColorWhite: hsl(0, 0%, 100%);
@@ -408,6 +408,16 @@ img {
     color: var(--ForthColorBlack);
 }
 
+.review-content{
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+
+}
+
+.swiper-wrapper{
+    overflow: hidden;
+}
+
 .card {
     border: none;
 }
@@ -420,6 +430,62 @@ img {
 .review-desc {
     font-size: var(--smaller-font-size);
 }
+
+.swiper-button-next, .swiper-button-prev{
+    color: var(--ThirdColorGreen);
+    font-size: 0px;
+}
+
+
+.swiper-pagination-bullet-active {
+  background-color: var(--ThirdColorGreen);
+} 
+
+/* .swiper-button-prev:after,
+.swiper-button-next:after {
+  content: "";
+} */
+
+/* .swiper-button-prev,
+.swiper-button-next {
+  width: initial;
+  height: initial;
+  font-size: 3rem;
+  color: var(--second-color);
+
+} */
+  
+
+/* .swiper-button-prev:after,
+.swiper-button-next:after {
+  content: "";
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: initial;
+  height: initial;
+  font-size: 3rem;
+  color: var(--second-color);
+  display: none;
+}
+
+.swiper-button-prev {
+  left: 0;
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+.swiper-pagination-bullet {
+  background-color: hsl(212, 32%, 40%);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--second-color);
+} */
 
 /* Home End */
 #tenagakerja .login-tittle {
