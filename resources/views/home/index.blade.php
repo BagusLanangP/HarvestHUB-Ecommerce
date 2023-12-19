@@ -59,14 +59,17 @@
         </div>
         <hr>
         <div class="row ">
+          @foreach($kategoris as $k)
           <div class="col-4 md-3 mb-3">
             <div class="card shadow">
               <img src="{{ asset('img/home/kategori/buah-kategori.jpg') }}" class="card-img-top" alt="GAMBAR2">
               <div class="card-body">
-                <h4 class="card-text text-center">Buah</h4>
+                <h4 class="card-text text-center">{{ $k->productName }}</h4>
               </div>
             </div>
           </div>
+          @endforeach
+
 
           <div class="col-4 md-3 mb-3">
             <div class="card shadow">
@@ -85,6 +88,7 @@
               </div>
             </div>
           </div>
+
          
         </div>
         <div class="row">

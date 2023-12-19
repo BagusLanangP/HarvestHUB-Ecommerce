@@ -59,31 +59,28 @@ class DashboardProductController extends Controller
 
         $itemuser = Auth::user();  
         $toko = Toko::where('user_id', $itemuser->id)->first();
+
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'category_id' => 'required|unique:products',
+            'category_id' => 'required',
             'harga' => 'required',
             'description' => 'required',
             'jumlah_produk' => 'required',
-            'foto' => 'required|image',  
-            'slug' => 'required',
-            // ... tambahkan aturan validasi lainnya sesuai kebutuhan
+            'foto' => 'image|file',  
+            'slug' => 'required|unique:products',
+            
         ]);
+         
+        if($request->file('foto')){
+            $validatedData['foto'] = $request->file('foto')->store('product-images');
+        }
+
         $validatedData['user_id'] = $itemuser->id;
         $validatedData['toko_id'] = $toko->id;
-
-       
-        // if($request->file('foto')){
-        $validatedData['foto'] = $request->file('foto')->store('product-images');
-        // }
-        
-
         
         // Membuat produk baru
         Product::create($validatedData);
         return redirect('/dashboard/product')->with('success',  'Data Anda Tersimpan');
-    
-    
     }
 
     /**
@@ -97,9 +94,13 @@ class DashboardProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $kategori = ProductCategory::all();
+        $item = Product::findOrFail($id);
+            $data = array('data' => $item,
+                          'kategoris' => $kategori);
+        return view('dashboard.product.edit', $data);
     }
 
     /**
@@ -107,15 +108,49 @@ class DashboardProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $itemuser = Auth::user();  
+        $toko = Toko::where('user_id', $itemuser->id)->first();
+        $rules = [
+            'name' => 'required|max:255',
+            'category_id' => 'required',
+            'harga' => 'required',
+            'description' => 'required',
+            'jumlah_produk' => 'required',
+            'foto' => 'image|file',  
+        ];
+
+        if($request->slug != $product->slug){
+            $rules['slug'] = 'required|unique:products';
+        }
+
+        $rules['user_id'] = $itemuser->id;
+        $rules['toko_id'] = $toko->id;
+
+        $validatedData = $request->validate($rules);
+
+        if($request->file('foto')){
+            $validatedData['foto'] = $request->file('foto')->store('product-images');
+        }
+        
+        // Membuat produk baru
+        
+        Product::where('id',  $product->id)->update($validatedData);
+
+        return redirect('/dashboard/product')->with('success',  'Data Anda Tersimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $itemproduk = Product::findOrFail($id);//cari berdasarkan id = $id, 
+        // kalo ga ada error page not found 404
+        if ($itemproduk->delete()) {
+            return back()->with('success', 'Data berhasil dihapus');
+        } else {
+            return back()->with('error', 'Data gagal dihapus');
+        }
     }
 
     public function checkSlug(Request $request){
