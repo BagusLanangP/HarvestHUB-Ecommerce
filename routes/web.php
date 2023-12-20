@@ -51,3 +51,5 @@ Route::resource('/Toko', TokoController::class)->middleware('toko');
 Route::get('/cart', function () {
     return view('cart.index');
 });
+
+Route::get('/home/kategori/{id}', [HomeController::class, 'categoryDetail']);

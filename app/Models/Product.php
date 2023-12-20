@@ -20,7 +20,7 @@ class Product extends Model
 
     public function kategori()
     {
-    return $this->belongsTo(ProductCategory::class, 'category_id');
+        return $this->belongsTo(ProductCategory::class, 'id');
     }
 
     public function sluggable(): array

@@ -50,7 +50,7 @@
 
     <section id="kategori" class="mt-5 mb-5" >
       <div class="container">
-        <div class="row text-center mb-3 ">
+        <div class="row text-center mb-3 kategori-tittle">
           <div class="col category-tittle">
             <h1>Kategori</h1>
             <h4>Temukan produk yang anda inginkan</h3>
@@ -60,36 +60,18 @@
         <hr>
         <div class="row ">
           @foreach($kategoris as $k)
-          <div class="col-4 md-3 mb-3">
+          <div class="col-2 mb-3">
             <div class="card shadow">
-              <img src="{{ asset('img/home/kategori/buah-kategori.jpg') }}" class="card-img-top" alt="GAMBAR2">
-              <div class="card-body">
+              <a href="{{ url('/home/kategori/' . $k->id) }}">
+                <img src="{{ asset('img/home/kategori/buah-kategori.jpg') }}" class="card-img-top" alt="GAMBAR2">
+                <div class="card-body">
                 <h4 class="card-text text-center">{{ $k->productName }}</h4>
               </div>
+              </a>
+              
             </div>
           </div>
-          @endforeach
-
-
-          <div class="col-4 md-3 mb-3">
-            <div class="card shadow">
-              <img src="{{ asset('img/home/kategori/obat.jpg') }}" class="card-img-top" alt="GAMBAR3">
-              <div class="card-body">
-                <h4 class="card-text text-center">Obat</h4>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-4 md-3 mb-3">
-            <div class="card shadow">
-              <img src="{{ asset('img/home/kategori/sayur-kategori.jpg') }}" class="card-img-top" alt="GAMBAR3">
-              <div class="card-body">
-                <h4 class="card-text text-center">Sayur</h4>
-              </div>
-            </div>
-          </div>
-
-         
+          @endforeach         
         </div>
         <div class="row">
 
@@ -108,79 +90,15 @@
         <hr>
         <div class="homeProdukContent ">
           <div class="row-1 d-flex justify-content-between mb-3">
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
+            @foreach($produks as $produk)
+              <div class="col-2 card me-3 shadow card-product ">
                 <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <p class="card-text fw-medium">Daging Sapi</p>
                   <p class="productPrice">Rp.15000/kg</p>
                 </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text fw-medium">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text fw-medium">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text fw-medium">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text fw-medium">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-            </div>
-          </div>
-          <div class="row-1 d-flex justify-content-between mb-3">
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-                <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <p class="card-text fw-medium">Daging Sapi</p>
-                  <p class="productPrice">Rp.15000/kg</p>
-                </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text fw-medium">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text fw-medium">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text fw-medium">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text fw-medium">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
+              </div>
+            @endforeach
             </div>
           </div>
           {{-- <div class="row-2 d-flex justify-content-between">
