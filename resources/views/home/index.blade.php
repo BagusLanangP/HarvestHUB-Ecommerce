@@ -59,8 +59,13 @@
         </div>
         <hr>
         <div class="row ">
-          @foreach($kategoris as $k)
-          <div class="col-2 mb-3">
+          <div class="col-6">
+            <p>ini adalah</p>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              @foreach($kategoris as $k)
+          <div class="col-4 mb-3">
             <div class="card shadow">
               <a href="{{ url('/home/kategori/' . $k->id) }}">
                 <img src="{{ asset('img/home/kategori/buah-kategori.jpg') }}" class="card-img-top" alt="GAMBAR2">
@@ -71,7 +76,11 @@
               
             </div>
           </div>
-          @endforeach         
+          @endforeach     
+            </div>
+          
+          </div>
+              
         </div>
         <div class="row">
 
@@ -91,13 +100,15 @@
         <div class="homeProdukContent ">
           <div class="row-1 d-flex justify-content-between mb-3">
             @foreach($produks as $produk)
+              <a href="{{ URL::to('produk/'.$produk->slug ) }}"> 
               <div class="col-2 card me-3 shadow card-product ">
                 <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <p class="card-text fw-medium">Daging Sapi</p>
-                  <p class="productPrice">Rp.15000/kg</p>
+                  <p class="card-text fw-medium">{{ $produk->name }}</p>
+                  <p class="productPrice">Rp {{ $produk->harga }}</p>
                 </div>             
               </div>
+              </a>
             @endforeach
             </div>
           </div>
