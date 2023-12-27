@@ -50,5 +50,14 @@ class HomeController extends Controller
         }
     }
 
+    public function cari() 
+    {    
+      $itemproduk = Product::latest()->filter(request(['cari']))->get();
+        return view('home.search', [ 
+          "judul" => 'Hasil Pencarian',
+          "hasil" =>  $itemproduk,
+        ]);
+    }
+
 
 }

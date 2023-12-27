@@ -54,11 +54,17 @@
         
         <div class="row mt-5 mb-5">
             <div class="col-1 p-0 m-0 me-5">
-                    <a href="" >
-                        <button type="button" class="like-product rounded">
-                            <i class="bi bi-heart-fill"></i>
-                        </button>    
-                    </a>
+                   <form action="{{ route('wishlist.store') }}" method="post" class="d-inline-block">
+                      @csrf
+                        <input type="hidden" name="produk_id" value={{ $itemproduk->id }}>
+                        <button type="submit" class="button btn-warning">
+                      @if(isset($itemwishlist) && $itemwishlist)
+                        <i class="bi bi-heart-fill"></i>
+                      @else
+                        <i class="bi bi-heart-fill"></i>
+                      @endif
+                      </button>                    
+                    </form>
             </div>
             <div class="col-2 me-5">
                     <a href="" >
@@ -74,8 +80,7 @@
                         <input type="hidden" name="produk_id" value={{$itemproduk->id}}>
                         <button type="submit" class="add-cart rounded">
                             <i class="bi bi-cart-fill">Add to chart</i>
-                        </button> 
-                                      
+                        </button>                       
                 </form>                             
             </div>   
                         

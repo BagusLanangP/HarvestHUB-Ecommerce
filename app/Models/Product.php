@@ -32,4 +32,12 @@ class Product extends Model
         ];
     }
 
+
+    public function scopeFilter($query, array $filters)
+    {
+      $query->when($filters['cari'] ?? false, function($query, $cari){
+        return $query->where('name', 'like', '%'. $cari.'%');
+        });
+    }
+
 }

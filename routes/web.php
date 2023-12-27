@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\KonsultanController;
 use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\TenagaKerjaController;
@@ -26,6 +27,9 @@ use App\Http\Controllers\DashboardProductController;
 //halaman pertama yang tampil
 Route::get('/', [HomeController::class, 'index']);
 
+
+// Homepage
+Route::get('/cari', [HomeController::class, 'cari']);
 //rute login
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticating']);
@@ -58,6 +62,8 @@ Route::get('/home/kategori/{id}', [HomeController::class, 'categoryDetail']);
 
 Route::get('/produk/{slug}', [HomeController::class, 'produkdetail']);
 
+//route untuk user yang sudah melakukan login
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('cartdetail', CartDetailController::class);
+    Route::resource('wishlist', WishlistController::class);
 });
