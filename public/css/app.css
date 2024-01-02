@@ -679,3 +679,45 @@ img {
 /* Tokodetailend */
 
 
+
+/* Checkout start */
+.checkout{
+    padding-left: var(--paddingContentRL);
+    padding-right: var(--paddingContentRL);
+    padding-top: var(--paddingContentTB);
+    padding-bottom: var(--paddingContentTB);
+}
+
+.checkout-tittle h1{
+    font-size: var(--h1-font-size);
+    font-weight: 600;
+}
+.checkout-tittle h4{
+    font-size: var(--normal-font-size);
+    font-weight: 400;
+}
+
+.checkout-subtittle{
+    font-size: var(--h2-font-size);
+    font-weight: 500;
+}
+
+.checkout-form{
+    font-size: var(--normal-font-size);
+}
+
+.form-checkout-label{
+    font-size: var(--normal-font-size);
+}
+.button-checkout a{
+    color: #ffffff;
+}
+#buatpesanan{
+    background-color: var(--blueChat);
+}
+
+
+
+/* Checkout end */
+
+

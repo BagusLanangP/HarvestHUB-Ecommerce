@@ -35,3 +35,29 @@ let swiperCards = new Swiper(".review-content", {
   });
 
 
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('kosongkanForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Kirim request AJAX
+        fetch(this.action, {
+            method: this.method,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: new URLSearchParams(new FormData(this))
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Tampilkan pesan pop-up
+            alert(data.message); // Ubah sesuai dengan format respons yang Anda kirimkan dari server
+            // Refresh halaman atau lakukan tindakan lain jika diperlukan
+            location.reload();
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
+
+

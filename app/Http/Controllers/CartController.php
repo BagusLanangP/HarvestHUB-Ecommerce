@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use App\Models\AlamatPengiriman;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -72,16 +73,14 @@ class CartController extends Controller
         $itemuser = $request->user();
         $itemcart = Cart::where('user_id', $itemuser->id)->where('status_cart', 'cart')->first();
 
-        // $itemalamatpengiriman = AlamatPengiriman::where('user_id', $itemuser->id)
-        //                                         ->where('status', 'utama')
-        //                                         ->first();
+        $itemalamatpengiriman = AlamatPengiriman::where('user_id', $itemuser->id)->where('status', 'utama')->first();
         if($itemcart){
             $data = array('itemcart' => $itemcart,
             'itemalamatpengiriman' => $itemalamatpengiriman);
 
-            // return view
+            return view('cart.checkout', $data);
         }else{
-            
+            return abort('404');
         }
     }
 
@@ -90,9 +89,7 @@ class CartController extends Controller
         //menghapus semau detail cart dari cart yang berdasarkan id
         $itemcart->detail()->delete();
         $itemcart->updatetotal($itemcart, '-'. $itemcart->subtotal);
-        // return back
-
-
-
+        // return back 
+        return response()->json(['message' => 'Cart berhasil dikosongkan']);
     }
 }

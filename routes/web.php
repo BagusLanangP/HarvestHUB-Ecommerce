@@ -8,6 +8,7 @@ use App\Http\Controllers\TokoController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\KonsultanController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\TenagaKerjaController;
 use App\Http\Controllers\DashboardUserController;
@@ -72,4 +73,7 @@ Route::get('/produk/{slug}', [HomeController::class, 'produkdetail']);
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('cartdetail', CartDetailController::class);
     Route::resource('wishlist', WishlistController::class);
+    Route::get('checkout', [CartController::class,'checkout']);
+    Route::patch('kosongkan/{id}', [CartController::class, 'kosongkan']);
+    Route::resource('transaksi', TransaksiController::class);
 });

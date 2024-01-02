@@ -91,17 +91,22 @@
             </div>
             <hr class="mb-0 mt-0">
             <div class="row pt-5 pb-5">
-                <div class="col-3">
-                    <span>Total Produk : {{ $itemcart->detail->count() }}</span>
-                </div>
                 <div class="col-2">
-                    <span><a href="">Hapus</a></span>
+                    <span>Total Produk : {{ $itemcart->detail->count() }}</span>
                 </div>
                 <div class="col-3">
                     <span>{{ $itemcart->total }}</span>
                 </div>
+                <div class="col-3">
+                    <form id="kosongkanForm" action="{{ url('kosongkan').'/'.$itemcart->id }}" method="post">
+                        @method('patch')
+                        @csrf()
+                        <button type="submit" class="btn">Kosongkan</button>
+                    </form>
+                </div>
                 <div class="col-4">
-                    <button type="submit" class="btn submit-login d-flex justify-content-center">Checkout</button>
+                    <button type="submit" class="btn submit-login d-flex justify-content-center">
+                        <a href="{{ URL::to('checkout') }}" class="btn">Checkout</a></button>
                 </div>
             </div>
         </div>
