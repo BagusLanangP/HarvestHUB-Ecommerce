@@ -53,7 +53,13 @@ Route::resource('/dashboard/product', DashboardProductController::class)->middle
 
 Route::resource('/TenagaKerja', TenagaKerjaController::class)->middleware('tenagaKerja');
 Route::resource('/Konsultan', KonsultanController::class)->middleware('konsultan');
-Route::resource('/Toko', TokoController::class)->middleware('toko');
+Route::resource('Toko', TokoController::class)
+->middleware('toko');
+
+Route::get('/Toko/{id}', [TokoController::class, 'show']);
+
+
+
 
 
 

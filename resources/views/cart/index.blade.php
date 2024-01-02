@@ -29,7 +29,7 @@
                             {{  $loop->iteration }}
                         </td>
                         <td class="product-info">
-                            <img src="{{ asset('img/home/ahlipakar2.jpg') }}" alt="Product Image" style="max-width: 30%;  display: block; margin-right: 10px; float: left;">
+                            <img src="{{ asset('storage/' .$detail->produk->foto) }}" alt="Product Image" style="max-width: 30%;  display: block; margin-right: 10px; float: left;">
                             <!-- Nama Produk -->
                             <span class="product-name">{{  $detail->produk->name }}</span>
                         </td>

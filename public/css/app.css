@@ -558,6 +558,7 @@ img {
     font-weight: 600;
 }
 .description {
+    min-height: 200px;
     max-height: 200px; /* Tentukan tinggi maksimal sesuai kebutuhan */
   }
   .custom-btn-1{
@@ -591,14 +592,15 @@ img {
 .chat-product{
     background-color: var(--blueChat);
     border: none;
-    width: 100%;
+    width: 13.5rem;
     height: 2.5rem;
+
 }
 
 .add-cart{
     background-color: var(--ThirdColorGreen);
     border: none;
-    width: 100%;
+    width: 45.5rem;
     height: 2.5rem;
 }
 
@@ -632,6 +634,7 @@ img {
     color: var(--ThirdColorGreen);
 }
 
+/* untuk yang keliatan di menu wishlist */
 .like-button-wishlist{
     background-color: var(--Red);
     border: none;
@@ -642,6 +645,37 @@ img {
     background-color: var(--ThirdColorGreen);
 }
 
-.card-body-wl{
-    height: 30rem;
+
+/* untuk yang di detail product */
+.wishlist-product-button{
+    background-color: var(--Red);
+    border: none;
+    height: 2.5rem;
+    width: 9rem;
 }
+
+
+
+/* Tokodetail */
+.tokodetail{
+    padding-left: var(--paddingContentRL);
+    padding-right: var(--paddingContentRL);
+    padding-top: var(--paddingContentTB);
+    padding-bottom: var(--paddingContentTB);
+}
+
+.follow-toko{
+    background-color: var(--ThirdColorGreen);
+    border: none;
+    width: 13.5rem;
+    height: 2.5rem;
+
+}
+
+.bi-plus{
+    color: #ffffff;
+}
+
+/* Tokodetailend */
+
+

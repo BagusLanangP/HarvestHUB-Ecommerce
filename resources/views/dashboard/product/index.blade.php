@@ -41,8 +41,8 @@
             
             
           </td>
-          <td class="pt-2 pb-2 product-name" >{{ $product->kategori->productName}}</td>
-          <td class="pt-2 pb-2 product-name ">{{ $product->harga}}</td>
+          {{-- <td class="pt-2 pb-2 product-name" >{{ $product->kategori->productName}}</td>
+          <td class="pt-2 pb-2 product-name ">{{ $product->harga}}</td> --}}
           <td class="pt-2 pb-2 product-name">
             <a href="/dashboard/product/{{ $product->id}}" class=" badge bg-info">
                 <i class="bi bi-eye"></i>

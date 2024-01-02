@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Toko;
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,9 +65,12 @@ class TokoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Toko $toko)
+    public function show($id)
     {
-        //
+        
+        $toko = Toko::findOrFail($id);
+        $products = Product::where('toko_id', $id)->get();
+        return view('Toko.view', compact('toko', 'products'));
     }
 
     /**

@@ -61,9 +61,9 @@
         <div class="row ">
           @foreach($kategoris as $k)
           <div class="col-2 mb-3"">
-            <div class="card shadow">
+            <div class="card card-product shadow">
               <a href="{{ url('/home/kategori/' . $k->id) }}">
-                <img src="{{ asset('img/home/kategori/buah-kategori.jpg') }}" class="card-img-top" alt="GAMBAR2">
+                <img src="{{ asset('img/home/kategori/obat-pupuk.png') }}" class="card-img-top" alt="GAMBAR2">
                 <div class="card-body">
                 <h4 class="card-text text-center">{{ $k->productName }}</h4>
                 </div>
@@ -92,56 +92,26 @@
         </div>
         <hr>
         <div class="homeProdukContent ">
-          <div class="row-1 d-flex justify-content-between mb-3">
+          <div class="row mb-3">
             @foreach($produks as $produk)
-              <a href="{{ URL::to('produk/'.$produk->slug ) }}"> 
-              <div class="col-2 card me-3 shadow card-product d-flex justify-content-center ">
-                <img src="{{asset('storage/' . $produk->foto)}}" class="card-img-top shadow-sm" alt="...">
-                <div class="card-body">
-                  <p class="card-text fw-medium mb-1">{{ $produk->name }}</p>
-                  <p class="productPrice mb-0">Rp {{ $produk->harga }}</p>
-                </div>             
-              </div>
-              </a>
+                <div class="col-2 mb-3">
+                    <div class="card me-3 shadow card-product d-flex justify-content-start mb-2">
+                        <a href="{{ URL::to('produk/'.$produk->slug ) }}">
+                            <img src="{{asset('storage/' . $produk->foto)}}" class="card-img-top shadow-sm" alt="...">
+                            <div class="card-body">
+                                <p class="card-text fw-medium mb-1">{{ $produk->name }}</p>
+                                <p class="productPrice mb-0">Rp {{ $produk->harga }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        
+                @if($loop->iteration % 6 == 0)
+                    </div><div class="row mb-3">
+                @endif
             @endforeach
-            </div>
-          </div>
-          {{-- <div class="row-2 d-flex justify-content-between">
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>     
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-            <div class="col-3 card me-3 shadow " style="width: 14rem;">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <p class="card-text">Daging Sapi</p>
-                <p class="productPrice">Rp.15000/kg</p>
-              </div>             
-            </div>
-          </div> --}}
+        </div>
+
           <div class="seemore d-flex justify-content-center mt-5">
             <div class="produkhomeseemore">
               <button type="submit" class="btn submit-login d-flex justify-content-center">Lihat Produk Lainnya</button>

@@ -15,12 +15,12 @@
         <div class="row-1 d-flex justify-content-start mb-3">
           @foreach($itemwishlist as $wl)
             <a href="{{ URL::to('produk/'.$wl->produk->slug ) }}"> 
-            <div class="col-3 card me-3 shadow card-product-wl ">
-              <img src="{{ asset('img/home/pekerja2.jpg')}}" class="card-img-top" alt="...">
+            <div class="col-3 card me-3 shadow card-product ">
+              <img src="{{ asset('storage/' . $wl->produk->foto)}}" class="card-img-top" alt="...">
               <div class="card-body">
                 <p class="card-text fw-medium">{{ $wl->produk->name }}</p>
                 <p class="productPrice">Rp {{ $wl->produk->harga }}</p>
-                <div class="row">
+                <div class="row mt-0 mb-0">
                     <div class="col">
                         <form action="{{ route('wishlist.store') }}" method="post" class="d-inline-block">
                             @csrf
