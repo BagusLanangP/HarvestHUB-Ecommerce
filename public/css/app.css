@@ -85,6 +85,11 @@ a{
     height: 10rem;
 }
 
+.bi-star-fill{
+    color: rgb(216, 216, 0);
+    
+}
+
 
 
 /* Global end */
@@ -740,6 +745,55 @@ img {
     
 }
 
+.ahlipakar-page{
+    padding-left: var(--paddingContentRL);
+    padding-right: var(--paddingContentRL);
+    padding-top: var(--paddingContentTB);
+    padding-bottom: var(--paddingContentTB);
+}
+
+.ahlipakar-tittle h1{
+    font-size: var(--h1-font-size);
+    font-weight: 600;
+    color: #a9a9a9;
+}
+
+.detail-ahlipakar{
+    padding-left: var(--paddingContentRL);
+    padding-right: var(--paddingContentRL);
+    padding-top: var(--paddingContentTB);
+    padding-bottom: var(--paddingContentTB);
+}
+
+.hero-name-detail-ahlipakar h1{
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.hero-name-detail-ahlipakar h1 span{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--blueChat);
+}
+
+.deskripsi-ahlipakr-detail h4{
+    font-size: var(--h2-font-size);
+}
+
+.download-ahlipakar{
+    background-color: var(--blueChat);
+}
+.download-ahlipakar a{
+    color: #ffffff;
+}
+
+.chat-ahlipakar a{
+    color: #ffffff;
+}
+
+/* .foto-user-service{
+    width: 30rem;
+} */
 /* Konsultan end */
 
 

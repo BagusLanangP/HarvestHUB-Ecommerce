@@ -58,7 +58,8 @@ Route::resource('Toko', TokoController::class)
 ->middleware('toko');
 
 Route::get('/Toko/{id}', [TokoController::class, 'show']);
-
+Route::get('/Tenagakerja/view', [HomeController::class, 'tenagakerja']);
+Route::get('/Ahlipakar/view', [HomeController::class, 'ahlipakar']);
 
 
 
@@ -68,6 +69,8 @@ Route::get('/home/kategori/{id}', [HomeController::class, 'categoryDetail']);
 
 
 Route::get('/produk/{slug}', [HomeController::class, 'produkdetail']);
+Route::get('/tenagakerja/{id}', [HomeController::class, 'tenagakerjadetail']);
+Route::get('/ahlipakar/{id}', [HomeController::class, 'ahlipakardetail']);
 
 //route untuk user yang sudah melakukan login
 Route::group(['middleware' => 'auth'], function(){

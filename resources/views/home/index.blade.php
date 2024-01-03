@@ -134,11 +134,12 @@
           @foreach($service as $s)
           <div class="card shadow swiper-slide" style="width: 14rem;">
             <div class="card-img pt-3 pb-3 d-flex justify-content-center">
-              <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
+              <img src="{{ asset('storage/' . $s->foto)}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
             </div>
             <div class="card-body text-center">
               <h5 class="card-title review-name">{{ $s->nama }}</h5>
-              <h4 class="card-text review-desc">{{ $s->email }}</h4>
+              <h6><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></h6>
+              <h4 class="card-text review-desc">{{ $s->keahlian }}</h4>
             </div>
           </div>
           @endforeach   

@@ -51,8 +51,8 @@
                 Service
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Tenaga Kerja</a></li>
-                <li><a class="dropdown-item" href="#">Ahli Pakar</a></li>
+                <li><a class="dropdown-item" href="/Tenagakerja/view">Tenaga Kerja</a></li>
+                <li><a class="dropdown-item" href="/Ahlipakar/view">Ahli Pakar</a></li>
               </ul>
             </li>
           </ul>

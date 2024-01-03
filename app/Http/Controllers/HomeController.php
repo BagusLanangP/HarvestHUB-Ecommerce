@@ -57,6 +57,46 @@ class HomeController extends Controller
         }
     }
 
+    public function ahlipakardetail($id) {
+        $itemAP = Konsultan::where('id', $id)
+                            
+                            ->first();
+        if ($itemAP) {
+            if (Auth::user()) {//cek kalo user login
+                $itemuser = Auth::user();
+                $data = array('title' => $itemAP->name,
+                        'itemproduk' => $itemAP
+                    );
+            } else {
+                $data = array('title' => $itemAP->name,
+                            'itemproduk' => $itemAP);
+            }
+            return view('home.ahlipakar.detail', $data);            
+        } else {
+            return abort('404');
+        }
+    }
+
+    public function tenagakerjadetail($id) {
+        $itemAP = TenagaKerja::where('id', $id)
+                            
+                            ->first();
+        if ($itemAP) {
+            if (Auth::user()) {//cek kalo user login
+                $itemuser = Auth::user();
+                $data = array('title' => $itemAP->name,
+                        'itemproduk' => $itemAP
+                    );
+            } else {
+                $data = array('title' => $itemAP->name,
+                            'itemproduk' => $itemAP);
+            }
+            return view('home.tenagakerja.detail', $data);            
+        } else {
+            return abort('404');
+        }
+    }
+
     public function cari() 
     {    
       $itemproduk = Product::latest()->filter(request(['cari']))->get();
@@ -65,6 +105,16 @@ class HomeController extends Controller
           "hasil" =>  $itemproduk,
         ]);
     }
+
+    public function tenagakerja(){
+        $data = TenagaKerja::all();
+        return view('home.tenagakerja.index', compact('data'));
+    } 
+    public function ahlipakar(){
+        $data = Konsultan::all();
+        return view('home.ahlipakar.index', compact('data'));
+    }
+    
 
 
 
