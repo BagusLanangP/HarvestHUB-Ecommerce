@@ -14,8 +14,8 @@
         </div>
         <div class="row justify-content-center">
           <div class="col col-8">
-          <div class="tenagakerja-form">
-            <form action="{{ route('TenagaKerja.store') }}" method="post">
+          <div class="tenagakerja-form shadow p-3 mb-3">
+            <form action="/TenagaKerja" method="post" enctype="multipart/form-data">
               @csrf
                 <div class="mb-4">
                     <label for="nama" class="form-label">Nama</label>
@@ -26,6 +26,25 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                       @enderror
                 </div>
+                <div class="mb-3">
+                  <label for="foto" class="form-label">Upload Fotomu</label>
+                  <img class="img-preview img-fluid mb-3 col-sm-5">
+                  <input class="form-control" @error('foto') is-invalid @enderror type="file" id="foto" name="foto" onchange="previewImage()">
+                  @error('foto')
+                 <div class="alert alert-danger">
+                  {{ $message }}
+                 </div>
+                  @enderror
+                </div>
+                <div class="mb-3">
+                  <label for="foto_cv" class="form-label">Upload CV/Portofoliomu</label>
+                  <img class="img-preview img-fluid mb-3 col-sm-5">
+                  <input class="form-control" @error('foto_cv') is-invalid @enderror type="file" id="foto_cv" name="foto_cv" onchange="previewImage()">
+                  @error('foto_cv')
+                 <div class="alert alert-danger">
+                  {{ $message }}
+                 </div>
+                  @enderror
                 <div class="mb-4">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" 
@@ -52,6 +71,15 @@
                       @error('alamat')
                         <div class="alert alert-danger">{{ $message }}</div>
                       @enderror
+                </div>
+                <div class="mb-4">
+                  <label for="keahlian" class="form-label">Keahlian</label>
+                  <input type="text" class="form-control" id="keahlian"  name="keahlian" placeholder="Masukan keahlian"
+                    @error('keahlian') is-invalid @enderror value="{{ old('keahlian') }}" required >
+
+                    @error('alamat')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-4">
                     <label for="pengalaman" class="form-label">pengalaman</label>

@@ -62,8 +62,8 @@
           @foreach($kategoris as $k)
           <div class="col-2 mb-3"">
             <div class="card card-product shadow">
-              <a href="{{ url('/home/kategori/' . $k->id) }}">
-                <img src="{{ asset('img/home/kategori/obat-pupuk.png') }}" class="card-img-top" alt="GAMBAR2">
+              <a href="{{ url('kategori/' . $k->id) }}">
+                <img src="{{ asset('img/kategori/' . $k->foto ) }}" class="card-img-top" alt="GAMBAR2">
                 <div class="card-body">
                 <h4 class="card-text text-center">{{ $k->productName }}</h4>
                 </div>
@@ -131,16 +131,18 @@
       <hr>
       <div class="review-content swiper">
         <div class="d-flex justify-content-between swiper-wrapper">
+          @foreach($service as $s)
           <div class="card shadow swiper-slide" style="width: 14rem;">
             <div class="card-img pt-3 pb-3 d-flex justify-content-center">
               <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
             </div>
             <div class="card-body text-center">
-              <h5 class="card-title review-name">Lanang Purbhawa</h5>
-              <h4 class="card-text review-desc">Ahli Durian</h4>
+              <h5 class="card-title review-name">{{ $s->nama }}</h5>
+              <h4 class="card-text review-desc">{{ $s->email }}</h4>
             </div>
-          </div>   
-          <div class="card shadow swiper-slide" style="width: 14rem;">
+          </div>
+          @endforeach   
+          {{-- <div class="card shadow swiper-slide" style="width: 14rem;">
             <div class="card-img pt-3 pb-3 d-flex justify-content-center">
               <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
             </div>
@@ -175,7 +177,7 @@
               <h5 class="card-title review-name">Lanang Purbhawa</h5>
               <h4 class="card-text review-desc">Ahli Durian</h4>
             </div>
-          </div>  
+          </div>   --}}
            
         </div> 
          <!-- Navigation buttons -->

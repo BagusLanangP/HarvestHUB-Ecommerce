@@ -18,11 +18,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->text('alamat');
+            $table->text('keahlian');
             $table->text('pengalaman');
             $table->text('deskripsi');
-            $table->string('cv')->nullable();
-            $table->unsignedBigInteger('user_id');
-            
+            $table->string('foto');
+            $table->string('foto_cv')->nullable();
+            $table->unsignedBigInteger('user_id');            
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

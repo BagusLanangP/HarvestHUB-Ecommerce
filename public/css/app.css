@@ -715,9 +715,31 @@ img {
 #buatpesanan{
     background-color: var(--blueChat);
 }
-
-
-
 /* Checkout end */
+
+
+/* Konsultan/Ahli Pakar */
+
+#hapus-konsultan {
+    color: #ffffff;
+    background-color: var(--Red);
+}
+#hapus-konsultan a {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#edit-konsultan a{
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.subtittle h4{
+    font-size: var(--h2-font-size);
+    font-weight: 600;
+    
+}
+
+/* Konsultan end */
 
 

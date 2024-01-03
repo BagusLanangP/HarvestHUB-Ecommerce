@@ -40,21 +40,42 @@ class KonsultanController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+       
+        $validatedData = $request->validate([
             'nama' => 'required|max:50',
             'email' => 'required|email:dns|unique:konsultans',
             'phone' => 'required|min:10',
+            'keahlian' => 'required',
             'alamat' => 'required',
             'pengalaman' =>'required',
             'deskripsi' =>'required',
-            
+            'foto' => 'image|file',
+            'foto_cv' => 'image|file',    
         ]);
+        // $this->validate($request, [
+        //     'nama' => 'required|max:50',
+        //     'email' => 'required|email:dns|unique:konsultans',
+        //     'phone' => 'required|min:10',
+        //     'keahlian' => 'required',
+        //     'alamat' => 'required',
+        //     'pengalaman' =>'required',
+        //     'deskripsi' =>'required',
+        //     'foto' => 'image|file',
+        //     'foto_cv' => 'image|file',    
+        // ]);
+        if($request->file('foto')){
+            $validatedData['foto'] = $request->file('foto')->store('konsultan-foto');
+        }
 
-        $itemuser = $request->user();//ambil data user yang login
-        $inputan = $request->all();
-        $inputan['user_id'] = $itemuser->id;
+        if($request->file('foto_cv')){
+            $validatedData['foto_cv'] = $request->file('foto_cv')->store('konsultan-foto-cv');
+        }
+        $itemuser = $request->user();
+        $validatedData['user_id'] = $itemuser->id;
+        //ambil data user yang login
+       
         
-        Konsultan::create($inputan);
+        Konsultan::create($validatedData);
 
         
 

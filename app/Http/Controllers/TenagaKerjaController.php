@@ -41,21 +41,47 @@ class TenagaKerjaController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
+        $validatedData = $request->validate([
             'nama' => 'required|max:50',
             'email' => 'required|email:dns|unique:tenaga_kerjas',
             'phone' => 'required|min:10',
+            'keahlian' => 'required',
             'alamat' => 'required',
             'pengalaman' =>'required',
             'deskripsi' =>'required',
-            
+            'foto' => 'image|file',
+            'foto_cv' => 'image|file',    
         ]);
 
-        $itemuser = $request->user();//ambil data user yang login
-        $inputan = $request->all();
-        $inputan['user_id'] = $itemuser->id;
+        if($request->file('foto')){
+            $validatedData['foto'] = $request->file('foto')->store('tenagakerja-foto');
+        }
+
+        if($request->file('foto_cv')){
+            $validatedData['foto_cv'] = $request->file('foto_cv')->store('tenagakerja-foto-cv');
+        }
+        $itemuser = $request->user();
+        $validatedData['user_id'] = $itemuser->id;
+        //ambil data user yang login
+       
         
-        TenagaKerja::create($inputan);
+        TenagaKerja::create($validatedData);
+
+
+        // $this->validate($request, [
+        //     'nama' => 'required|max:50',
+        //     'email' => 'required|email:dns|unique:tenaga_kerjas',
+        //     'phone' => 'required|min:10',
+        //     'alamat' => 'required',
+        //     'pengalaman' =>'required',
+        //     'deskripsi' =>'required',      
+        // ]);
+
+        // $itemuser = $request->user();//ambil data user yang login
+        // $inputan = $request->all();
+        // $inputan['user_id'] = $itemuser->id;
+        
+        // TenagaKerja::create($inputan);
 
         
 

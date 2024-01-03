@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->string('foto')->nullable();
             $table->unsignedBigInteger('user_id');
-            
+            $table->string('foto_syarat')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

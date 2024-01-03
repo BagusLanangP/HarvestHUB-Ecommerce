@@ -14,8 +14,8 @@
         </div>
         <div class="row justify-content-center">
           <div class="col col-8">
-          <div class="tenagakerja-form">
-            <form action="{{ route('Toko.store') }}" method="post">
+          <div class="tenagakerja-form shadow p-3">
+            <form action="/Toko" method="post" enctype="multipart/form-data">
               @csrf
                 <div class="mb-4">
                     <label for="nama" class="form-label">Nama Toko</label>
@@ -26,6 +26,25 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                       @enderror
                 </div>
+                <div class="mb-4">
+                  <label for="foto" class="form-label">Foto Profil toko</label>
+                  <img class="img-preview img-fluid mb-3 col-sm-5">
+                  <input class="form-control" @error('foto') is-invalid @enderror type="file" id="foto" name="foto" onchange="previewImage()">
+                  @error('foto')
+                 <div class="alert alert-danger">
+                  {{ $message }}
+                 </div>
+                  @enderror
+                </div>
+                <div class="mb-4">
+                  <label for="foto_syarat" class="form-label">Upload syarat</label>
+                  <img class="img-preview img-fluid mb-3 col-sm-5">
+                  <input class="form-control" @error('foto_syarat') is-invalid @enderror type="file" id="foto_syarat" name="foto_syarat" onchange="previewImage()">
+                  @error('foto_syarat')
+                 <div class="alert alert-danger">
+                  {{ $message }}
+                 </div>
+                  @enderror
                 <div class="mb-4">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" 

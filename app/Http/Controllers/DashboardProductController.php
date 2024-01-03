@@ -54,7 +54,6 @@ class DashboardProductController extends Controller
      */
     public function store(Request $request)
     {
-        // ddd($request);
         // return $request->file('foto')->store('product-images');
 
         $itemuser = Auth::user();  

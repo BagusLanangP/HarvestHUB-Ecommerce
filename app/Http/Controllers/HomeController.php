@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Konsultan;
+use App\Models\TenagaKerja;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +15,13 @@ class HomeController extends Controller
     public function index(){
         $produk = Product::all();
         $kategori = ProductCategory::all();
-        $data = array('produks' => $produk,
-                       'kategoris' => $kategori   );
+        $tenagaKerja = TenagaKerja::all();
+        $konsultan = Konsultan::all();
+
+    // Menggabungkan data dari TenagaKerja dan Konsultan
+        $service = $tenagaKerja->merge($konsultan);
+        // return $service;
+        $data = array('produks' => $produk, 'kategoris' => $kategori, 'service' => $service);
         return view('home.index', $data);
 
     }
@@ -58,6 +65,8 @@ class HomeController extends Controller
           "hasil" =>  $itemproduk,
         ]);
     }
+
+
 
 
 }

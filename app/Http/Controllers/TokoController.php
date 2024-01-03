@@ -41,21 +41,35 @@ class TokoController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validate($request, [
-            'nama' => 'required|max:50|unique:tokos',
-            'email' => 'required|email:dns|unique:tokos',
-            'phone' => 'required|min:10|unique:tokos',
+        $validatedData = $request->validate([
+            'nama' => 'required|max:50',
+            'email' => 'required|email:dns|unique:tenaga_kerjas',
+            'phone' => 'required|min:10',
             'alamat' => 'required',
             'deskripsi' =>'required',
-            
+            'foto' => 'image|file',  
+            'foto_syarat' => 'image|file',  
         ]);
 
-        $itemuser = $request->user();//ambil data user yang login
-        $inputan = $request->all();
-        $inputan['user_id'] = $itemuser->id;
-        
-        Toko::create($inputan);
+        if($request->file('foto')){
+            $validatedData['foto'] = $request->file('foto')->store('toko-foto');
+        }
+
+        if($request->file('foto_syarat')){
+            $validatedData['foto_cv'] = $request->file('foto_cv')->store('toko-foto-syarat');
+        }
+        $itemuser = $request->user();
+        $validatedData['user_id'] = $itemuser->id;
+
+        // $this->validate($request, [
+        //     'nama' => 'required|max:50|unique:tokos',
+        //     'email' => 'required|email:dns|unique:tokos',
+        //     'phone' => 'required|min:10|unique:tokos',
+        //     'alamat' => 'required',
+        //     'deskripsi' =>'required',
+            
+        // ]);
+        Toko::create($validatedData);
 
         
 

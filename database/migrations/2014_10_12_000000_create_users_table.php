@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('phone', 12);
+            $table->string('phone', 14);
             $table->text('alamat')->nullable();
             $table->string('role_id')->default(2); // Set default role to 'user'
             $table->string('foto')->nullable();
