@@ -61,10 +61,6 @@ Route::get('/Toko/{id}', [TokoController::class, 'show']);
 Route::get('/Tenagakerja/view', [HomeController::class, 'tenagakerja']);
 Route::get('/Ahlipakar/view', [HomeController::class, 'ahlipakar']);
 
-
-
-
-
 Route::get('/home/kategori/{id}', [HomeController::class, 'categoryDetail']);
 
 

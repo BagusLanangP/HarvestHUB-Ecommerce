@@ -1,66 +1,115 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# HarvestHUB Ecommerce
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+HarvestHUB is an agricultural e-commerce platform that connects farmers, buyers, and agricultural experts. It provides a comprehensive marketplace for agricultural products, farm workers, and consultants.
 
-## About Laravel
+## Key Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Multi-Role User Authentication**: Secure login and registration for different user types (Farmer, Buyer, Admin).
+- **Product & Shop Management**: Farmers can create their own shops (`Toko`) and manage their agricultural products.
+- **Service Booking**: Find and hire farm workers (`TenagaKerja`) and agricultural consultants (`Konsultan`).
+- **Shopping Cart & Order System**: Complete e-commerce experience with shopping cart (`cart`), wishlist (`wishlist`), checkout, and transaction management (`transaksi`).
+- **User Dashboard**: Personalized dashboard for users to manage their profiles, shops, and products.
+- **Search & Filtering**: Easily find products, workers, and consultants based on categories.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## User Roles
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The application supports multiple user roles, each with specific permissions:
 
-## Learning Laravel
+- **Admin**: Full access to the system. Can manage all users, products, categories, and oversee transactions.
+- **Farmer / Seller (Toko)**: Can create a shop profile, add/edit/delete their own products, and manage incoming orders. They can also offer services as a Worker or Consultant.
+- **Buyer**: Can browse products, add items to their cart/wishlist, and complete transactions. Buyers can also hire farm workers and consultants.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Project Structure
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+This project follows the standard Laravel MVC (Model-View-Controller) architecture. Here are the key directories:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- `app/Http/Controllers/`: Contains the core logic for handling requests (e.g., `HomeController`, `CartController`, `TokoController`, `AuthController`).
+- `app/Models/`: Eloquent models representing the database tables (e.g., `Product`, `Toko`, `User`, `Cart`, `Order`).
+- `routes/web.php`: Defines all web-accessible routes and applies necessary middleware (authentication, role checks).
+- `resources/views/`: Contains the Blade template files for the frontend UI (e.g., dashboards, homepages, forms).
+- `database/migrations/`: Database schema definitions for tables like `users`, `products`, `orders`, `tokos`, `tenaga_kerjas`, etc.
+- `public/`: The entry point for the application. Contains compiled CSS/JS assets, images, and `index.php`.
 
-## Laravel Sponsors
+## Routes & Endpoints
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+A summary of the main web routes in the application:
 
-### Premium Partners
+### Authentication
+- `GET /login`, `POST /login` - User login
+- `GET /register`, `POST /register` - User registration
+- `POST /logout` - User logout
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Public Pages
+- `GET /` - Homepage
+- `GET /cari` - Search functionality
+- `GET /produk/{slug}` - View specific product details
+- `GET /Toko/{id}` - View specific shop profile
+- `GET /Tenagakerja/view` - Browse available farm workers
+- `GET /Ahlipakar/view` - Browse available agricultural experts/consultants
 
-## Contributing
+### User Dashboard (Requires Login)
+- `GET /dashboard` - Main user dashboard
+- `RESOURCE /dashboard/user` - User profile management
+- `RESOURCE /dashboard/product` - Product management for farmers
+- `RESOURCE /cart`, `RESOURCE /cartdetail` - Shopping cart management
+- `RESOURCE /wishlist` - Wishlist management
+- `GET /checkout`, `RESOURCE /transaksi` - Checkout and order processing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Service Management (Role-Specific)
+- `RESOURCE /TenagaKerja` - Farm worker management
+- `RESOURCE /Konsultan` - Consultant management
+- `RESOURCE /Toko` - Shop management
 
-## Code of Conduct
+## Execution Guide
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Follow these steps to run the project locally on your machine:
 
-## Security Vulnerabilities
+1. **Clone the repository** (if you haven't already):
+   ```bash
+   git clone <your-repository-url>
+   cd HarvestHUB-Ecommerce
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. **Install PHP dependencies**:
+   ```bash
+   composer install
+   ```
 
-## License
+3. **Install NPM dependencies**:
+   ```bash
+   npm install
+   npm run build # or npm run dev for development
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. **Environment Setup**:
+   Copy the example `.env` file and generate an application key.
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+5. **Database Configuration**:
+   Open the `.env` file and update your database credentials:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=your_database_name
+   DB_USERNAME=your_database_user
+   DB_PASSWORD=your_database_password
+   ```
+
+6. **Run Migrations & Seeders**:
+   Migrate the database tables and (optionally) seed some initial data.
+   ```bash
+   php artisan migrate --seed
+   ```
+
+7. **Start the Development Server**:
+   ```bash
+   php artisan serve
+   ```
+   The application will be accessible at `http://127.0.0.1:8000`.
+
+---
+*Documentation generated for HarvestHUB-Ecommerce.*
