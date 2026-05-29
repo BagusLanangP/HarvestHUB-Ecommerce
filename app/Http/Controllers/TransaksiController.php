@@ -52,7 +52,7 @@ class TransaksiController extends Controller
                 $itemorder = Order::create($inputanorder);//simpan order
                 // update status cart
                 $itemcart->update(['status_cart' => 'checkout']);
-                // return redirect()->route('transaksi.index')->with('success', 'Order berhasil disimpan');
+                return redirect('/transaksi')->with('success', 'Order berhasil disimpan');
             } else {
                 return back()->with('error', 'Alamat pengiriman belum diisi');
             }

@@ -13,6 +13,7 @@ use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\TenagaKerjaController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\AlamatPengirimanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('cartdetail', CartDetailController::class);
     Route::resource('wishlist', WishlistController::class);
     Route::get('checkout', [CartController::class,'checkout']);
+    Route::post('checkout/alamat', [AlamatPengirimanController::class, 'storeAjax'])->name('checkout.alamat.store');
     Route::patch('kosongkan/{id}', [CartController::class, 'kosongkan']);
     Route::resource('transaksi', TransaksiController::class);
 });

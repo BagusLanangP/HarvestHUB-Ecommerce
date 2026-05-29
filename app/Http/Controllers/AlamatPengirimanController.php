@@ -62,4 +62,53 @@ class AlamatPengirimanController extends Controller
     {
         //
     }
+
+    public function storeAjax(Request $request)
+    {
+        $validatedData = $request->validate([
+            'namapenerima' => 'required|string|max:255',
+            'Telp' => 'required|string|max:20',
+            'alamat' => 'required|string',
+            'kodepos' => 'required|string|max:10',
+            'kelurahan' => 'required|string|max:255',
+            'kecamatan' => 'required|string|max:255',
+            'kota' => 'required|string|max:255',
+            'provinsi' => 'required|string|max:255',
+        ]);
+
+        $alamat = AlamatPengiriman::where('user_id', auth()->id())
+                    ->where('status', 'utama')
+                    ->first();
+
+        if ($alamat) {
+            $alamat->update([
+                'nama_penerima' => $validatedData['namapenerima'],
+                'no_tlp' => $validatedData['Telp'],
+                'alamat' => $validatedData['alamat'],
+                'kodepos' => $validatedData['kodepos'],
+                'kelurahan' => $validatedData['kelurahan'],
+                'kecamatan' => $validatedData['kecamatan'],
+                'kota' => $validatedData['kota'],
+                'provinsi' => $validatedData['provinsi'],
+            ]);
+        } else {
+            AlamatPengiriman::create([
+                'user_id' => auth()->id(),
+                'status' => 'utama',
+                'nama_penerima' => $validatedData['namapenerima'],
+                'no_tlp' => $validatedData['Telp'],
+                'alamat' => $validatedData['alamat'],
+                'kodepos' => $validatedData['kodepos'],
+                'kelurahan' => $validatedData['kelurahan'],
+                'kecamatan' => $validatedData['kecamatan'],
+                'kota' => $validatedData['kota'],
+                'provinsi' => $validatedData['provinsi'],
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Alamat berhasil disimpan'
+        ]);
+    }
 }

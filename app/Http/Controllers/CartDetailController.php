@@ -88,6 +88,7 @@ class CartDetailController extends Controller
             $itemdetail->cart->updatetotal($itemdetail->cart, $subtotal);            
         }
         //disini pindah ke halaman redirect
+        return redirect('/cart')->with('success', 'Produk berhasil ditambahkan ke keranjang');
     }
 
     /**
