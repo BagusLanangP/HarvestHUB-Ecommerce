@@ -97,7 +97,7 @@
                 <div class="col-2 mb-3">
                     <div class="card me-3 shadow card-product d-flex justify-content-start mb-2">
                         <a href="{{ URL::to('produk/'.$produk->slug ) }}">
-                            <img src="{{asset('storage/' . $produk->foto)}}" class="card-img-top shadow-sm" alt="...">
+                            <img src="{{ $produk->image_url }}" class="card-img-top shadow-sm" alt="...">
                             <div class="card-body">
                                 <p class="card-text fw-medium mb-1">{{ $produk->name }}</p>
                                 <p class="productPrice mb-0">Rp {{ $produk->harga }}</p>

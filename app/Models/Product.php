@@ -40,4 +40,13 @@ class Product extends Model
         });
     }
 
+    public function getImageUrlAttribute()
+    {
+        if ($this->foto && \Illuminate\Support\Facades\Storage::disk('public')->exists($this->foto)) {
+            return asset('storage/' . $this->foto);
+        }
+        
+        // Fallback default image
+        return asset('img/default-product.png'); 
+    }
 }

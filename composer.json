@@ -8,6 +8,7 @@
         "php": "^8.2",
         "cviebrock/eloquent-sluggable": "^11.0",
         "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "^4.1",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9"

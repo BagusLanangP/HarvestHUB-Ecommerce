@@ -71,7 +71,13 @@ class DashboardProductController extends Controller
         ]);
          
         if($request->file('foto')){
-            $validatedData['foto'] = $request->file('foto')->store('product-images');
+            $manager = new \Intervention\Image\ImageManager(new \Intervention\Image\Drivers\Gd\Driver());
+            $image = $manager->decodePath($request->file('foto')->getRealPath());
+            $image->cover(800, 800); // Resize and crop to 800x800
+
+            $filename = 'product-images/' . uniqid() . '.' . $request->file('foto')->getClientOriginalExtension();
+            \Illuminate\Support\Facades\Storage::disk('public')->put($filename, $image->encodeUsingFileExtension('jpg')->toString());
+            $validatedData['foto'] = $filename;
         }
 
         $validatedData['user_id'] = $itemuser->id;
@@ -128,7 +134,18 @@ class DashboardProductController extends Controller
         $validatedData = $request->validate($rules);
 
         if($request->file('foto')){
-            $validatedData['foto'] = $request->file('foto')->store('product-images');
+            $manager = new \Intervention\Image\ImageManager(new \Intervention\Image\Drivers\Gd\Driver());
+            $image = $manager->decodePath($request->file('foto')->getRealPath());
+            $image->cover(800, 800); // Resize and crop to 800x800
+
+            $filename = 'product-images/' . uniqid() . '.' . $request->file('foto')->getClientOriginalExtension();
+            \Illuminate\Support\Facades\Storage::disk('public')->put($filename, $image->encodeUsingFileExtension('jpg')->toString());
+            $validatedData['foto'] = $filename;
+            
+            // Delete old photo
+            if ($product->foto && \Illuminate\Support\Facades\Storage::disk('public')->exists($product->foto)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($product->foto);
+            }
         }
         
         // Membuat produk baru
@@ -145,6 +162,11 @@ class DashboardProductController extends Controller
     {
         $itemproduk = Product::findOrFail($id);//cari berdasarkan id = $id, 
         // kalo ga ada error page not found 404
+        
+        if ($itemproduk->foto && \Illuminate\Support\Facades\Storage::disk('public')->exists($itemproduk->foto)) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($itemproduk->foto);
+        }
+
         if ($itemproduk->delete()) {
             return back()->with('success', 'Data berhasil dihapus');
         } else {
