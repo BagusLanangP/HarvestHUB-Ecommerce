@@ -51,6 +51,31 @@
                       @enderror
                 </div>
                 <div class="mb-4">
+                    <label for="year_started" class="form-label">Tahun Berdiri</label>
+                    <input type="number" class="form-control" id="year_started" name="year_started" placeholder="Masukkan tahun berdiri" 
+                      @error('year_started') is-invalid @enderror value="{{ $data->year_started }}">
+                </div>
+                <div class="mb-4">
+                    <label for="region" class="form-label">Wilayah</label>
+                    <input type="text" class="form-control" id="region" name="region" placeholder="Masukkan wilayah" 
+                      @error('region') is-invalid @enderror value="{{ $data->region }}">
+                </div>
+                <div class="mb-4">
+                    <label for="link_tiktok" class="form-label">Link TikTok</label>
+                    <input type="url" class="form-control" id="link_tiktok" name="link_tiktok" placeholder="https://tiktok.com/@username" 
+                      @error('link_tiktok') is-invalid @enderror value="{{ $data->link_tiktok }}">
+                </div>
+                <div class="mb-4">
+                    <label for="link_ig" class="form-label">Link Instagram</label>
+                    <input type="url" class="form-control" id="link_ig" name="link_ig" placeholder="https://instagram.com/username" 
+                      @error('link_ig') is-invalid @enderror value="{{ $data->link_ig }}">
+                </div>
+                <div class="mb-4">
+                    <label for="link_fb" class="form-label">Link Facebook</label>
+                    <input type="url" class="form-control" id="link_fb" name="link_fb" placeholder="https://facebook.com/username" 
+                      @error('link_fb') is-invalid @enderror value="{{ $data->link_fb }}">
+                </div>
+                <div class="mb-4">
                     <label for="deskripsi" class="form-label">deskripsi</label>
                     <input id="deskripsi" type="hidden" name="deskripsi" @error('deskripsi') is-invalid @enderror value="{{ $data->deskripsi }}" required>
 

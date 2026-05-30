@@ -16,7 +16,7 @@
             <hr>
             <div class="konsultan-data shadow p-2">
                 <div class="img-consultan d-flex justify-content-center" >
-                  <img src="{{ asset('storage/' . $data->foto)}}" alt="air" style="width: 20rem">
+                  <img src="{{ $data->foto_url }}" alt="{{ $data->nama }}" style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                 </div>
                 <hr>               
                 <div class="row text-start mb-1">
@@ -31,7 +31,51 @@
                   <div class="col-4">No. Telpon</div>
                   <div class="col-8">:{{ $data->phone }}</div>
                 </div>
+                <div class="row text-start mb-1">
+                  <div class="col-4">Tahun Berdiri</div>
+                  <div class="col-8">:{{ $data->year_started ?? '-' }}</div>
+                </div>
+                <div class="row text-start mb-1">
+                  <div class="col-4">Wilayah</div>
+                  <div class="col-8">:{{ $data->region ?? '-' }}</div>
+                </div>
+                <div class="row text-start mb-1">
+                  <div class="col-4">Sosial Media</div>
+                  <div class="col-8">
+                      @if($data->link_tiktok)
+                          <a href="{{ $data->link_tiktok }}" target="_blank" class="badge bg-dark text-decoration-none me-1">TikTok</a>
+                      @endif
+                      @if($data->link_ig)
+                          <a href="{{ $data->link_ig }}" target="_blank" class="badge bg-danger text-decoration-none me-1">Instagram</a>
+                      @endif
+                      @if($data->link_fb)
+                          <a href="{{ $data->link_fb }}" target="_blank" class="badge bg-primary text-decoration-none me-1">Facebook</a>
+                      @endif
+                      @if(!$data->link_tiktok && !$data->link_ig && !$data->link_fb)
+                          -
+                      @endif
+                  </div>
+                </div>
+                <div class="row text-start mb-1">
+                  <div class="col-4">Rating Keseluruhan</div>
+                  <div class="col-8">:⭐ {{ $data->overall_rating }} / 5</div>
+                </div>
+                <div class="row text-start mb-1">
+                  <div class="col-4">Jumlah Produk</div>
+                  <div class="col-8">: {{ $data->total_products }} produk</div>
+                </div>
+                <div class="row text-start mb-1">
+                  <div class="col-4">Produk Terlaris</div>
+                  <div class="col-8">: 
+                    @if($data->best_selling_product)
+                      <strong>{{ $data->best_selling_product->name }}</strong> ({{ $data->best_selling_product->total_sold }} terjual)
+                    @else
+                      Belum ada produk terjual
+                    @endif
+                  </div>
+                </div>
                 <hr>
+
                 <div class="row text-center">
                   <div class="col">Deskripsi</div>
                 </div>
@@ -51,12 +95,16 @@
         </div>
         <div class="row mt-3">
           <div class="col-6 p-3">
-            <button type="submit" class="btn submit-login d-flex justify-content-center" id="edit-konsultan">
-              <a href="{{ URL::to('checkout') }}" class="btn">Edit</a></button>
+            <button class="btn submit-login d-flex justify-content-center w-100" id="edit-konsultan">
+              <a href="{{ route('Toko.edit', $data->id) }}" class="btn text-white w-100">Edit Profil</a>
+            </button>
           </div>
           <div class="col-6 p-3">
-            <button type="submit" class="btn submit-login d-flex justify-content-center" id="hapus-konsultan">
-              <a href="{{ URL::to('checkout') }}" class="btn">Hapus</a></button>
+            <form action="{{ route('Toko.destroy', $data->id) }}" method="POST" class="w-100">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger d-flex justify-content-center w-100" onclick="return confirm('Apakah Anda yakin ingin menghapus toko ini?')">Hapus Toko</button>
+            </form>
         </div>
 
                     {{-- <div class="tampil-data"> --}}

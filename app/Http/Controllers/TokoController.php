@@ -108,6 +108,11 @@ class TokoController extends Controller
             'phone' => 'required|min:10|unique:tokos,phone,' . $id,
             'alamat' => 'required',
             'deskripsi' =>'required',
+            'year_started' => 'nullable|integer',
+            'region' => 'nullable|string|max:255',
+            'link_tiktok' => 'nullable|url',
+            'link_ig' => 'nullable|url',
+            'link_fb' => 'nullable|url',
         ]);
 
         $item = Toko::findOrFail($id);
