@@ -25,4 +25,8 @@ class Order extends Model
     public function cart() {
         return $this->belongsTo(Cart::class, 'cart_id');
     }
+
+    public function transaction() {
+        return $this->hasOne(Transaction::class);
+    }
 }

@@ -49,4 +49,13 @@ class Product extends Model
         // Fallback default image
         return asset('img/default-product.png'); 
     }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
+
+    public function getAverageRatingAttribute() {
+        if ($this->reviews()->count() == 0) return 0;
+        return round($this->reviews()->avg('rating'), 1);
+    }
 }

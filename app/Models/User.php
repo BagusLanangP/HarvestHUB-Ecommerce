@@ -85,6 +85,17 @@ class User extends Authenticatable
         return $this->hasOne(Toko::class);
     }
 
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'user_id');
+    }
 
+    public function transactions() {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
 
 }

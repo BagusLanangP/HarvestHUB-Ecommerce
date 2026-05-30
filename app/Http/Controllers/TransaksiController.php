@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\AlamatPengiriman;
 
@@ -12,9 +13,13 @@ class TransaksiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $transactions = Transaction::where('user_id', $request->user()->id)
+                            ->with('order.cart.detail.produk')
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+        return view('transaksi.index', compact('transactions'));
     }
 
     /**
@@ -50,6 +55,15 @@ class TransaksiController extends Controller
                 $inputanorder['kelurahan'] = $itemalamatpengiriman->kelurahan;
                 $inputanorder['kodepos'] = $itemalamatpengiriman->kodepos;
                 $itemorder = Order::create($inputanorder);//simpan order
+                
+                // Create Transaction
+                Transaction::create([
+                    'user_id' => $itemuser->id,
+                    'order_id' => $itemorder->id,
+                    'status' => 'Pending',
+                    'total_price' => $itemcart->total,
+                ]);
+
                 // update status cart
                 $itemcart->update(['status_cart' => 'checkout']);
                 return redirect('/transaksi')->with('success', 'Order berhasil disimpan');
@@ -91,5 +105,13 @@ class TransaksiController extends Controller
     public function destroy(Cart $cart)
     {
         //
+    }
+
+    public function complete(Request $request, Transaction $transaction) {
+        if ($transaction->user_id !== $request->user()->id) {
+            abort(403);
+        }
+        $transaction->update(['status' => 'Completed']);
+        return back()->with('success', 'Pesanan telah diselesaikan.');
     }
 }

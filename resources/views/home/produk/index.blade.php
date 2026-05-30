@@ -13,7 +13,7 @@
             <div class="col-5 rounded-2 shadow me-5 ">
                 <div class="square-container">
                 <div class="aspect-ratio aspect-ratio-1x1">
-                    <img src="{{ asset('storage/' . $itemproduk->foto) }}" alt="y">
+                    <img src="{{ $itemproduk->image_url }}" alt="y">
                 </div>
                 </div>
             </div>
@@ -26,6 +26,18 @@
                     <div class="row ">
                         <div class="col">
                             <h5 class="card-price text-start productPrice">{{ $itemproduk->harga }}/kg</h5>
+                            <div class="mb-3">
+                                <span class="text-warning">
+                                    @for($i=1; $i<=5; $i++)
+                                        @if($i <= round($itemproduk->average_rating))
+                                            <i class="bi bi-star-fill"></i>
+                                        @else
+                                            <i class="bi bi-star"></i>
+                                        @endif
+                                    @endfor
+                                </span>
+                                <span>({{ $itemproduk->average_rating }} / 5) - {{ $itemproduk->reviews->count() }} Ulasan</span>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-2 mb-1">
@@ -96,7 +108,39 @@
         </div>
 
         
-        
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4>Ulasan Produk</h4>
+                <hr>
+                @if($itemproduk->reviews->isEmpty())
+                    <p class="text-muted">Belum ada ulasan untuk produk ini.</p>
+                @else
+                    <div class="list-group">
+                        @foreach($itemproduk->reviews as $review)
+                        <div class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">{{ $review->user->name }}</h6>
+                                <small class="text-muted">{{ $review->created_at->diffForHumans() }}</small>
+                            </div>
+                            <div class="text-warning mb-2">
+                                @for($i=1; $i<=5; $i++)
+                                    @if($i <= $review->rating)
+                                        <i class="bi bi-star-fill"></i>
+                                    @else
+                                        <i class="bi bi-star"></i>
+                                    @endif
+                                @endfor
+                            </div>
+                            <p class="mb-1">{{ $review->comment }}</p>
+                        </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+        </div>
+
     </div>
 </section>
 @endsection

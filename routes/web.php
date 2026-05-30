@@ -13,6 +13,7 @@ use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\TenagaKerjaController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AlamatPengirimanController;
 
 /*
@@ -77,4 +78,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('checkout/alamat', [AlamatPengirimanController::class, 'storeAjax'])->name('checkout.alamat.store');
     Route::patch('kosongkan/{id}', [CartController::class, 'kosongkan']);
     Route::resource('transaksi', TransaksiController::class);
+    Route::patch('transaksi/{transaction}/complete', [TransaksiController::class, 'complete'])->name('transaksi.complete');
+    
+    Route::get('review/create', [ReviewController::class, 'create'])->name('review.create');
+    Route::post('review/store', [ReviewController::class, 'store'])->name('review.store');
 });
