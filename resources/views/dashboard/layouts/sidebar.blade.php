@@ -26,12 +26,17 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2" href="#">
+          <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/analytics*') ? 'active' : '' }}" href="{{ route('dashboard.analytics.index') }}">
             <svg class="bi"><use xlink:href="#graph-up"/></svg>
-            Reports
+            Analytics
           </a>
         </li>
-      
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/role-requests*') ? 'active' : '' }}" href="{{ route('dashboard.role_requests.index') }}">
+            <span data-feather="users"></span>
+            Role Requests
+          </a>
+        </li>
       @else
       <li class="nav-item">
           <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard') ? 'active' : '' }}" aria-current="page" href="#">

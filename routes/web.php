@@ -50,6 +50,8 @@ Route::middleware(['dashboard'])->get('/dashboard', function () {
 Route::resource('/cart', CartController::class);
 
 Route::resource('/dashboard/user', DashboardUserController::class)->middleware('auth');
+Route::patch('/dashboard/user/{user}/ban', [DashboardUserController::class, 'ban'])->name('user.ban')->middleware('auth');
+Route::get('/dashboard/user/{user}/backup', [DashboardUserController::class, 'backup'])->name('user.backup')->middleware('auth');
 
 Route::get('/dashboard/product/checkSlug', [DashboardProductController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/product', DashboardProductController::class)->middleware('auth');
@@ -82,4 +84,17 @@ Route::group(['middleware' => 'auth'], function(){
     
     Route::get('review/create', [ReviewController::class, 'create'])->name('review.create');
     Route::post('review/store', [ReviewController::class, 'store'])->name('review.store');
+    
+    // User role requests
+    Route::get('role-requests/create', [\App\Http\Controllers\RoleRequestController::class, 'create'])->name('role_requests.create');
+    Route::post('role-requests', [\App\Http\Controllers\RoleRequestController::class, 'store'])->name('role_requests.store');
+});
+
+// Admin role requests (assuming 'dashboard' middleware protects admin area)
+Route::middleware(['dashboard'])->group(function () {
+    Route::get('dashboard/role-requests', [\App\Http\Controllers\RoleRequestController::class, 'index'])->name('dashboard.role_requests.index');
+    Route::put('dashboard/role-requests/{roleRequest}', [\App\Http\Controllers\RoleRequestController::class, 'update'])->name('dashboard.role_requests.update');
+    
+    // Admin Analytics
+    Route::get('dashboard/analytics', [\App\Http\Controllers\AdminAnalyticsController::class, 'index'])->name('dashboard.analytics.index');
 });

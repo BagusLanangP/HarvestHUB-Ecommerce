@@ -98,4 +98,8 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
+    public function roleRequests()
+    {
+        return $this->hasMany(RoleRequest::class);
+    }
 }

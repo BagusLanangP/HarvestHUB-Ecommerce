@@ -90,6 +90,8 @@
                @can('dashboard')
                <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-database"></i></i>Dashboard</a></li>
                @endcan
+               
+               <li><a class="dropdown-item" href="{{ route('role_requests.create') }}"><i class="bi bi-person-lines-fill"></i>Pengajuan Role</a></li>
                 
                 <li class="dropdown-divider"></li>
                 <li>

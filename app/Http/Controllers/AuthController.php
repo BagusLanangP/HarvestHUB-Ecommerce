@@ -20,6 +20,13 @@ class AuthController extends Controller
         ]);
  
         if (Auth::attempt($credentials)) {
+            if (Auth::user()->status === 'banned') {
+                Auth::logout();
+                Session::flash('status', 'failed');
+                Session::flash('message', 'Akun Anda telah dinonaktifkan (Banned).');
+                return back()->withInput($request->only('email'));
+            }
+
             $request->session()->regenerate();
  
             return redirect()->intended('/');
