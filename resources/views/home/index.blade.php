@@ -82,117 +82,161 @@
       </div>
     </section>
 
-    <div class="mt-5"></div>
-    <section class="produk vh-100 mb-5" id="produkhome">
+    <section class="produk mb-5 py-4" id="produkhome">
       <div class="homeProduk">
-        <div class="homeProdukTittle text-center mb-5" >
+        <div class="homeProdukTittle text-center mb-3" >
           <h1>Produk</h1>
           <h4>Pesanlah untuk anda atau orang tercinta anda!</h4>
-          
         </div>
         <hr>
-        <div class="homeProdukContent ">
-          <div class="row mb-3">
+        <div class="homeProdukContent">
+          <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 justify-content-center">
             @foreach($produks as $produk)
-                <div class="col-2 mb-3">
-                    <div class="card me-3 shadow card-product d-flex justify-content-start mb-2">
-                        <a href="{{ URL::to('produk/'.$produk->slug ) }}">
-                            <img src="{{ $produk->image_url }}" class="card-img-top shadow-sm" alt="...">
+                <div class="col d-flex">
+                    <div class="card shadow-sm card-product h-100 w-100">
+                        <a href="{{ URL::to('produk/'.$produk->slug ) }}" class="text-decoration-none h-100 d-flex flex-column">
+                            <img src="{{ $produk->image_url }}" class="card-img-top" alt="{{ $produk->name }}">
                             <div class="card-body">
-                                <p class="card-text fw-medium mb-1">{{ $produk->name }}</p>
-                                <p class="productPrice mb-0">Rp {{ $produk->harga }}</p>
+                                <div class="mb-2">
+                                    <p class="product-name-title mb-1">{{ $produk->name }}</p>
+                                    @if($produk->toko)
+                                        <span class="text-muted d-block text-truncate" style="font-size: 0.78rem; font-weight: 400; line-height: 1.2;" title="{{ $produk->toko->nama }}">
+                                            <i class="bi bi-shop me-1" style="color: #198754;"></i> {{ $produk->toko->nama }}
+                                        </span>
+                                    @else
+                                        <!-- Placeholder to maintain height consistency -->
+                                        <span class="d-block" style="font-size: 0.78rem; line-height: 1.2; visibility: hidden;">&nbsp;</span>
+                                    @endif
+                                    
+                                    <!-- Rating & Sold Summary -->
+                                    <div class="d-flex align-items-center mt-2 flex-wrap" style="font-size: 0.72rem; gap: 4px;">
+                                        <div class="d-flex align-items-center text-warning">
+                                            <i class="bi bi-star-fill me-1" style="color: #ffc107;"></i>
+                                            <span class="text-dark fw-semibold">{{ $produk->average_rating }}</span>
+                                        </div>
+                                        <span class="text-muted">|</span>
+                                        <span class="text-secondary">{{ $produk->total_sold }} Terjual</span>
+                                    </div>
+                                </div>
+                                <p class="product-price-label">Rp {{ number_format($produk->harga, 0, ',', '.') }}</p>
                             </div>
                         </a>
                     </div>
                 </div>
-        
-                @if($loop->iteration % 6 == 0)
-                    </div><div class="row mb-3">
-                @endif
             @endforeach
+          </div>
         </div>
 
           <div class="seemore d-flex justify-content-center mt-5">
-            <div class="produkhomeseemore">
-              <button type="submit" class="btn submit-login d-flex justify-content-center">Lihat Produk Lainnya</button>
-            </div>     
+              <a href="/cari" class="btn btn-custom-green d-inline-flex align-items-center py-2.5 px-4 rounded-3 fw-semibold shadow-sm text-white" style="font-size: 0.95rem; text-decoration: none;">
+                Lihat Produk Lainnya
+              </a>
           </div>
               
         </div> 
       </div>
     </section>
 
-    <section class="review vh-100">
+    <style>
+        .hover-lift {
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+        }
+        .bg-success-subtle {
+            background-color: rgba(25, 135, 84, 0.08) !important;
+        }
+        .btn-custom-green {
+            background-color: #198754 !important;
+            color: #ffffff !important;
+            border: 1px solid #198754 !important;
+            transition: all 0.2s ease-in-out !important;
+        }
+        .btn-custom-green:hover {
+            background-color: #157347 !important;
+            border-color: #146c43 !important;
+            color: #ffffff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(25, 135, 84, 0.15);
+        }
+    </style>
 
+    <section class="review mb-5 py-4">
       <div class="review-tittle text-center mb-5">
-        <h1>Service</h1>
-        <h4>Pesanlah untuk anda atau orang tercinta anda!</h4>
+        <h1 class="fw-bold text-dark">Layanan Ahli & Tenaga Kerja</h1>
+        <h4 class="text-secondary">Pesan jasa profesional pertanian & peternakan untuk mendampingi usaha Anda</h4>
       </div>
-      <hr>
+      <hr class="mb-5">
+      
       <div class="review-content swiper">
-        <div class="d-flex justify-content-between swiper-wrapper">
+        <div class="swiper-wrapper">
           @foreach($service as $s)
-          <div class="card shadow swiper-slide" style="width: 14rem;">
-            <div class="card-img pt-3 pb-3 d-flex justify-content-center">
-              <img src="{{ asset('storage/' . $s->foto)}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
-            </div>
-            <div class="card-body text-center">
-              <h5 class="card-title review-name">{{ $s->nama }}</h5>
-              <h6><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></h6>
-              <h4 class="card-text review-desc">{{ $s->keahlian }}</h4>
-            </div>
-          </div>
-          @endforeach   
-          {{-- <div class="card shadow swiper-slide" style="width: 14rem;">
-            <div class="card-img pt-3 pb-3 d-flex justify-content-center">
-              <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
-            </div>
-            <div class="card-body text-center">
-              <h5 class="card-title review-name">Lanang Purbhawa</h5>
-              <h4 class="card-text review-desc">Ahli Durian</h4>
-            </div>
-          </div>
-          <div class="card shadow swiper-slide" style="width: 14rem;">
-            <div class="card-img pt-3 pb-3 d-flex justify-content-center">
-              <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
-            </div>
-            <div class="card-body text-center">
-              <h5 class="card-title review-name">Lanang Purbhawa</h5>
-              <h4 class="card-text review-desc">Ahli Durian</h4>
-            </div>
-          </div>
-          <div class="card shadow swiper-slide" style="width: 14rem;">
-            <div class="card-img pt-3 pb-3 d-flex justify-content-center">
-              <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
-            </div>
-            <div class="card-body text-center">
-              <h5 class="card-title review-name">Lanang Purbhawa</h5>
-              <h4 class="card-text review-desc">Ahli Durian</h4>
-            </div>
-          </div>
-          <div class="card shadow swiper-slide" style="width: 14rem;">
-            <div class="card-img pt-3 pb-3 d-flex justify-content-center">
-              <img src="{{ asset('img/home/ahlipakar.jpg')}}" class="card-img-top rounded-circle" alt="..." style="width: 7rem; height:7rem">
-            </div>
-            <div class="card-body text-center">
-              <h5 class="card-title review-name">Lanang Purbhawa</h5>
-              <h4 class="card-text review-desc">Ahli Durian</h4>
-            </div>
-          </div>   --}}
-           
-        </div> 
-         <!-- Navigation buttons -->
-         <div class="swiper-button-next ">
-          <i class="ri-arrow-right-s-line"></i>
-          </div>
-          
-          <div class="swiper-button-prev">
-              <i class="ri-arrow-left-s-line"></i>
-          </div>
+            @php
+              // Determine dynamic routing based on model instance
+              $detailUrl = $s instanceof \App\Models\TenagaKerja ? URL::to('tenagakerja/' . $s->id) : URL::to('ahlipakar/' . $s->id);
+            @endphp
+            <div class="card shadow-sm border border-light rounded-4 swiper-slide bg-white h-100 hover-lift" style="width: 17rem;">
+              <a href="{{ $detailUrl }}" class="text-decoration-none h-100 d-flex flex-column justify-content-between">
+                <!-- Profile Image Container (Enlarged) -->
+                <div class="card-img pt-4 pb-2 d-flex justify-content-center">
+                  <div class="position-relative" style="width: 130px; height: 130px;">
+                    <img src="{{ $s->foto ? asset('storage/' . $s->foto) : asset('img/default-avatar.png') }}" class="rounded-circle shadow border border-2 border-white" alt="{{ $s->nama }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.25s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <!-- Online status dot -->
+                    <span class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle" style="width: 15px; height: 15px; border-width: 2.5px;"></span>
+                  </div>
+                </div>
+                
+                <!-- Details Container -->
+                <div class="card-body text-center d-flex flex-column align-items-center justify-content-between p-3" style="min-height: 180px;">
+                  <div>
+                    <h5 class="card-title review-name fw-bold text-dark mb-1 hover-primary" style="font-size: 1.05rem;">{{ $s->nama }}</h5>
+                    
+                    <!-- Location -->
+                    <p class="text-muted mb-2 d-flex align-items-center justify-content-center" style="font-size: 0.78rem; font-weight: 400;">
+                      <i class="bi bi-geo-alt me-1 text-danger"></i> {{ $s->alamat ?: 'Indonesia' }}
+                    </p>
+                    
+                    <!-- Stars -->
+                    <div class="mb-3 text-warning d-flex align-items-center justify-content-center" style="font-size: 0.8rem; gap: 2px;">
+                      <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                      <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                      <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                      <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                      <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                      <span class="text-dark fw-semibold ms-1" style="font-size: 0.75rem;">(5.0)</span>
+                    </div>
+                  </div>
 
-          <!-- Pagination -->
-          <div class="swiper-pagination mt-3"></div>
+                  <!-- Role/Expertise badge -->
+                  <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1.5 fw-semibold" style="font-size: 0.75rem; border-radius: 20px;">
+                    {{ $s->keahlian }}
+                  </span>
+                </div>
+              </a>
+            </div>
+          @endforeach   
+        </div> 
+        
+        <!-- Navigation buttons -->
+        <div class="swiper-button-next">
+          <i class="ri-arrow-right-s-line"></i>
+        </div>
+        
+        <div class="swiper-button-prev">
+          <i class="ri-arrow-left-s-line"></i>
+        </div>
+
+        <!-- Pagination -->
+        <div class="swiper-pagination mt-4"></div>
       </div>
-           
+
+      <!-- See More Buttons at the Bottom of Layanan Section -->
+      <div class="seemore d-flex justify-content-center mt-5">
+          <a href="/Tenagakerja/view" class="btn btn-custom-green d-inline-flex align-items-center py-2.5 px-4 rounded-3 fw-semibold shadow-sm text-white" style="font-size: 0.95rem; text-decoration: none;">
+            <i class="bi bi-person-workspace me-2"></i> Lihat Semua Layanan
+          </a>
+      </div>
     </section>
 @endsection

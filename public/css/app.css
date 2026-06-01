@@ -73,16 +73,58 @@ a{
     color: var(--ForthColorBlack);
 }
 
-.card-product{
-   width: 12.1rem;
-   height: auto;
-   
+.card-product {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-radius: 12px !important;
+    background: #ffffff;
 }
 
-.card-product img{
-    display: cover;
-    width:  10rem;
-    height: 10rem;
+.card-product:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+.card-product img.card-img-top {
+    width: 100% !important;
+    height: 160px !important;
+    object-fit: cover !important;
+    margin: 0 !important;
+    border-radius: 12px 12px 0 0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.card-product .card-body {
+    padding: 14px !important;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-product .product-name-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 2.6rem;
+    font-size: 0.88rem;
+    line-height: 1.3;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 8px !important;
+}
+
+.card-product .product-price-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #198754;
+    margin-bottom: 0 !important;
 }
 
 .bi-star-fill{

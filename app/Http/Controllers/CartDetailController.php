@@ -65,7 +65,7 @@ class CartDetailController extends Controller
         //$cartdetail -> mengecek apakah ada produk yang sama dalam suatu cart
         $cekdetail = CartDetail::where('cart_id', $itemcart->id)->where('produk_id', $itemproduk->id)->first();
         //inisialisai value cart detail
-        $qty = 1;
+        $qty = $request->input('qty', 1);
         $harga = $itemproduk->harga;
         $subtotal = ($qty * $harga);
 
@@ -88,7 +88,7 @@ class CartDetailController extends Controller
             $itemdetail->cart->updatetotal($itemdetail->cart, $subtotal);            
         }
         //disini pindah ke halaman redirect
-        return redirect('/cart')->with('success', 'Produk berhasil ditambahkan ke keranjang');
+        return back()->with('success', 'Produk berhasil ditambahkan ke keranjang');
     }
 
     /**

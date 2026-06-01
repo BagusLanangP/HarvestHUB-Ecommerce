@@ -58,4 +58,14 @@ class Product extends Model
         if ($this->reviews()->count() == 0) return 0;
         return round($this->reviews()->avg('rating'), 1);
     }
+
+    public function getTotalSoldAttribute()
+    {
+        return \App\Models\CartDetail::join('carts', 'cart_details.cart_id', '=', 'carts.id')
+            ->join('orders', 'carts.id', '=', 'orders.cart_id')
+            ->join('transactions', 'orders.id', '=', 'transactions.order_id')
+            ->where('transactions.status', 'Completed')
+            ->where('cart_details.produk_id', $this->id)
+            ->sum('cart_details.qty') ?: 0;
+    }
 }

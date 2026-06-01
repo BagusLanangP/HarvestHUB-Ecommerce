@@ -14,14 +14,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $itemuser = Auth::user();
-        $itemcart = Cart::where('user_id', $itemuser->id)->where('status_cart', 'cart')->first();
-
-        if($itemcart){
-            $data = array('itemcart' => $itemcart);
-            return view('cart.index', $data);
-        }
-
+        return view('cart.index');
     }
 
     /**
