@@ -12,9 +12,20 @@ class RoleRequest extends Model
     protected $fillable = [
         'user_id',
         'requested_role_id',
+        'identity_id',
+        'whatsapp',
+        'email',
+        'gender',
+        'birth_date',
+        'domicile',
+        'metadata',
         'reason',
         'document_path',
         'status',
+    ];
+
+    protected $casts = [
+        'metadata' => 'array',
     ];
 
     public function user()

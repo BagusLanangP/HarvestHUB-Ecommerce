@@ -13,13 +13,52 @@ class TokoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
        $itemuser = Auth::user();
 
         if ($itemuser->role_id == 5) {
             $item = Toko::where('user_id', $itemuser->id)->first();
-            $data = array('data' => $item);
+            
+            if (!$item) {
+                return redirect()->route('Toko.create')->with('info', 'Silakan buat profil toko Anda terlebih dahulu.');
+            }
+
+            // Query produk toko milik user
+            $query = Product::where('toko_id', $item->id);
+
+            // Filter Pencarian
+            if ($request->filled('search')) {
+                $query->where('name', 'like', '%' . $request->search . '%');
+            }
+
+            // Filter Urutan/Sorting
+            if ($request->filled('sort')) {
+                if ($request->sort == 'termurah') {
+                    $query->orderBy('harga', 'asc');
+                } elseif ($request->sort == 'termahal') {
+                    $query->orderBy('harga', 'desc');
+                } elseif ($request->sort == 'terlaris') {
+                    $query->select('products.*')
+                          ->selectRaw('COALESCE(SUM(cart_details.qty), 0) as total_sold')
+                          ->leftJoin('cart_details', 'products.id', '=', 'cart_details.produk_id')
+                          ->groupBy('products.id')
+                          ->orderByDesc('total_sold');
+                } elseif ($request->sort == 'terlama') {
+                    $query->orderBy('id', 'asc');
+                } else {
+                    $query->orderBy('id', 'desc');
+                }
+            } else {
+                $query->orderBy('id', 'desc');
+            }
+
+            $products = $query->get();
+
+            $data = array(
+                'data' => $item,
+                'products' => $products
+            );
             return view('Toko.index', $data);
         } else {
             // Handle a situation where the logged-in user does not have role_id 2
@@ -33,7 +72,11 @@ class TokoController extends Controller
      */
     public function create()
     {
-        return view('Toko.create');
+        $latestRequest = \App\Models\RoleRequest::where('user_id', auth()->id())
+            ->where('status', 'approved')
+            ->latest()
+            ->first();
+        return view('Toko.create', compact('latestRequest'));
     }
 
     /**
@@ -52,11 +95,11 @@ class TokoController extends Controller
         ]);
 
         if($request->file('foto')){
-            $validatedData['foto'] = $request->file('foto')->store('toko-foto');
+            $validatedData['foto'] = $request->file('foto')->store('toko-foto', 'public');
         }
 
         if($request->file('foto_syarat')){
-            $validatedData['foto_cv'] = $request->file('foto_cv')->store('toko-foto-syarat');
+            $validatedData['foto_cv'] = $request->file('foto_syarat')->store('toko-foto-syarat', 'public');
         }
         $itemuser = $request->user();
         $validatedData['user_id'] = $itemuser->id;
@@ -79,11 +122,40 @@ class TokoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        
         $toko = Toko::findOrFail($id);
-        $products = Product::where('toko_id', $id)->get();
+        
+        $query = Product::where('toko_id', $id);
+        
+        // Search filter
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        
+        // Sort filter
+        if ($request->filled('sort')) {
+            if ($request->sort == 'termurah') {
+                $query->orderBy('harga', 'asc');
+            } elseif ($request->sort == 'termahal') {
+                $query->orderBy('harga', 'desc');
+            } elseif ($request->sort == 'terlaris') {
+                $query->select('products.*')
+                      ->selectRaw('COALESCE(SUM(cart_details.qty), 0) as total_sold')
+                      ->leftJoin('cart_details', 'products.id', '=', 'cart_details.produk_id')
+                      ->groupBy('products.id')
+                      ->orderByDesc('total_sold');
+            } elseif ($request->sort == 'terlama') {
+                $query->orderBy('id', 'asc');
+            } else {
+                $query->orderBy('id', 'desc');
+            }
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+        
+        $products = $query->get();
+        
         return view('Toko.view', compact('toko', 'products'));
     }
 
@@ -102,7 +174,7 @@ class TokoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $validatedData = $request->validate([
             'nama' => 'required|max:50|unique:tokos,nama,' . $id,
             'email' => 'required|email|unique:tokos,email,' . $id,
             'phone' => 'required|min:10|unique:tokos,phone,' . $id,
@@ -113,15 +185,30 @@ class TokoController extends Controller
             'link_tiktok' => 'nullable|url',
             'link_ig' => 'nullable|url',
             'link_fb' => 'nullable|url',
+            'foto' => 'image|file|max:2048',  
+            'foto_syarat' => 'image|file|max:2048',  
         ]);
 
         $item = Toko::findOrFail($id);
-        // kalo ga ada error page not found 404
         
-        $inputan = $request->all();
-        $itemuser = $request->user();//ambil data user yang login
-        $inputan['user_id'] = $itemuser->id;
-        $item->update($inputan);   
+        if($request->file('foto')){
+            if ($item->foto && \Storage::disk('public')->exists($item->foto)) {
+                \Storage::disk('public')->delete($item->foto);
+            }
+            $validatedData['foto'] = $request->file('foto')->store('toko-foto', 'public');
+        }
+
+        if($request->file('foto_syarat')){
+            if ($item->foto_cv && \Storage::disk('public')->exists($item->foto_cv)) {
+                \Storage::disk('public')->delete($item->foto_cv);
+            }
+            $validatedData['foto_cv'] = $request->file('foto_syarat')->store('toko-foto-syarat', 'public');
+        }
+
+        $itemuser = $request->user();
+        $validatedData['user_id'] = $itemuser->id;
+
+        $item->update($validatedData);   
         return redirect('/Toko')->with('success',  'Data Anda Tersimpan');
     }
 

@@ -2,95 +2,177 @@
 
 @section('tittle', 'Buat Profil Toko')
 
-
 @section('content')
-    <section id="tenagakerja">
+    <section id="tenagakerja" class="py-5" style="padding-top: 110px !important;">
       <div class="container">
-        <div class="row text-center">
+        <div class="row text-center mb-4">
             <div class="login-tittle">
-                  <h2>Buat Profil Toko</h2>
-                  <h4>ini klo ga dibutuhin hapus aja</h4>
+                <h2 class="fw-bold text-dark mb-1">Buat Profil Toko</h2>
+                <p class="text-secondary">Lengkapi profil Toko Tani Anda yang telah disetujui untuk mulai berjualan</p>
+            </div>
         </div>
-        </div>
+        
         <div class="row justify-content-center">
-          <div class="col col-8">
-          <div class="tenagakerja-form shadow p-3">
-            <form action="/Toko" method="post" enctype="multipart/form-data">
-              @csrf
+          <div class="col-12 col-md-10 col-lg-8">
+            <div class="card border-0 shadow rounded-4 p-4 p-sm-5 bg-white create-toko-card">
+              <form action="/Toko" method="post" enctype="multipart/form-data">
+                @csrf
+                
+                {{-- Nama Toko (Prefilled & Readonly) --}}
                 <div class="mb-4">
-                    <label for="nama" class="form-label">Nama Toko</label>
-                    <input type="text" class="form-control" id="nama" placeholder="Masukkan nama" name="nama"
-                      @error('nama') is-invalid @enderror value="{{ old('nama') }}" required>
-
-                      @error('nama')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                      @enderror
-                </div>
-                <div class="mb-4">
-                  <label for="foto" class="form-label">Foto Profil toko</label>
-                  <img class="img-preview img-fluid mb-3 col-sm-5">
-                  <input class="form-control" @error('foto') is-invalid @enderror type="file" id="foto" name="foto" onchange="previewImage()">
-                  @error('foto')
-                 <div class="alert alert-danger">
-                  {{ $message }}
-                 </div>
-                  @enderror
-                </div>
-                <div class="mb-4">
-                  <label for="foto_syarat" class="form-label">Upload syarat</label>
-                  <img class="img-preview img-fluid mb-3 col-sm-5">
-                  <input class="form-control" @error('foto_syarat') is-invalid @enderror type="file" id="foto_syarat" name="foto_syarat" onchange="previewImage()">
-                  @error('foto_syarat')
-                 <div class="alert alert-danger">
-                  {{ $message }}
-                 </div>
-                  @enderror
-                <div class="mb-4">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" 
-                      @error('email') is-invalid @enderror value="{{ old('email') }}" required>
-                      
-                      @error('email')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                      @enderror
-                </div>
-                <div class="mb-4">
-                    <label for="phone" class="form-label">nomor Telepon </label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Masukkan Nomor Telepon" 
-                      @error('phone') is-invalid @enderror value="{{ old('phone') }}" required >
-
-                      @error('phone')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                      @enderror
-                </div>
-                <div class="mb-4">
-                    <label for="alamat" class="form-label">Alamat</label>
-                    <input type="text" class="form-control" id="alamat"  name="alamat" placeholder="Masukan alamat"
-                      @error('alamat') is-invalid @enderror value="{{ old('alamat') }}" required >
-
-                      @error('alamat')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                      @enderror
-                </div>
-                <div class="mb-4">
-                    <label for="deskripsi" class="form-label">deskripsi</label>
-                    <input id="deskripsi" type="hidden" name="deskripsi" @error('deskripsi') is-invalid @enderror required value="{{ old('deskripsi') }}">
-
-                    @error('deskripsi')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    <label for="nama" class="form-label fw-semibold">Nama Toko <span class="text-success small">(Telah Diverifikasi)</span></label>
+                    <input type="text" class="form-control rounded-3 bg-light" id="nama" name="nama" 
+                      value="{{ old('nama', $latestRequest->metadata['shop_name'] ?? '') }}" readonly required>
+                    @error('nama')
+                      <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
-                    <trix-editor input="deskripsi"></trix-editor>
+                </div>
+
+                {{-- Email (Prefilled & Readonly) --}}
+                <div class="mb-4">
+                    <label for="email" class="form-label fw-semibold">Email Toko <span class="text-success small">(Telah Diverifikasi)</span></label>
+                    <input type="email" class="form-control rounded-3 bg-light" id="email" name="email" 
+                      value="{{ old('email', $latestRequest->email ?? auth()->user()->email ?? '') }}" readonly required>
+                    @error('email')
+                      <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Nomor Telepon (Prefilled & Readonly) --}}
+                <div class="mb-4">
+                    <label for="phone" class="form-label fw-semibold">Nomor Telepon <span class="text-success small">(Telah Diverifikasi)</span></label>
+                    <input type="text" class="form-control rounded-3 bg-light" id="phone" name="phone" 
+                      value="{{ old('phone', $latestRequest->whatsapp ?? '') }}" readonly required>
+                    @error('phone')
+                      <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Alamat (Prefilled & Readonly) --}}
+                <div class="mb-4">
+                    <label for="alamat" class="form-label fw-semibold">Alamat Lengkap <span class="text-success small">(Telah Diverifikasi)</span></label>
+                    <input type="text" class="form-control rounded-3 bg-light" id="alamat" name="alamat" 
+                      value="{{ old('alamat', $latestRequest->metadata['shop_address'] ?? '') }}" readonly required>
+                    @error('alamat')
+                      <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="row">
+                    {{-- Tahun Berdiri (Editable) --}}
+                    <div class="col-12 col-sm-6 mb-4">
+                        <label for="year_started" class="form-label fw-semibold">Tahun Berdiri</label>
+                        <input type="number" class="form-control rounded-3" id="year_started" name="year_started" placeholder="Contoh: 2026" 
+                          value="{{ old('year_started') }}">
+                        @error('year_started')
+                          <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                    {{-- Wilayah (Editable) --}}
+                    <div class="col-12 col-sm-6 mb-4">
+                        <label for="region" class="form-label fw-semibold">Wilayah / Kota</label>
+                        <input type="text" class="form-control rounded-3" id="region" name="region" placeholder="Masukkan wilayah operasional" 
+                          value="{{ old('region', $latestRequest->domicile ?? '') }}">
+                        @error('region')
+                          <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <hr class="my-4 opacity-10">
+
+                {{-- Foto Profil Toko (Editable) --}}
+                <div class="mb-4">
+                    <label for="foto" class="form-label fw-semibold">Foto Profil Toko</label>
+                    <input type="file" class="form-control rounded-3" id="foto" name="foto" accept="image/*" required>
+                    <small class="text-secondary d-block mt-1">Format: JPG, PNG, JPEG. Maks: 2MB</small>
+                    @error('foto')
+                      <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Upload Syarat / Dokumen (Editable) --}}
+                <div class="mb-4">
+                    <label for="foto_syarat" class="form-label fw-semibold">Dokumen Verifikasi Tambahan</label>
+                    <input type="file" class="form-control rounded-3" id="foto_syarat" name="foto_syarat" accept="image/*">
+                    <small class="text-secondary d-block mt-1">Format: Gambar/Dokumen. Maks: 2MB</small>
+                    @error('foto_syarat')
+                      <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <hr class="my-4 opacity-10">
+
+                {{-- Deskripsi (Editable) --}}
+                <div class="mb-5">
+                    <label for="deskripsi" class="form-label fw-semibold">Deskripsi Toko</label>
+                    <input id="deskripsi" type="hidden" name="deskripsi" value="{{ old('deskripsi') }}" required>
+                    @error('deskripsi')
+                        <div class="text-danger small mt-1 mb-2">{{ $message }}</div>
+                    @enderror
+                    <div class="trix-wrapper rounded-3">
+                        <trix-editor input="deskripsi" placeholder="Tulis deskripsi toko Anda..."></trix-editor>
+                    </div>
                 </div>
                 
-                    <button type="submit" class="btn submit-login mb-5 mx-auto d-block">Simpan</button>
+                {{-- Button Submit --}}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success rounded-pill px-5 py-2.5 fw-semibold shadow-sm btn-submit-create">
+                        <i class="bi bi-save me-2"></i> Simpan Profil Toko
+                    </button>
+                </div>
                                 
-            </form>
+              </form>
+            </div>
           </div>
-
         </div>
+        
       </div>
-    </div>
     </section>
 
-
+{{-- Custom CSS untuk Tampilan Premium & Kompatibilitas Dark Mode --}}
+<style>
+    .create-toko-card {
+        background-color: #ffffff;
+    }
+    .dark-mode .create-toko-card {
+        background-color: #1e1e1e !important;
+    }
+    .dark-mode .form-label {
+        color: #e0e0e0 !important;
+    }
+    .dark-mode .form-control {
+        background-color: #2b2b2b !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+        color: #ffffff !important;
+    }
+    .dark-mode .form-control:focus {
+        border-color: #198754 !important;
+        box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+    }
+    .trix-wrapper trix-editor {
+        min-height: 180px;
+        background-color: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+    }
+    .dark-mode .trix-wrapper trix-editor {
+        background-color: #2b2b2b !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+        color: #ffffff !important;
+    }
+    .btn-submit-create {
+        background-color: #198754 !important;
+        border-color: #198754 !important;
+        color: #ffffff !important;
+        transition: all 0.2s ease-in-out;
+    }
+    .btn-submit-create:hover {
+        background-color: #157347 !important;
+        border-color: #146c43 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(25, 135, 84, 0.2) !important;
+    }
+</style>
 @endsection

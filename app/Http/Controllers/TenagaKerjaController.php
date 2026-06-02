@@ -18,6 +18,9 @@ class TenagaKerjaController extends Controller
 
         if ($itemuser->role_id == 3) {
             $item = TenagaKerja::where('user_id', $itemuser->id)->first();
+            if (!$item) {
+                return redirect()->route('TenagaKerja.create')->with('info', 'Silakan lengkapi profil tenaga kerja Anda terlebih dahulu.');
+            }
             $data = array('data' => $item);
             return view('TenagaKerja.index', $data);
         } else {
@@ -30,9 +33,13 @@ class TenagaKerjaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(User $user)
+    public function create()
     {
-        return view('TenagaKerja.create');
+        $latestRequest = \App\Models\RoleRequest::where('user_id', auth()->id())
+            ->where('status', 'approved')
+            ->latest()
+            ->first();
+        return view('TenagaKerja.create', compact('latestRequest'));
     }
 
     /**
@@ -143,8 +150,23 @@ class TenagaKerjaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TenagaKerja $tenagaKerja)
+    public function destroy($id)
     {
-        //
+        $item = TenagaKerja::findOrFail($id);
+        
+        // Delete associated files from storage disk public
+        if ($item->foto && \Storage::disk('public')->exists($item->foto)) {
+            \Storage::disk('public')->delete($item->foto);
+        }
+        if ($item->foto_cv && \Storage::disk('public')->exists($item->foto_cv)) {
+            \Storage::disk('public')->delete($item->foto_cv);
+        }
+        
+        // Revert user role back to 'user' (role_id = 2)
+        $item->user->update(['role_id' => 2]);
+        
+        $item->delete();
+        
+        return redirect('/')->with('success', 'Profil Tenaga Kerja berhasil dihapus.');
     }
 }

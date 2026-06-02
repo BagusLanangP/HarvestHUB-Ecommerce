@@ -23,10 +23,10 @@ class ProductCategorySeeder extends Seeder
         $data = [
             ['productName' => 'Sayur', 'foto' => 'sayur.png'],
             ['productName' => 'Buah', 'foto' => 'buah.png'],
-            ['productName' => 'Hewani', 'foto' => 'hewani.png'],
+            ['productName' => 'Hewani', 'foto' => 'hewan.jpg'],
             ['productName' => 'Obat dan pupuk', 'foto' => 'obat-pupuk.png'],
             ['productName' => 'Peralatan', 'foto' => 'peralatan.png'],
-            ['productName' => 'pakan ternak', 'foto' => 'buah.PNG']
+            ['productName' => 'pakan ternak', 'foto' => 'ternak.png']
             
         ];
 

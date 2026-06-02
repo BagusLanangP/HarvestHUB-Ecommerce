@@ -110,6 +110,7 @@ class CartComponent extends Component
                 'user_id' => $user->id,
                 'no_invoice' => $activeCart->no_invoice . '-TEMP',
                 'status_cart' => 'temp',
+                'status_pembayaran' => 'belum',
                 'subtotal' => 0,
                 'total' => 0
             ]);

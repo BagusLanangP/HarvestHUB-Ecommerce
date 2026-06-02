@@ -18,6 +18,9 @@ class KonsultanController extends Controller
 
         if ($itemuser->role_id == 4) {
             $item = Konsultan::where('user_id', $itemuser->id)->first();
+            if (!$item) {
+                return redirect()->route('Konsultan.create')->with('info', 'Silakan lengkapi profil pakar/konsultan Anda terlebih dahulu.');
+            }
             $data = array('data' => $item);
             return view('Konsultan.index', $data);
         } else {
@@ -32,7 +35,11 @@ class KonsultanController extends Controller
      */
     public function create()
     {
-        return view('Konsultan.create');
+        $latestRequest = \App\Models\RoleRequest::where('user_id', auth()->id())
+            ->where('status', 'approved')
+            ->latest()
+            ->first();
+        return view('Konsultan.create', compact('latestRequest'));
     }
 
     /**
@@ -64,11 +71,11 @@ class KonsultanController extends Controller
         //     'foto_cv' => 'image|file',    
         // ]);
         if($request->file('foto')){
-            $validatedData['foto'] = $request->file('foto')->store('konsultan-foto');
+            $validatedData['foto'] = $request->file('foto')->store('konsultan-foto', 'public');
         }
 
         if($request->file('foto_cv')){
-            $validatedData['foto_cv'] = $request->file('foto_cv')->store('konsultan-foto-cv');
+            $validatedData['foto_cv'] = $request->file('foto_cv')->store('konsultan-foto-cv', 'public');
         }
         $itemuser = $request->user();
         $validatedData['user_id'] = $itemuser->id;
@@ -93,17 +100,17 @@ class KonsultanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Konsultan $id)
+    public function edit($id)
     {
-        $item = Konsulatan::findOrFail($id);
-            $data = array('data' => $item);
-        return view('Konsulatan.edit', $data);
+        $item = Konsultan::findOrFail($id);
+        $data = array('data' => $item);
+        return view('Konsultan.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Konsultan $konsultan)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'nama' => 'required|max:50',
@@ -112,23 +119,54 @@ class KonsultanController extends Controller
             'alamat' => 'required',
             'pengalaman' =>'required',
             'deskripsi' =>'required',
+            'foto' => 'nullable|image|file|max:2048',
+            'foto_cv' => 'nullable|image|file|max:2048',
         ]);
 
         $item = Konsultan::findOrFail($id);
-        // kalo ga ada error page not found 404
         
-        $inputan = $request->all();
-        $itemuser = $request->user();//ambil data user yang login
+        $inputan = $request->except(['foto', 'foto_cv']);
+        $itemuser = $request->user();
         $inputan['user_id'] = $itemuser->id;
+
+        if ($request->hasFile('foto')) {
+            if ($item->foto && \Storage::disk('public')->exists($item->foto)) {
+                \Storage::disk('public')->delete($item->foto);
+            }
+            $inputan['foto'] = $request->file('foto')->store('konsultan-foto', 'public');
+        }
+
+        if ($request->hasFile('foto_cv')) {
+            if ($item->foto_cv && \Storage::disk('public')->exists($item->foto_cv)) {
+                \Storage::disk('public')->delete($item->foto_cv);
+            }
+            $inputan['foto_cv'] = $request->file('foto_cv')->store('konsultan-foto-cv', 'public');
+        }
+
         $item->update($inputan);   
-            return redirect('/Konsultan')->with('success',  'Data Anda Tersimpan');
+        return redirect('/Konsultan')->with('success', 'Data Anda Tersimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Konsultan $konsultan)
+    public function destroy($id)
     {
-        //
+        $item = Konsultan::findOrFail($id);
+        
+        // Delete associated files from storage disk public
+        if ($item->foto && \Storage::disk('public')->exists($item->foto)) {
+            \Storage::disk('public')->delete($item->foto);
+        }
+        if ($item->foto_cv && \Storage::disk('public')->exists($item->foto_cv)) {
+            \Storage::disk('public')->delete($item->foto_cv);
+        }
+        
+        // Revert user role back to 'user' (role_id = 2)
+        $item->user->update(['role_id' => 2]);
+        
+        $item->delete();
+        
+        return redirect('/')->with('success', 'Profil Konsultan berhasil dihapus.');
     }
 }

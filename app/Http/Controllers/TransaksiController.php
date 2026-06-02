@@ -16,7 +16,7 @@ class TransaksiController extends Controller
     public function index(Request $request)
     {
         $transactions = Transaction::where('user_id', $request->user()->id)
-                            ->with('order.cart.detail.produk')
+                            ->with('order.cart.detail.produk.toko')
                             ->orderBy('created_at', 'desc')
                             ->get();
         return view('transaksi.index', compact('transactions'));
@@ -43,21 +43,53 @@ class TransaksiController extends Controller
             $itemalamatpengiriman = AlamatPengiriman::where('user_id', $itemuser->id)
                                                     ->where('status', 'utama')
                                                     ->first();
-            if ($itemalamatpengiriman) {
-                // buat variabel inputan order
+            
+            // Jika user memilih "Ambil di tempat", alamat pengiriman utama tidak wajib ada
+            $opsi_pengiriman = $request->input('opsi_pengiriman', 'Diantar');
+            
+            if ($itemalamatpengiriman || $opsi_pengiriman === 'Ambil di tempat') {
                 $inputanorder['cart_id'] = $itemcart->id;
-                $inputanorder['nama_penerima'] = $itemalamatpengiriman->nama_penerima;
-                $inputanorder['no_tlp'] = $itemalamatpengiriman->no_tlp;
-                $inputanorder['alamat'] = $itemalamatpengiriman->alamat;
-                $inputanorder['provinsi'] = $itemalamatpengiriman->provinsi;
-                $inputanorder['kota'] = $itemalamatpengiriman->kota;
-                $inputanorder['kecamatan'] = $itemalamatpengiriman->kecamatan;
-                $inputanorder['kelurahan'] = $itemalamatpengiriman->kelurahan;
-                $inputanorder['kodepos'] = $itemalamatpengiriman->kodepos;
-                $itemorder = Order::create($inputanorder);//simpan order
+                
+                if ($opsi_pengiriman === 'Ambil di tempat') {
+                    $inputanorder['nama_penerima'] = $itemuser->name;
+                    $inputanorder['no_tlp'] = $request->input('Telp', $itemalamatpengiriman?->no_tlp ?? '-');
+                    
+                    $alamat_detail = 'Ambil di Toko';
+                    if ($request->filled('koordinat')) {
+                        $alamat_detail .= ' | Koordinat: ' . $request->koordinat;
+                    }
+                    $alamat_detail .= ' | Pengiriman: Ambil di tempat';
+                    $alamat_detail .= ' | Pembayaran: ' . $request->input('metode_pembayaran', 'Cash');
+                    
+                    $inputanorder['alamat'] = $alamat_detail;
+                    $inputanorder['provinsi'] = '-';
+                    $inputanorder['kota'] = '-';
+                    $inputanorder['kecamatan'] = '-';
+                    $inputanorder['kelurahan'] = '-';
+                    $inputanorder['kodepos'] = '-';
+                } else {
+                    $inputanorder['nama_penerima'] = $itemalamatpengiriman->nama_penerima;
+                    $inputanorder['no_tlp'] = $itemalamatpengiriman->no_tlp;
+                    
+                    $alamat_detail = $itemalamatpengiriman->alamat;
+                    if ($request->filled('koordinat')) {
+                        $alamat_detail .= ' | Koordinat: ' . $request->koordinat;
+                    }
+                    $alamat_detail .= ' | Pengiriman: Diantar';
+                    $alamat_detail .= ' | Pembayaran: ' . $request->input('metode_pembayaran', 'Cash');
+                    
+                    $inputanorder['alamat'] = $alamat_detail;
+                    $inputanorder['provinsi'] = $itemalamatpengiriman->provinsi;
+                    $inputanorder['kota'] = $itemalamatpengiriman->kota;
+                    $inputanorder['kecamatan'] = $itemalamatpengiriman->kecamatan;
+                    $inputanorder['kelurahan'] = $itemalamatpengiriman->kelurahan;
+                    $inputanorder['kodepos'] = $itemalamatpengiriman->kodepos;
+                }
+                
+                $itemorder = Order::create($inputanorder); // simpan order
                 
                 // Create Transaction
-                Transaction::create([
+                $transaction = Transaction::create([
                     'user_id' => $itemuser->id,
                     'order_id' => $itemorder->id,
                     'status' => 'Pending',
@@ -66,13 +98,25 @@ class TransaksiController extends Controller
 
                 // update status cart
                 $itemcart->update(['status_cart' => 'checkout']);
-                return redirect('/transaksi')->with('success', 'Order berhasil disimpan');
+                
+                return redirect()->route('transaksi.nota', $transaction->id)->with('success', 'Order berhasil disimpan');
             } else {
                 return back()->with('error', 'Alamat pengiriman belum diisi');
             }
         } else {
-            return abort('404');//kalo ternyata ga ada shopping cart, maka akan menampilkan error halaman tidak ditemukan
+            return abort('404');
         }
+    }
+
+    /**
+     * Display the success receipt invoice (nota) for a transaction.
+     */
+    public function nota($id)
+    {
+        $transaction = Transaction::where('user_id', auth()->id())
+                            ->with('order.cart.detail.produk')
+                            ->findOrFail($id);
+        return view('transaksi.nota', compact('transaction'));
     }
 
     /**
@@ -113,5 +157,18 @@ class TransaksiController extends Controller
         }
         $transaction->update(['status' => 'Completed']);
         return back()->with('success', 'Pesanan telah diselesaikan.');
+    }
+
+    public function cancel(Request $request, Transaction $transaction) {
+        if ($transaction->user_id !== $request->user()->id) {
+            abort(403);
+        }
+        
+        if ($transaction->status !== 'Pending') {
+            return back()->with('error', 'Hanya pesanan yang masih pending yang dapat dibatalkan.');
+        }
+
+        $transaction->update(['status' => 'Cancelled']);
+        return back()->with('success', 'Pesanan Anda berhasil dibatalkan.');
     }
 }

@@ -40,6 +40,8 @@
                         @endif
                     </td>
                     <td>
+                        <a href="{{ route('dashboard.role_requests.show', $req->id) }}" class="btn btn-sm btn-primary text-white me-1"><span data-feather="eye"></span> Detail</a>
+
                         <form action="{{ route('dashboard.role_requests.update', $req->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('PUT')

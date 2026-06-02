@@ -40,6 +40,16 @@ class AdminControlPanelTest extends TestCase
 
         $response = $this->actingAs($user)->post(route('role_requests.store'), [
             'requested_role_id' => $targetRole->id,
+            'identity_id' => '1234567890123456',
+            'whatsapp' => '08123456789',
+            'email' => 'user_test@gmail.com',
+            'gender' => 'Laki-laki',
+            'birth_date' => '1995-05-15',
+            'domicile' => 'Bandung, Jawa Barat',
+            'meta' => [
+                'shop_name' => 'Toko Tani Jaya',
+                'shop_address' => 'Jl. Sawah Hijau No. 10',
+            ],
             'reason' => 'Saya ingin berjualan',
             'document' => UploadedFile::fake()->create('document.pdf', 100),
         ]);
@@ -49,6 +59,9 @@ class AdminControlPanelTest extends TestCase
         $this->assertDatabaseHas('role_requests', [
             'user_id' => $user->id,
             'requested_role_id' => $targetRole->id,
+            'identity_id' => '1234567890123456',
+            'whatsapp' => '08123456789',
+            'email' => 'user_test@gmail.com',
             'status' => 'pending'
         ]);
     }
@@ -62,6 +75,16 @@ class AdminControlPanelTest extends TestCase
         $request = RoleRequest::create([
             'user_id' => $user->id,
             'requested_role_id' => $targetRole->id,
+            'identity_id' => '1234567890123456',
+            'whatsapp' => '08123456789',
+            'email' => 'user_test@gmail.com',
+            'gender' => 'Laki-laki',
+            'birth_date' => '1995-05-15',
+            'domicile' => 'Bandung, Jawa Barat',
+            'metadata' => [
+                'shop_name' => 'Toko Tani Jaya',
+                'shop_address' => 'Jl. Sawah Hijau No. 10',
+            ],
             'reason' => 'Test reason',
             'status' => 'pending'
         ]);
@@ -151,5 +174,25 @@ class AdminControlPanelTest extends TestCase
         $response->assertViewHas('newRegistrations', function($count) {
             return $count >= 2; // Including $buyer and the 2 new users
         });
+    }
+
+    public function test_admin_can_update_user()
+    {
+        $admin = $this->getAdmin();
+        $user = $this->getUser();
+        $targetRole = Role::where('name', 'Penjual')->first();
+
+        $response = $this->actingAs($admin)->put(route('user.update', $user->slug), [
+            'name' => 'Updated Name',
+            'email' => 'updated_email@gmail.com',
+            'phone' => '081234567890',
+            'role_id' => $targetRole->id,
+            'status' => 'aktif'
+        ]);
+
+        $response->assertRedirect(route('user.index'));
+        $this->assertEquals('Updated Name', $user->fresh()->name);
+        $this->assertEquals('updated_email@gmail.com', $user->fresh()->email);
+        $this->assertEquals($targetRole->id, $user->fresh()->role_id);
     }
 }

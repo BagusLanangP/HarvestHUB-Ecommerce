@@ -48,36 +48,50 @@
         </div>
     </section>
 
-    <section id="kategori" class="mt-5 mb-5" >
+    <section id="kategori" class="py-5" style="background-color: var(--bs-body-bg);">
       <div class="container">
-        <div class="row text-center mb-3 kategori-tittle">
-          <div class="col category-tittle">
-            <h1>Kategori</h1>
-            <h4>Temukan produk yang anda inginkan</h3>
+        <div class="row text-center mb-4">
+          <div class="col-12 category-tittle">
+            <span class="badge bg-success-subtle text-success rounded-pill px-3 py-1.5 fw-semibold small mb-2">Katalog Segar</span>
+            <h2 class="fw-bold text-dark" style="font-family: 'Outfit', sans-serif;">Pilihan Kategori Tani</h2>
+            <p class="text-secondary small">Temukan berbagai produk pertanian segar langsung dari petani lokal</p>
           </div>
-          
         </div>
-        <hr>
-        <div class="row ">
+        
+        <style>
+          .category-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            border: 1px solid rgba(0, 0, 0, 0.03) !important;
+          }
+          .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(25, 135, 84, 0.08) !important;
+            border-color: rgba(25, 135, 84, 0.2) !important;
+          }
+          .category-card:hover .category-image-wrapper {
+            transform: scale(1.04);
+            box-shadow: 0 8px 20px rgba(25, 135, 84, 0.12) !important;
+          }
+        </style>
+
+        <div class="row g-4 justify-content-center">
           @foreach($kategoris as $k)
-          <div class="col-2 mb-3"">
-            <div class="card card-product shadow">
-              <a href="{{ url('kategori/' . $k->id) }}">
-                <img src="{{ asset('img/kategori/' . $k->foto ) }}" class="card-img-top" alt="GAMBAR2">
-                <div class="card-body">
-                <h4 class="card-text text-center">{{ $k->productName }}</h4>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <a href="{{ url('home/kategori/' . $k->id) }}" class="text-decoration-none">
+              <div class="card category-card rounded-4 text-center p-3 h-100 bg-white">
+                <div class="rounded-3 mb-3 overflow-hidden bg-light shadow-xs category-image-wrapper" style="width: 100%; height: 110px; transition: all 0.3s ease;">
+                  <img src="{{ asset('img/kategori/' . $k->foto ) }}" alt="{{ $k->productName }}" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-              </a>             
-            </div>
+                <div class="pt-1">
+                  <h6 class="fw-bold text-dark mb-1 tracking-tight" style="font-family: 'Outfit', sans-serif; font-size: 0.88rem;">{{ $k->productName }}</h6>
+                  <span class="badge bg-success-subtle text-success rounded-pill px-2.5 py-1.2 fw-semibold" style="font-size: 0.65rem;">
+                    {{ $k->produk->count() }} Produk
+                  </span>
+                </div>
+              </div>
+            </a>             
           </div>
           @endforeach     
-        </div>
-          
-          </div>
-              
-        </div>
-        <div class="row">
-
         </div>
       </div>
     </section>
@@ -175,7 +189,7 @@
           @foreach($service as $s)
             @php
               // Determine dynamic routing based on model instance
-              $detailUrl = $s instanceof \App\Models\TenagaKerja ? URL::to('tenagakerja/' . $s->id) : URL::to('ahlipakar/' . $s->id);
+              $detailUrl = $s instanceof \App\Models\TenagaKerja ? URL::to('tenagakerja/' . $s->user->slug) : URL::to('ahlipakar/' . $s->user->slug);
             @endphp
             <div class="card shadow-sm border border-light rounded-4 swiper-slide bg-white h-100 hover-lift" style="width: 17rem;">
               <a href="{{ $detailUrl }}" class="text-decoration-none h-100 d-flex flex-column justify-content-between">

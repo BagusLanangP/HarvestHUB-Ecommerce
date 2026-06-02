@@ -58,8 +58,7 @@ Route::resource('/dashboard/product', DashboardProductController::class)->middle
 
 Route::resource('/TenagaKerja', TenagaKerjaController::class)->middleware('tenagaKerja');
 Route::resource('/Konsultan', KonsultanController::class)->middleware('konsultan');
-Route::resource('Toko', TokoController::class)
-->middleware('toko');
+Route::resource('Toko', TokoController::class)->except(['show'])->middleware('toko');
 
 Route::get('/Toko/{id}', [TokoController::class, 'show']);
 Route::get('/Tenagakerja/view', [HomeController::class, 'tenagakerja']);
@@ -69,11 +68,12 @@ Route::get('/home/kategori/{id}', [HomeController::class, 'categoryDetail']);
 
 
 Route::get('/produk/{slug}', [HomeController::class, 'produkdetail']);
-Route::get('/tenagakerja/{id}', [HomeController::class, 'tenagakerjadetail']);
-Route::get('/ahlipakar/{id}', [HomeController::class, 'ahlipakardetail']);
+Route::get('/tenagakerja/{slug}', [HomeController::class, 'tenagakerjadetail']);
+Route::get('/ahlipakar/{slug}', [HomeController::class, 'ahlipakardetail']);
 
 //route untuk user yang sudah melakukan login
 Route::group(['middleware' => 'auth'], function(){
+    Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
     Route::resource('cartdetail', CartDetailController::class);
     Route::resource('wishlist', WishlistController::class);
     Route::get('checkout', [CartController::class,'checkout']);
@@ -81,6 +81,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::patch('kosongkan/{id}', [CartController::class, 'kosongkan']);
     Route::resource('transaksi', TransaksiController::class);
     Route::patch('transaksi/{transaction}/complete', [TransaksiController::class, 'complete'])->name('transaksi.complete');
+    Route::patch('transaksi/{transaction}/cancel', [TransaksiController::class, 'cancel'])->name('transaksi.cancel');
+    Route::get('transaksi/{id}/nota', [TransaksiController::class, 'nota'])->name('transaksi.nota');
     
     Route::get('review/create', [ReviewController::class, 'create'])->name('review.create');
     Route::post('review/store', [ReviewController::class, 'store'])->name('review.store');
@@ -93,6 +95,7 @@ Route::group(['middleware' => 'auth'], function(){
 // Admin role requests (assuming 'dashboard' middleware protects admin area)
 Route::middleware(['dashboard'])->group(function () {
     Route::get('dashboard/role-requests', [\App\Http\Controllers\RoleRequestController::class, 'index'])->name('dashboard.role_requests.index');
+    Route::get('dashboard/role-requests/{roleRequest}', [\App\Http\Controllers\RoleRequestController::class, 'show'])->name('dashboard.role_requests.show');
     Route::put('dashboard/role-requests/{roleRequest}', [\App\Http\Controllers\RoleRequestController::class, 'update'])->name('dashboard.role_requests.update');
     
     // Admin Analytics

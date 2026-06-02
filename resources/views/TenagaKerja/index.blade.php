@@ -74,16 +74,21 @@
             </div>
           </div>
         </div>
-        <div class="row mt-3">
-          <div class="col-6 p-3">
-            <button type="submit" class="btn submit-login d-flex justify-content-center" id="edit-konsultan">
-              <a href="{{ URL::to('checkout') }}" class="btn">Edit</a></button>
+        <div class="row mt-4 mb-4 justify-content-center">
+          <div class="col-md-6 d-flex justify-content-center gap-3">
+            <a href="{{ route('TenagaKerja.edit', $data->id) }}" class="btn btn-warning px-4 py-2 rounded-pill fw-semibold shadow-sm text-white">
+              <i class="bi bi-pencil-square me-1"></i> Edit Profil
+            </a>
+            
+            <form action="{{ route('TenagaKerja.destroy', $data->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus profil Tenaga Kerja Anda? Akun Anda akan otomatis kembali menjadi user biasa.')">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-danger px-4 py-2 rounded-pill fw-semibold shadow-sm">
+                <i class="bi bi-trash-fill me-1"></i> Hapus Profil
+              </button>
+            </form>
           </div>
-          <div class="col-6 p-3">
-            <button type="submit" class="btn submit-login d-flex justify-content-center" id="hapus-konsultan">
-              <a href="{{ URL::to('checkout') }}" class="btn">Hapus</a></button>
-        </div>
-        {{-- <div class="tampil-data"> --}}
+        </div>{{-- <div class="tampil-data"> --}}
         {{-- <table class="table table-borderless align-middle table-responsive mt-5">
           <tbody>
             <tr>

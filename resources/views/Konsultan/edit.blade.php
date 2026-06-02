@@ -18,34 +18,31 @@
             <form action="{{ route('Konsultan.update', $data->id) }}" method="post">
               @method('PATCH')
               @csrf
-                <div class="mb-4">
-                    <label for="nama" class="form-label">Nama</label>
-                    <input type="text" class="form-control" id="nama" placeholder="Masukkan nama" name="nama"
-                      @error('nama') is-invalid @enderror value="{{ old('nama') }}" value="{{ $data->nama }}" required>
-
+                 <div class="mb-4">
+                    <label for="nama" class="form-label">Nama <span class="text-success small">(Telah Diverifikasi)</span></label>
+                    <input type="text" class="form-control bg-light" id="nama" placeholder="Masukkan nama" name="nama"
+                      @error('nama') is-invalid @enderror value="{{ old('nama', $data->nama) }}" readonly required>
                       @error('nama')
                         <div class="alert alert-danger">{{ $message }}</div>
                       @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" 
-                      @error('email') is-invalid @enderror value="{{ $data->email }}" required>
-
+                    <label for="email" class="form-label">Email <span class="text-success small">(Telah Diverifikasi)</span></label>
+                    <input type="email" class="form-control bg-light" id="email" name="email" placeholder="Masukkan email" 
+                      @error('email') is-invalid @enderror value="{{ old('email', $data->email) }}" readonly required>
                       @error('email')
                         <div class="alert alert-danger">{{ $message }}</div>
                       @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="phone" class="form-label">nomor Telepon </label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Masukkan Nomor Telepon" 
-                      @error('phone') is-invalid @enderror value="{{ $data->phone }}" required >
+                    <label for="phone" class="form-label">Nomor Telepon <span class="text-success small">(Telah Diverifikasi)</span></label>
+                    <input type="text" class="form-control bg-light" id="phone" name="phone" placeholder="Masukkan Nomor Telepon" 
+                      @error('phone') is-invalid @enderror value="{{ old('phone', $data->phone) }}" readonly required >
                 </div>
                 <div class="mb-4">
-                    <label for="alamat" class="form-label">Alamat</label>
-                    <input type="text" class="form-control" id="alamat"  name="alamat" placeholder="Masukan alamat" 
-                      @error('alamat') is-invalid @enderror value="{{ $data->alamat }}" required >
-
+                    <label for="alamat" class="form-label">Alamat <span class="text-success small">(Telah Diverifikasi)</span></label>
+                    <input type="text" class="form-control bg-light" id="alamat"  name="alamat" placeholder="Masukan alamat" 
+                      @error('alamat') is-invalid @enderror value="{{ old('alamat', $data->alamat) }}" readonly required >
                       @error('alamat')
                         <div class="alert alert-danger">{{ $message }}</div>
                       @enderror

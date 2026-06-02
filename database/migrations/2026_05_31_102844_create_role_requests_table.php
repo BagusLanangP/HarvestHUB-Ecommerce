@@ -16,6 +16,13 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('requested_role_id');
             $table->foreign('requested_role_id')->references('id')->on('roles')->cascadeOnDelete();
+            $table->string('identity_id')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('email')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->string('domicile')->nullable();
+            $table->json('metadata')->nullable();
             $table->text('reason');
             $table->string('document_path')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');

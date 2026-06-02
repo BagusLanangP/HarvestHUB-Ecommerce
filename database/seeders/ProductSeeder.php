@@ -47,6 +47,7 @@ class ProductSeeder extends Seeder
                     'phone' => $seller->phone,
                     'alamat' => $seller->alamat,
                     'deskripsi' => 'Toko pertanian resmi milik ' . $seller->name,
+                    'foto' => 'default-shop.png',
                     'user_id' => $seller->id,
                 ]);
             }

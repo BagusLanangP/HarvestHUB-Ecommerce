@@ -21,9 +21,40 @@ class RoleRequestController extends Controller
     {
         $request->validate([
             'requested_role_id' => 'required|exists:roles,id',
+            'identity_id' => 'required|string|max:50',
+            'whatsapp' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'gender' => 'required|in:Laki-laki,Perempuan',
+            'birth_date' => 'required|date',
+            'domicile' => 'required|string|max:255',
             'reason' => 'required|string',
             'document' => 'nullable|file|mimes:pdf,jpg,png,jpeg|max:2048',
         ]);
+
+        $requestedRole = Role::findOrFail($request->requested_role_id);
+        $roleName = $requestedRole->name;
+
+        $metaRules = [];
+        if ($roleName === 'Penjual') {
+            $metaRules = [
+                'meta.shop_name' => 'required|string|max:255',
+                'meta.shop_address' => 'required|string|max:255',
+            ];
+        } elseif ($roleName === 'Ahli Pakar') {
+            $metaRules = [
+                'meta.expertise' => 'required|string|max:255',
+                'meta.experience' => 'required|string|max:255',
+            ];
+        } elseif ($roleName === 'Tenaga Kerja') {
+            $metaRules = [
+                'meta.skills' => 'required|string|max:255',
+                'meta.rate' => 'required|string|max:255',
+            ];
+        }
+
+        if (!empty($metaRules)) {
+            $request->validate($metaRules);
+        }
 
         $path = null;
         if ($request->hasFile('document')) {
@@ -33,6 +64,13 @@ class RoleRequestController extends Controller
         RoleRequest::create([
             'user_id' => Auth::id(),
             'requested_role_id' => $request->requested_role_id,
+            'identity_id' => $request->identity_id,
+            'whatsapp' => $request->whatsapp,
+            'email' => $request->email,
+            'gender' => $request->gender,
+            'birth_date' => $request->birth_date,
+            'domicile' => $request->domicile,
+            'metadata' => $request->input('meta', []),
             'reason' => $request->reason,
             'document_path' => $path,
             'status' => 'pending',
@@ -51,6 +89,13 @@ class RoleRequestController extends Controller
         return view('dashboard.role_requests.index', compact('requests'));
     }
 
+    // For Admins: View details of a specific role request
+    public function show(RoleRequest $roleRequest)
+    {
+        $roleRequest->load(['user', 'role']);
+        return view('dashboard.role_requests.show', compact('roleRequest'));
+    }
+
     // For Admins: Approve or Reject a request
     public function update(Request $request, RoleRequest $roleRequest)
     {
@@ -62,8 +107,24 @@ class RoleRequestController extends Controller
 
         if ($request->status === 'approved') {
             $roleRequest->user->update(['role_id' => $roleRequest->requested_role_id]);
+            
+            return redirect()->back()->with([
+                'success' => 'Status pengajuan berhasil diperbarui menjadi DISETUJUI.',
+                'notify_approved' => true,
+                'notify_whatsapp_number' => $roleRequest->whatsapp,
+                'notify_email_address' => $roleRequest->email,
+                'notify_user_name' => $roleRequest->user->name,
+                'notify_role_name' => $roleRequest->role->name
+            ]);
         }
 
-        return redirect()->back()->with('success', 'Status pengajuan berhasil diperbarui.');
+        return redirect()->back()->with([
+            'success' => 'Status pengajuan berhasil diperbarui menjadi DITOLAK.',
+            'notify_rejected' => true,
+            'notify_whatsapp_number' => $roleRequest->whatsapp,
+            'notify_email_address' => $roleRequest->email,
+            'notify_user_name' => $roleRequest->user->name,
+            'notify_role_name' => $roleRequest->role->name
+        ]);
     }
 }

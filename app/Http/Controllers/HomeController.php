@@ -15,8 +15,8 @@ class HomeController extends Controller
     public function index(){
         $produk = Product::all();
         $kategori = ProductCategory::all();
-        $tenagaKerja = TenagaKerja::all();
-        $konsultan = Konsultan::all();
+        $tenagaKerja = TenagaKerja::with('user')->get();
+        $konsultan = Konsultan::with('user')->get();
 
     // Menggabungkan data dari TenagaKerja dan Konsultan
         $service = $tenagaKerja->merge($konsultan);
@@ -57,18 +57,19 @@ class HomeController extends Controller
         }
     }
 
-    public function ahlipakardetail($id) {
-        $itemAP = Konsultan::where('id', $id)
-                            
-                            ->first();
+    public function ahlipakardetail($slug) {
+        $itemAP = Konsultan::whereHas('user', function($q) use ($slug) {
+            $q->where('slug', $slug);
+        })->first();
+
         if ($itemAP) {
             if (Auth::user()) {//cek kalo user login
                 $itemuser = Auth::user();
-                $data = array('title' => $itemAP->name,
+                $data = array('title' => $itemAP->nama,
                         'itemproduk' => $itemAP
                     );
             } else {
-                $data = array('title' => $itemAP->name,
+                $data = array('title' => $itemAP->nama,
                             'itemproduk' => $itemAP);
             }
             return view('home.ahlipakar.detail', $data);            
@@ -77,18 +78,19 @@ class HomeController extends Controller
         }
     }
 
-    public function tenagakerjadetail($id) {
-        $itemAP = TenagaKerja::where('id', $id)
-                            
-                            ->first();
+    public function tenagakerjadetail($slug) {
+        $itemAP = TenagaKerja::whereHas('user', function($q) use ($slug) {
+            $q->where('slug', $slug);
+        })->first();
+
         if ($itemAP) {
             if (Auth::user()) {//cek kalo user login
                 $itemuser = Auth::user();
-                $data = array('title' => $itemAP->name,
+                $data = array('title' => $itemAP->nama,
                         'itemproduk' => $itemAP
                     );
             } else {
-                $data = array('title' => $itemAP->name,
+                $data = array('title' => $itemAP->nama,
                             'itemproduk' => $itemAP);
             }
             return view('home.tenagakerja.detail', $data);            
@@ -107,16 +109,20 @@ class HomeController extends Controller
     }
 
     public function tenagakerja(){
-        $data = TenagaKerja::all();
+        $data = TenagaKerja::with('user')->get();
         return view('home.tenagakerja.index', compact('data'));
     } 
     public function ahlipakar(){
-        $data = Konsultan::all();
+        $data = Konsultan::with('user')->get();
         return view('home.ahlipakar.index', compact('data'));
     }
-    
 
+    public function chat() {
+        $tokos = \App\Models\Toko::with('user')->get();
+        $konsultans = \App\Models\Konsultan::with('user')->get();
+        $tenagaKerjas = \App\Models\TenagaKerja::with('user')->get();
 
-
+        return view('home.chat', compact('tokos', 'konsultans', 'tenagaKerjas'));
+    }
 
 }

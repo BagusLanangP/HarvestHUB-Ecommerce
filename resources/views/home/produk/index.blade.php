@@ -88,7 +88,14 @@
                         <div class="d-flex align-items-center gap-2">
                             
                             {{-- Button Chat --}}
-                            <a href="#" class="btn btn-outline-success rounded-pill d-flex align-items-center justify-content-center p-0 flex-shrink-0 btn-action" style="width: 48px; height: 48px;" title="Chat Penjual">
+                            @php
+                                $tokoPhone = preg_replace('/[^0-9]/', '', $itemproduk->toko->phone);
+                                if (str_starts_with($tokoPhone, '0')) {
+                                    $tokoPhone = '62' . substr($tokoPhone, 1);
+                                }
+                                $chatUrl = "https://wa.me/" . $tokoPhone . "?text=Halo%20Toko%20" . urlencode($itemproduk->toko->nama) . ",%20saya%20tertarik%20dengan%20produk%20" . urlencode($itemproduk->name) . "%20yang%20saya%20lihat%20di%20HarvestHUB.";
+                            @endphp
+                            <a href="{{ $chatUrl }}" target="_blank" class="btn btn-outline-success rounded-pill d-flex align-items-center justify-content-center p-0 flex-shrink-0 btn-action" style="width: 48px; height: 48px;" title="Chat Penjual">
                                 <i class="bi bi-chat-left-text" style="font-size: 1.2rem;"></i>
                             </a>
 

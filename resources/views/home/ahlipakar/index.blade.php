@@ -15,7 +15,7 @@
         @foreach ($data as $d)
             <div class="col-3 mb-3">
                 <div class="card me-3 shadow card-product d-flex justify-content-start mb-2">
-                    <a href="{{ URL::to('ahlipakar/'.$d->id ) }}">
+                    <a href="{{ URL::to('ahlipakar/'.$d->user->slug ) }}">
                         <img src="{{asset('storage/' . $d->foto)}}" class="card-img-top shadow rounded-circle" alt="...">
                         <div class="card-body">
                             <p class=" text-center review-name mb-0">{{ $d->nama }}</p>

@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
 
             
         foreach ( $data as $value){
-            User::insert([
+            User::create([
                 'name' => $value['name'],
                 'email' => $value['email'],
                 'password' => bcrypt($value['password']),
