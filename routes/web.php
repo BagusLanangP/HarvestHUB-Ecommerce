@@ -33,6 +33,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 // Homepage
 Route::get('/cari', [HomeController::class, 'cari']);
+Route::post('/set-location', [HomeController::class, 'setLocation'])->name('set-location');
 //rute login
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticating']);
@@ -64,7 +65,8 @@ Route::get('/Toko/{id}', [TokoController::class, 'show']);
 Route::get('/Tenagakerja/view', [HomeController::class, 'tenagakerja']);
 Route::get('/Ahlipakar/view', [HomeController::class, 'ahlipakar']);
 
-Route::get('/home/kategori/{id}', [HomeController::class, 'categoryDetail']);
+Route::get('/home/kategori/{id}', [HomeController::class, 'redirectToCategorySlug']);
+Route::get('/kategori/{slug}', [HomeController::class, 'categoryDetail'])->name('category.detail');
 
 
 Route::get('/produk/{slug}', [HomeController::class, 'produkdetail']);

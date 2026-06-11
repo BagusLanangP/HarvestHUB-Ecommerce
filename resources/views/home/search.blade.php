@@ -31,7 +31,7 @@
         @if(request('cari'))
           <h5 class="text-secondary fw-normal">
             Menampilkan hasil pencarian untuk: <span class="text-success fw-bold">"{{ request('cari') }}"</span>
-            <span class="badge bg-light text-dark border ms-2" style="font-size: 0.8rem; font-weight: 500;">{{ $hasil->count() }} Ditemukan</span>
+            <span class="badge bg-light text-dark border ms-2" style="font-size: 0.8rem; font-weight: 500;">{{ $hasil->total() }} Ditemukan</span>
           </h5>
         @else
           <h5 class="text-secondary fw-bold" style="font-size: 1.1rem; border-left: 4px solid #198754; padding-left: 10px;">Semua Produk Katalog</h5>
@@ -51,12 +51,17 @@
                             <div class="mb-2">
                                 <p class="product-name-title mb-1">{{ $produk->name }}</p>
                                 @if($produk->toko)
-                                    <span class="text-muted d-block text-truncate" style="font-size: 0.78rem; font-weight: 400; line-height: 1.2;" title="{{ $produk->toko->nama }}">
-                                        <i class="bi bi-shop me-1" style="color: #198754;"></i> {{ $produk->toko->nama }}
-                                    </span>
+                                    <div class="d-flex align-items-center justify-content-between text-muted mt-1" style="font-size: 0.78rem; line-height: 1.2;">
+                                        <span class="text-truncate me-2" style="max-width: 60%;" title="{{ $produk->toko->nama }}">
+                                            <i class="bi bi-shop me-1" style="color: #198754;"></i> {{ $produk->toko->nama }}
+                                        </span>
+                                        <span class="text-truncate text-secondary text-end fw-medium" style="max-width: 40%; font-size: 0.74rem;" title="{{ $produk->toko->alamat }}">
+                                            <i class="bi bi-geo-alt-fill me-0.5 text-danger"></i> {{ $produk->toko->alamat }}
+                                        </span>
+                                    </div>
                                 @else
                                     <!-- Placeholder to maintain height consistency -->
-                                    <span class="d-block" style="font-size: 0.78rem; line-height: 1.2; visibility: hidden;">&nbsp;</span>
+                                    <div class="d-flex" style="font-size: 0.78rem; line-height: 1.2; visibility: hidden;">&nbsp;</div>
                                 @endif
                                 
                                 <!-- Rating & Sold Summary -->
@@ -75,6 +80,10 @@
                 </div>
             </div>
           @endforeach
+        </div>
+        
+        <div class="d-flex justify-content-center mt-4">
+            {{ $hasil->links('pagination::bootstrap-5') }}
         </div>
         @else
         <!-- Beautiful Empty State -->

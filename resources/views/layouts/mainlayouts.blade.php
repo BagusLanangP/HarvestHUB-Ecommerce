@@ -16,6 +16,11 @@
     {{-- Bootstrap Icon --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -130,6 +135,89 @@
       #theme-icon {
         transition: color 0.3s ease;
       }
+      
+      /* Mobile responsiveness overrides */
+      @media (max-width: 991px) {
+        .navbar-nav {
+          padding: 1rem 0;
+          text-align: center;
+        }
+        .navbar-nav .nav-item {
+          margin-right: 0 !important;
+          margin-bottom: 0.5rem;
+        }
+      }
+      @media (max-width: 768px) {
+        :root {
+          --paddingContentRL: 1rem !important;
+          --paddingContentRL2: 1rem !important;
+          --paddingContentTB: 2.5rem !important;
+          --paddingInElemenMini: 1.5rem !important;
+        }
+        .header .search-form {
+          width: calc(100vw - 2rem) !important;
+        }
+        .navbar {
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+        }
+        .divider-vertical {
+          margin: auto 8px !important;
+        }
+        .search {
+          margin-right: 10px !important;
+        }
+      }
+
+      /* Custom Pagination Styles */
+      .pagination {
+        margin-bottom: 0;
+        gap: 5px;
+      }
+      .pagination .page-link {
+        color: #198754 !important;
+        border-color: rgba(25, 135, 84, 0.15) !important;
+        background-color: #ffffff !important;
+        border-radius: 8px !important;
+        font-weight: 600;
+        padding: 8px 16px;
+        transition: all 0.2s ease-in-out;
+        box-shadow: none !important;
+      }
+      .pagination .page-link:hover {
+        color: #ffffff !important;
+        background-color: #157347 !important;
+        border-color: #157347 !important;
+      }
+      .pagination .page-item.active .page-link {
+        background-color: #198754 !important;
+        border-color: #198754 !important;
+        color: #ffffff !important;
+      }
+      .pagination .page-item.disabled .page-link {
+        background-color: #f8f9fa !important;
+        border-color: rgba(0, 0, 0, 0.05) !important;
+        color: #6c757d !important;
+        opacity: 0.6;
+      }
+      .dark-mode .pagination .page-link {
+        background-color: #1e1e1e !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+        color: #e0e0e0 !important;
+      }
+      .dark-mode .pagination .page-link:hover {
+        background-color: #157347 !important;
+        color: #ffffff !important;
+      }
+      .dark-mode .pagination .page-item.active .page-link {
+        background-color: #198754 !important;
+        border-color: #198754 !important;
+      }
+      .dark-mode .pagination .page-item.disabled .page-link {
+        background-color: #121212 !important;
+        border-color: rgba(255, 255, 255, 0.05) !important;
+        color: #777777 !important;
+      }
     </style>
   </head>
   <body>
@@ -142,8 +230,8 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
-          <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
             <li class="nav-item me-5">
               <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/">Home</a>
             </li>
@@ -163,77 +251,87 @@
               </ul>
             </li>
           </ul>
-        </div>
-
-        <div class="d-flex justify-content-end">
-          <ul class="navbar-nav">
-            
-            <li class="nav-item search me-2">
-              <i class="bi bi-search nav-link nav-item" style="font-size: 30px; cursor: pointer;" id="search-btn"></i>
-            </li>
-            @auth
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="bi bi-person" style="font-size: 30px;"></i>
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/wishlist"><i class="bi bi-heart"></i>Wishlist</a></li>
-                <li><a class="dropdown-item" href="/cart"><i class="bi bi-cart"></i>Keranjang</a></li>
-                <li><a class="dropdown-item" href="/transaksi"><i class="bi bi-bag"></i>Transaksi</a></li>
-                <li><a class="dropdown-item" href="/chat"><i class="bi bi-chat-left-text"></i>Chat</a></li>
-                @can('tenagaKerja0')
-                  <li><a class="dropdown-item" href="/TenagaKerja/create"><i class="bi bi-person-circle"></i>Profil</a></li>
-                @elsecan('tenagaKerja1')
-                  <li><a class="dropdown-item" href="/TenagaKerja"><i class="bi bi-person-circle"></i>Profil</a></li>
-                @elsecan('konsultan0')
-                  <li><a class="dropdown-item" href="/Konsultan/create"><i class="bi bi-person-circle"></i>Profil</a></li>
-                @elsecan('konsultan1')
-                  <li><a class="dropdown-item" href="/Konsultan"><i class="bi bi-person-circle"></i>Profil</a></li>
-                @elsecan('toko0')
-                  <li><a class="dropdown-item" href="/Toko/create"><i class="bi bi-person-circle"></i>Profil</a></li>
-                @elsecan('toko1')
-                  <li><a class="dropdown-item" href="/Toko"><i class="bi bi-person-circle"></i>Profil</a></li>
-                @endcan
-                  
-               @can('admin')
-               <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-database"></i></i>Dashboard</a></li>
-               @endcan
-               
-               <li><a class="dropdown-item" href="{{ route('role_requests.create') }}"><i class="bi bi-person-lines-fill"></i>Pengajuan Role</a></li>
-                
-                <li class="dropdown-divider"></li>
-                <li>
-                  <form action="/logout" method="post">
-                    @csrf
-                    <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Log Out</button>
-                  </form>
-                </li>
-              </ul>
-            </li>
-            @else
-            <li class="nav-item">
-              <a href="/login" class="nav-link">
-                <i class="bi bi-person" style="font-size: 30px;"></i>
-              </a>
-            </li>
-            @endauth
-            <!-- Garis vertikal -->
-            <li class="divider-vertical"></li>
-            <li class="nav-item d-flex align-items-center ms-2">
-              <button id="dark-mode-toggle" class="btn btn-link nav-link p-0" style="border: none; background: none;">
-                <i class="bi bi-sun" id="theme-icon" style="font-size: 30px; cursor: pointer;"></i>
-              </button>
-            </li>
-
-
-            
-            {{-- <li class="nav-item">
-              <div class="form-check form-switch nav-item">
-                  <input type="checkbox" class="form-check-input " id="checkbox">
-                  <label class="form-check-label nav-link" for="checkbox">Dark Mode</label>
+          
+          <div class="d-flex align-items-center justify-content-center justify-content-lg-end mt-3 mt-lg-0">
+            <ul class="navbar-nav flex-row align-items-center justify-content-center gap-3">
+              
+              <li class="nav-item dropdown me-3 d-flex align-items-center">
+                <a class="nav-link dropdown-toggle d-flex align-items-center gap-1 text-success fw-semibold" href="#" id="locationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 1rem;">
+                  <i class="bi bi-geo-alt-fill text-success" style="font-size: 20px;"></i>
+                  <span id="nav-location-text">{{ session('selected_location', 'Pilih Lokasi') }}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end shadow border-0 p-3 rounded-4 mt-2" aria-labelledby="locationDropdown" style="width: 280px; z-index: 1050;">
+                  <h6 class="fw-bold text-dark mb-2" style="font-size: 0.88rem;">Pilih Wilayah Operasional</h6>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text bg-light border-0"><i class="bi bi-search" style="font-size: 0.8rem;"></i></span>
+                    <input type="text" id="navbar-location-search" class="form-control bg-light border-0" placeholder="Cari kota/kabupaten..." style="font-size: 0.8rem;">
+                  </div>
+                  <div id="navbar-location-list" style="max-height: 180px; overflow-y: auto;">
+                    {{-- Will be populated dynamically via JS --}}
+                  </div>
+                  <div class="border-top pt-2 mt-2 text-center">
+                    <a href="#" class="text-decoration-none text-danger small fw-semibold" id="reset-location-btn" style="font-size: 0.75rem;">Hapus Filter Lokasi</a>
+                  </div>
                 </div>
-            </li> --}}
-          </ul>
+              </li>
+
+              <li class="nav-item search me-2">
+                <i class="bi bi-search nav-link nav-item" style="font-size: 30px; cursor: pointer;" id="search-btn"></i>
+              </li>
+              @auth
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="bi bi-person" style="font-size: 30px;"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/wishlist"><i class="bi bi-heart"></i>Wishlist</a></li>
+                  <li><a class="dropdown-item" href="/cart"><i class="bi bi-cart"></i>Keranjang</a></li>
+                  <li><a class="dropdown-item" href="/transaksi"><i class="bi bi-bag"></i>Transaksi</a></li>
+                  <li><a class="dropdown-item" href="/chat"><i class="bi bi-chat-left-text"></i>Chat</a></li>
+                  @can('tenagaKerja0')
+                    <li><a class="dropdown-item" href="/TenagaKerja/create"><i class="bi bi-person-circle"></i>Profil</a></li>
+                  @elsecan('tenagaKerja1')
+                    <li><a class="dropdown-item" href="/TenagaKerja"><i class="bi bi-person-circle"></i>Profil</a></li>
+                  @elsecan('konsultan0')
+                    <li><a class="dropdown-item" href="/Konsultan/create"><i class="bi bi-person-circle"></i>Profil</a></li>
+                  @elsecan('konsultan1')
+                    <li><a class="dropdown-item" href="/Konsultan"><i class="bi bi-person-circle"></i>Profil</a></li>
+                  @elsecan('toko0')
+                    <li><a class="dropdown-item" href="/Toko/create"><i class="bi bi-person-circle"></i>Profil</a></li>
+                  @elsecan('toko1')
+                    <li><a class="dropdown-item" href="/Toko"><i class="bi bi-person-circle"></i>Profil</a></li>
+                  @endcan
+                    
+                 @can('admin')
+                 <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-database"></i></i>Dashboard</a></li>
+                 @endcan
+                  <li><a class="dropdown-item" href="{{ route('role_requests.create') }}"><i class="bi bi-person-lines-fill"></i>Pengajuan Role</a></li>
+                  
+                  <li class="dropdown-divider"></li>
+                  <li>
+                    <form action="/logout" method="post">
+                      @csrf
+                      <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Log Out</button>
+                    </form>
+                  </li>
+                </ul>
+              </li>
+              @else
+              <li class="nav-item">
+                <a href="/login" class="nav-link">
+                  <i class="bi bi-person" style="font-size: 30px;"></i>
+                </a>
+              </li>
+              @endauth
+              <!-- Garis vertikal -->
+              <li class="divider-vertical d-none d-lg-block"></li>
+              <li class="nav-item d-flex align-items-center ms-2">
+                <button id="dark-mode-toggle" class="btn btn-link nav-link p-0" style="border: none; background: none;">
+                  <i class="bi bi-sun" id="theme-icon" style="font-size: 30px; cursor: pointer;"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
 
 
@@ -379,6 +477,114 @@
             updateIcon(theme);
           });
         }
+
+        // Location selection autocomplete script
+        const locations = [
+            'Badung',
+            'Bangli',
+            'Buleleng',
+            'Denpasar',
+            'Gianyar',
+            'Jembrana',
+            'Karangasem',
+            'Klungkung',
+            'Tabanan',
+            'Jakarta',
+            'Surabaya',
+            'Malang',
+            'Bandung',
+            'Yogyakarta'
+        ];
+
+        const locationList = document.getElementById('navbar-location-list');
+        const locationSearch = document.getElementById('navbar-location-search');
+        const locationText = document.getElementById('nav-location-text');
+        const resetBtn = document.getElementById('reset-location-btn');
+
+        function renderLocations(filterText = '') {
+            if (!locationList) return;
+            locationList.innerHTML = '';
+            const filtered = locations.filter(loc => 
+                loc.toLowerCase().includes(filterText.toLowerCase())
+            );
+
+            if (filtered.length === 0) {
+                locationList.innerHTML = '<div class="text-center py-3 text-muted small">Lokasi tidak ditemukan</div>';
+                return;
+            }
+
+            filtered.forEach(loc => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'dropdown-item rounded-3 py-1.5 px-3 mb-1 text-start w-100 border-0 bg-transparent text-secondary small';
+                btn.style.fontSize = '0.82rem';
+                btn.innerHTML = `<i class="bi bi-geo-alt me-2 text-muted"></i>${loc}`;
+                btn.addEventListener('click', function() {
+                    selectLocation(loc);
+                });
+                locationList.appendChild(btn);
+            });
+        }
+
+        function selectLocation(loc) {
+            fetch('{{ route("set-location") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ lokasi: loc })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    if (locationText) locationText.textContent = loc;
+                    const url = new URL(window.location.href);
+                    if (url.pathname === '/cari') {
+                        url.searchParams.set('lokasi', loc);
+                        window.location.href = url.toString();
+                    } else {
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                fetch('{{ route("set-location") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ lokasi: null })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        if (locationText) locationText.textContent = 'Pilih Lokasi';
+                        const url = new URL(window.location.href);
+                        if (url.pathname === '/cari') {
+                            url.searchParams.delete('lokasi');
+                            window.location.href = url.toString();
+                        } else {
+                            window.location.reload();
+                        }
+                    }
+                });
+            });
+        }
+
+        if (locationSearch) {
+            locationSearch.addEventListener('input', function() {
+                renderLocations(this.value);
+            });
+        }
+
+        // Initial render
+        renderLocations();
       });
     </script>
   </body>

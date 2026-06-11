@@ -37,7 +37,14 @@ class Product extends Model
     {
       $query->when($filters['cari'] ?? false, function($query, $cari){
         return $query->where('name', 'like', '%'. $cari.'%');
+      });
+
+      $query->when($filters['lokasi'] ?? false, function($query, $lokasi){
+        return $query->whereHas('toko', function($q) use ($lokasi) {
+          $q->where('alamat', 'like', '%' . $lokasi . '%')
+            ->orWhere('region', 'like', '%' . $lokasi . '%');
         });
+      });
     }
 
     public function getImageUrlAttribute()

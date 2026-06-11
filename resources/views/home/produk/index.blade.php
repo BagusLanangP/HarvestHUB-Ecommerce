@@ -28,9 +28,12 @@
                     {{-- Judul & Toko --}}
                     <div class="mb-3">
                         <h2 class="fw-bold product-title text-dark mb-2" style="font-size: 1.6rem;">{{ $itemproduk->name }}</h2>
-                        <a href="{{ URL::to('Toko/'.$itemproduk->toko_id) }}" class="tokoname d-inline-flex align-items-center text-success fw-semibold text-decoration-none hover-underline">
+                        <a href="{{ URL::to('Toko/'.$itemproduk->toko_id) }}" class="tokoname d-inline-flex align-items-center text-success fw-semibold text-decoration-none hover-underline me-3">
                             <i class="bi bi-shop me-2" style="font-size: 1.1rem;"></i> {{ $itemproduk->toko->nama }}
                         </a>
+                        <span class="text-secondary small d-inline-flex align-items-center" title="Lokasi Toko">
+                            <i class="bi bi-geo-alt-fill me-1 text-danger"></i> {{ $itemproduk->toko->alamat }}
+                        </span>
                     </div>
                     
                     {{-- Ulasan Bintang & Total Terjual --}}
@@ -85,7 +88,7 @@
                         </div>
 
                         {{-- Baris Tombol Tindakan Rapi --}}
-                        <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-2 product-action-row">
                             
                             {{-- Button Chat --}}
                             @php
@@ -310,6 +313,37 @@
     }
     .tokoname:hover {
         color: #157347 !important;
+    }
+
+    /* Product Detail Mobile Responsive CSS Overrides */
+    @media (max-width: 576px) {
+        .detailProduk {
+            padding-top: 80px !important;
+        }
+        .product-detail-card {
+            padding: 20px !important;
+        }
+        .product-title {
+            font-size: 1.35rem !important;
+        }
+        .product-price {
+            font-size: 1.5rem !important;
+        }
+        .product-action-row {
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+        }
+        .product-action-row .btn-action {
+            flex-grow: 1 !important;
+            width: auto !important;
+            height: 46px !important;
+        }
+        .product-action-row .btn-add-cart {
+            width: 100% !important;
+            flex-basis: 100% !important;
+            height: 46px !important;
+            margin-top: 5px;
+        }
     }
 </style>
 

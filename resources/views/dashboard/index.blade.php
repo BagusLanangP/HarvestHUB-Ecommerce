@@ -30,6 +30,46 @@
                                 ->get();
         $recentTenagaKerja = \App\Models\TenagaKerja::orderBy('created_at', 'desc')->limit(3)->get();
         $recentKonsultan = \App\Models\Konsultan::orderBy('created_at', 'desc')->limit(3)->get();
+
+        // Compile notifications
+        $adminNotifications = collect();
+        \App\Models\User::with('role')->orderBy('created_at', 'desc')->limit(5)->get()->each(function($u) use ($adminNotifications) {
+            $adminNotifications->push([
+                'icon' => 'bi-person-plus-fill',
+                'color' => 'success',
+                'title' => 'Pengguna Baru',
+                'text' => 'User baru <strong>' . e($u->name) . '</strong> (' . e($u->email) . ') mendaftar dengan peran <strong>' . e($u->role->name ?? 'User') . '</strong>.',
+                'time' => $u->created_at,
+                'link' => '/dashboard/user',
+            ]);
+        });
+
+        \App\Models\RoleRequest::with(['user', 'role'])->orderBy('created_at', 'desc')->limit(5)->get()->each(function($rr) use ($adminNotifications) {
+            $statusText = $rr->status == 'pending' ? 'menunggu persetujuan' : ($rr->status == 'approved' ? 'disetujui' : 'ditolak');
+            $statusColor = $rr->status == 'pending' ? 'warning' : ($rr->status == 'approved' ? 'success' : 'danger');
+            $adminNotifications->push([
+                'icon' => 'bi-shield-lock-fill',
+                'color' => $statusColor,
+                'title' => 'Pengajuan Role Upgrade',
+                'text' => '<strong>' . e($rr->user->name ?? 'User') . '</strong> mengajukan permohonan upgrade ke peran <strong>' . e($rr->role->name ?? 'Role') . '</strong> (' . $statusText . ').',
+                'time' => $rr->created_at,
+                'link' => route('dashboard.role_requests.index'),
+            ]);
+        });
+
+        \App\Models\Transaction::with('user')->orderBy('created_at', 'desc')->limit(5)->get()->each(function($tx) use ($adminNotifications) {
+            $statusColor = $tx->status == 'Completed' ? 'success' : ($tx->status == 'Pending' ? 'warning' : 'danger');
+            $adminNotifications->push([
+                'icon' => 'bi-cart-check-fill',
+                'color' => $statusColor,
+                'title' => 'Transaksi Baru',
+                'text' => 'Transaksi senilai <strong>Rp ' . number_format($tx->total_price, 0, ',', '.') . '</strong> oleh <strong>' . e($tx->user->name ?? 'User') . '</strong> berstatus <strong>' . $tx->status . '</strong>.',
+                'time' => $tx->created_at,
+                'link' => route('dashboard.analytics.index'),
+            ]);
+        });
+
+        $adminNotifications = $adminNotifications->sortByDesc('time')->take(6);
     @endphp
 
     <div class="py-4">
@@ -184,6 +224,47 @@
                             </div>
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Admin Notifications Widget --}}
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold text-dark mb-0" style="font-family: 'Outfit', sans-serif;">
+                            <i class="bi bi-bell-fill text-success me-1"></i> Notifikasi & Pesan Sistem Terbaru
+                        </h5>
+                        <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1.5 fw-semibold small">Real-time Feed</span>
+                    </div>
+                    
+                    @if($adminNotifications->isEmpty())
+                        <div class="text-center py-4">
+                            <i class="bi bi-bell-slash text-muted" style="font-size: 2rem;"></i>
+                            <p class="text-secondary small mt-2 mb-0">Belum ada notifikasi sistem.</p>
+                        </div>
+                    @else
+                        <div class="list-group list-group-flush">
+                            @foreach($adminNotifications as $notif)
+                                <div class="list-group-item px-0 py-3 border-0 border-bottom d-flex align-items-start gap-3 bg-transparent">
+                                    <div class="rounded-circle bg-{{ $notif['color'] }}-subtle text-{{ $notif['color'] }} d-flex align-items-center justify-content-center flex-shrink-0" style="width: 40px; height: 40px; font-size: 1.1rem;">
+                                        <i class="bi {{ $notif['icon'] }}"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <h6 class="fw-bold text-dark mb-0" style="font-size: 0.92rem; font-family: 'Outfit', sans-serif;">{{ $notif['title'] }}</h6>
+                                            <small class="text-muted" style="font-size: 0.72rem;"><i class="bi bi-clock me-1"></i>{{ $notif['time']->diffForHumans() }}</small>
+                                        </div>
+                                        <p class="text-secondary mb-2" style="font-size: 0.82rem; line-height: 1.45;">{!! $notif['text'] !!}</p>
+                                        <a href="{{ $notif['link'] }}" class="btn btn-xs btn-outline-secondary rounded-pill py-0.5 px-2.5 fw-semibold text-uppercase tracking-wider" style="font-size: 0.65rem; display: inline-flex; align-items: center; gap: 4px;">
+                                            Lihat Detail <i class="bi bi-chevron-right" style="font-size: 0.55rem;"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

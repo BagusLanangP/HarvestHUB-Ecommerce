@@ -27,21 +27,25 @@ class KonsultanSeeder extends Seeder
                 'keahlian' => 'Konsultan Pemuliaan Tanaman',
                 'pengalaman' => '5 Tahun Penelitian Pemuliaan Benih padi dan Jagung Hibrida',
                 'deskripsi' => 'Ahli dalam rekayasa varietas benih unggul, teknik silang tanaman pangan, dan peningkatan produktivitas lahan sempit.',
+                'foto' => 'konsultan-foto/konsultanlaki.jpg',
             ],
             'Ari savitri' => [
                 'keahlian' => 'Ahli Fitopatologi (Penyakit Tanaman)',
                 'pengalaman' => '4 Tahun Konsultan Pengendalian Hama Organik',
                 'deskripsi' => 'Spesialis diagnosis dini penyakit daun, analisis jamur tanah, dan pembuatan biopestisida ramah lingkungan.',
+                'foto' => 'konsultan-foto/konsultanperempuan.jpg',
             ],
             'Herdy juniawan' => [
                 'keahlian' => 'Spesialis Hidroponik & Greenhouse',
                 'pengalaman' => '6 Tahun Pemasangan & Maintenance Greenhouse Modern',
                 'deskripsi' => 'Pakar sistem irigasi fertigasi otomatis, formulasi nutrisi AB Mix khusus buah sayur, dan optimasi suhu greenhouse.',
+                'foto' => 'konsultan-foto/konsultanlaki2.jpg',
             ],
             'Yurika Wahyuning' => [
                 'keahlian' => 'Konsultan Manajemen Agribisnis',
                 'pengalaman' => '5 Tahun Pembinaan Kelompok Tani & Kelayakan Usaha',
                 'deskripsi' => 'Ahli dalam perencanaan keuangan perkebunan, sertifikasi organik nasional, dan pemasaran produk tani digital.',
+                'foto' => 'konsultan-foto/pekerjaperempuan1.jpg',
             ]
         ];
 
@@ -50,6 +54,7 @@ class KonsultanSeeder extends Seeder
                 'keahlian' => 'Konsultan Pertanian Umum',
                 'pengalaman' => '3 Tahun Pendampingan Kelompok Tani',
                 'deskripsi' => 'Membantu petani mengoptimalkan hasil panen melalui pemupukan presisi dan rotasi tanaman.',
+                'foto' => 'konsultan-foto/konsultanlaki.jpg',
             ];
 
             Konsultan::create([
@@ -61,7 +66,7 @@ class KonsultanSeeder extends Seeder
                 'keahlian' => $details['keahlian'],
                 'pengalaman' => $details['pengalaman'],
                 'deskripsi' => $details['deskripsi'],
-                'foto' => 'default-avatar.png',
+                'foto' => $details['foto'],
                 'foto_cv' => null,
             ]);
         }

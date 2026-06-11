@@ -6,7 +6,7 @@
 @section('content')
 
     <section class="home" id="home">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
             <div class="carousel-inner" >
               <div class="carousel-item active">
                 <img src="{{ asset('img/home/pekerja2.jpg')}}" class="d-block w-100" alt="...">
@@ -20,27 +20,36 @@
             </div>
             <div class="overlay-container">
                 <div class="overlay-content container">
-                  <div class="row">
+                  <div class="row mb-1">
                     <div class="col-12 text-center">
-                      <img src="{{asset('img/Logo-harvesthub.png')}}" alt="" class="logo-home">
+                      <img src="{{asset('img/Logo-harvesthub.png')}}" alt="HarvestHUB" class="logo-home">
                     </div>
                   </div>
-                  <div class="row app-tittle">
+                  <div class="row mb-2">
                     <div class="col text-center">
-                      <h1 id="carouselTitle">HarvestHUB</h1>
+                      <span id="carouselBadge" class="badge bg-success text-white">JASA KEMITRAAN</span>
                     </div>
                   </div>
-                  <div class="row text-center app-desc">
-                    <div class="col">
-                      <h5 id="carouselText">E-commerce dan penyedia layanan jasa di bidang <br> pertanian dan peternakan!</h5>
+                  <div id="carouselTextContainer" class="carousel-text-transition">
+                    <div class="row app-tittle">
+                      <div class="col text-center">
+                        <h1 id="carouselTitle">Mitra Jasa <span class="text-success">Tani Profesional</span></h1>
+                      </div>
+                    </div>
+                    <div class="row text-center app-desc">
+                      <div class="col">
+                        <h5 id="carouselText" class="fw-normal px-2">
+                          Menghubungkan Anda dengan <span class="text-success fw-bold">tenaga kerja & pekerja lapangan</span> pertanian dan peternakan terpercaya untuk produktivitas lahan Anda.
+                        </h5>
+                      </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-3"></div>
-                    <div class="col-6">
-                      <button type="submit" class="btn submit-login d-flex justify-content-center">Discovery Our Collection</button>
+                  <div class="row mt-3">
+                    <div class="col-12 d-flex justify-content-center">
+                      <a id="carouselBtn" href="/Tenagakerja/view" class="btn btn-custom-green py-2.5 px-4 rounded-pill fw-semibold shadow-sm text-white text-decoration-none d-inline-flex align-items-center gap-2" style="font-size: 0.9rem;">
+                        Temukan Tenaga Kerja <i class="bi bi-person-workspace"></i>
+                      </a>
                     </div>
-                    <div class="col-3"></div>
                   </div>
                 </div>
             </div>
@@ -77,7 +86,7 @@
         <div class="row g-4 justify-content-center">
           @foreach($kategoris as $k)
           <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-            <a href="{{ url('home/kategori/' . $k->id) }}" class="text-decoration-none">
+            <a href="{{ route('category.detail', ['slug' => Str::slug($k->productName)]) }}" class="text-decoration-none">
               <div class="card category-card rounded-4 text-center p-3 h-100 bg-white">
                 <div class="rounded-3 mb-3 overflow-hidden bg-light shadow-xs category-image-wrapper" style="width: 100%; height: 110px; transition: all 0.3s ease;">
                   <img src="{{ asset('img/kategori/' . $k->foto ) }}" alt="{{ $k->productName }}" style="width: 100%; height: 100%; object-fit: cover;">
@@ -114,12 +123,17 @@
                                 <div class="mb-2">
                                     <p class="product-name-title mb-1">{{ $produk->name }}</p>
                                     @if($produk->toko)
-                                        <span class="text-muted d-block text-truncate" style="font-size: 0.78rem; font-weight: 400; line-height: 1.2;" title="{{ $produk->toko->nama }}">
-                                            <i class="bi bi-shop me-1" style="color: #198754;"></i> {{ $produk->toko->nama }}
-                                        </span>
+                                        <div class="d-flex align-items-center justify-content-between text-muted mt-1" style="font-size: 0.78rem; line-height: 1.2;">
+                                            <span class="text-truncate me-2" style="max-width: 60%;" title="{{ $produk->toko->nama }}">
+                                                <i class="bi bi-shop me-1" style="color: #198754;"></i> {{ $produk->toko->nama }}
+                                            </span>
+                                            <span class="text-truncate text-secondary text-end fw-medium" style="max-width: 40%; font-size: 0.74rem;" title="{{ $produk->toko->alamat }}">
+                                                <i class="bi bi-geo-alt-fill me-0.5 text-danger"></i> {{ $produk->toko->alamat }}
+                                            </span>
+                                        </div>
                                     @else
                                         <!-- Placeholder to maintain height consistency -->
-                                        <span class="d-block" style="font-size: 0.78rem; line-height: 1.2; visibility: hidden;">&nbsp;</span>
+                                        <div class="d-flex" style="font-size: 0.78rem; line-height: 1.2; visibility: hidden;">&nbsp;</div>
                                     @endif
                                     
                                     <!-- Rating & Sold Summary -->
@@ -139,6 +153,10 @@
                 </div>
             @endforeach
           </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+            {{ $produks->links('pagination::bootstrap-5') }}
         </div>
 
           <div class="seemore d-flex justify-content-center mt-5">
@@ -175,6 +193,128 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(25, 135, 84, 0.15);
         }
+
+        /* Overlay Container & Glassmorphism Styling */
+        .overlay-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48% !important;
+            max-width: 650px;
+            background: rgba(255, 255, 255, 0.45) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            padding: 2.2rem 2rem !important;
+            text-align: center;
+            border-radius: 20px !important;
+            backdrop-filter: blur(20px) saturate(160%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .overlay-container {
+            background: rgba(20, 20, 20, 0.55) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25) !important;
+        }
+
+        /* Dynamic Badge Styling */
+        #carouselBadge {
+            font-size: 0.72rem;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        /* Carousel Title & Text Styles */
+        #carouselTitle {
+            font-family: 'Outfit', sans-serif !important;
+            font-weight: 800 !important;
+            font-size: 2.3rem !important;
+            line-height: 1.25 !important;
+            letter-spacing: -0.5px !important;
+            color: #111111 !important;
+            margin-bottom: 0.75rem !important;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode #carouselTitle {
+            color: #ffffff !important;
+        }
+
+        #carouselText {
+            font-family: 'Outfit', sans-serif !important;
+            font-size: 0.95rem !important;
+            line-height: 1.6 !important;
+            color: #333333 !important;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode #carouselText {
+            color: #d1d1d1 !important;
+        }
+
+        /* Dynamic Text Slide & Fade Animations */
+        .carousel-text-transition {
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .carousel-text-transition.is-transitioning {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+
+        #carouselBtn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        
+        #carouselBtn.is-transitioning {
+            opacity: 0;
+            transform: translateY(8px) scale(0.95);
+        }
+
+        /* Homepage Mobile Responsive CSS Overrides */
+        @media (max-width: 768px) {
+            .overlay-container {
+                width: 90% !important;
+                padding: 1.8rem 1.2rem !important;
+                border-radius: 16px !important;
+            }
+            #carouselBadge {
+                font-size: 0.65rem !important;
+                padding: 4px 10px !important;
+            }
+            #carouselTitle {
+                font-size: 1.7rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            #carouselText {
+                font-size: 0.85rem !important;
+                line-height: 1.5 !important;
+            }
+            #carouselText br {
+                display: none;
+            }
+            .logo-home {
+                width: 4rem !important;
+                margin-bottom: 0.2rem !important;
+            }
+            .overlay-container .submit-login {
+                font-size: 0.8rem !important;
+                padding: 8px 12px !important;
+            }
+            #home .carousel, #home .carousel-inner, #home .carousel-item img {
+                height: 50vh !important;
+                min-height: 350px !important;
+            }
+        }
     </style>
 
     <section class="review mb-5 py-4">
@@ -191,7 +331,7 @@
               // Determine dynamic routing based on model instance
               $detailUrl = $s instanceof \App\Models\TenagaKerja ? URL::to('tenagakerja/' . $s->user->slug) : URL::to('ahlipakar/' . $s->user->slug);
             @endphp
-            <div class="card shadow-sm border border-light rounded-4 swiper-slide bg-white h-100 hover-lift" style="width: 17rem;">
+            <div class="card shadow-sm border border-light rounded-4 swiper-slide bg-white h-100 hover-lift">
               <a href="{{ $detailUrl }}" class="text-decoration-none h-100 d-flex flex-column justify-content-between">
                 <!-- Profile Image Container (Enlarged) -->
                 <div class="card-img pt-4 pb-2 d-flex justify-content-center">
@@ -253,4 +393,76 @@
           </a>
       </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselEl = document.getElementById('carouselExampleSlidesOnly');
+            const badgeEl = document.getElementById('carouselBadge');
+            const titleEl = document.getElementById('carouselTitle');
+            const textEl = document.getElementById('carouselText');
+            const btnEl = document.getElementById('carouselBtn');
+            const transitionContainer = document.getElementById('carouselTextContainer');
+
+            // Data for each slide index
+            const slidesData = [
+                {
+                    badge: "Jasa Kemitraan",
+                    badgeClass: "bg-success",
+                    title: "Mitra Jasa <span class='text-success'>Tani Profesional</span>",
+                    text: "Menghubungkan Anda dengan <span class='text-success fw-bold'>tenaga kerja & pekerja lapangan</span> pertanian dan peternakan terpercaya untuk produktivitas lahan Anda.",
+                    btnText: "Temukan Tenaga Kerja",
+                    btnLink: "/Tenagakerja/view",
+                    btnIcon: "bi-person-workspace"
+                },
+                {
+                    badge: "Produk Unggulan",
+                    badgeClass: "bg-primary",
+                    title: "Pasar Hasil <span class='text-success'>Bumi Unggul</span>",
+                    text: "Dapatkan <span class='text-success fw-bold'>produk pertanian & peternakan segar</span> berkualitas tinggi secara langsung dari para petani lokal terbaik.",
+                    btnText: "Belanja Produk Segar",
+                    btnLink: "#produkhome",
+                    btnIcon: "bi-shop"
+                },
+                {
+                    badge: "Konsultasi Pakar",
+                    badgeClass: "bg-danger",
+                    title: "Konsultasi <span class='text-success'>Ahli & Pakar</span>",
+                    text: "Konsultasi langsung dengan <span class='text-success fw-bold'>pakar agronomi & peternakan berpengalaman</span> untuk solusi tani modern berkelanjutan.",
+                    btnText: "Konsultasi Pakar",
+                    btnLink: "/Ahlipakar/view",
+                    btnIcon: "bi-chat-left-text"
+                }
+            ];
+
+            if (carouselEl && badgeEl && titleEl && textEl && btnEl && transitionContainer) {
+                carouselEl.addEventListener('slide.bs.carousel', function(event) {
+                    const nextIndex = event.to;
+                    const data = slidesData[nextIndex];
+
+                    if (data) {
+                        // Apply transitioning class (starts fade/slide out)
+                        transitionContainer.classList.add('is-transitioning');
+                        btnEl.classList.add('is-transitioning');
+
+                        // Wait for transition duration (300ms) before changing content
+                        setTimeout(() => {
+                            badgeEl.textContent = data.badge;
+                            
+                            // Reset badge background classes
+                            badgeEl.className = 'badge text-white ' + data.badgeClass;
+                            
+                            titleEl.innerHTML = data.title;
+                            textEl.innerHTML = data.text;
+                            btnEl.setAttribute('href', data.btnLink);
+                            btnEl.innerHTML = `${data.btnText} <i class="bi ${data.btnIcon} ms-1"></i>`;
+
+                            // Remove transitioning class (fades back in)
+                            transitionContainer.classList.remove('is-transitioning');
+                            btnEl.classList.remove('is-transitioning');
+                        }, 300);
+                    }
+                });
+            }
+        });
+    </script>
 @endsection
